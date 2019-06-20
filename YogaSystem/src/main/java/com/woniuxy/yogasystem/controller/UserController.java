@@ -34,7 +34,10 @@ public String register(HttpServletRequest request,String code,User user){
 	 Object reCode=session.getAttribute("code");
 	 String realCode=(String) reCode;
 	 if(code.equals(realCode)){
-		 result="成功";
+		 session.removeAttribute("code");
+		if( userService.register(user)){
+			 result="成功";
+		}
 	 }
 	return result;
 }
@@ -75,4 +78,17 @@ public String checkAcc(String acc){
 	
 }
 
+//登录
+@RequestMapping("/login")
+@ResponseBody
+public User login(HttpServletRequest request,User user){
+	System.out.println("用户账号"+user.getAcc());
+	User user2=null;
+	user2=userService.login(user);
+	HttpSession session= request.getSession();
+    session.setAttribute("uid", user2.getId());
+	System.out.println(user2);
+	return user2;
+	
+}
 }

@@ -20,5 +20,23 @@ private UserDao userdao;
 		}
 		return result;
 	}
+	
+	@Override
+	public boolean register(User user) {
+		
+		return userdao.register(user);
+	}
+
+	@Override
+	public User login(User user) {
+		User user2=null;
+		
+		if(userdao.checkacc(user.getAcc())==null){
+			return user2;
+		}else{
+			user2=userdao.checkMessageByAcc(user);
+		}
+		return user2;
+	}
 
 }

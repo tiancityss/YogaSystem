@@ -4,6 +4,7 @@ public class User {
 	private Integer id;
 	private String acc;
 	private String pwd;
+	private String role;
 	public Integer getId() {
 		return id;
 	}
@@ -22,11 +23,18 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public User(Integer id, String acc, String pwd) {
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public User(Integer id, String acc, String pwd, String role) {
 		super();
 		this.id = id;
 		this.acc = acc;
 		this.pwd = pwd;
+		this.role = role;
 	}
 	public User() {
 		super();
@@ -34,8 +42,9 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", acc=" + acc + ", pwd=" + pwd + "]";
+		return "User [id=" + id + ", acc=" + acc + ", pwd=" + pwd + ", role=" + role + "]";
 	}
+
 
 	
 }

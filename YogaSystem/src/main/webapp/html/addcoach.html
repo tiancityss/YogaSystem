@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="/js/addcoach.js" ></script>
+<title>Insert title here</title>
+</head>
+<body>
+当教练
+<div style="width:700px; margin-left: 450px ; margin-top: 100px;border: 1px solid;" align="center">
+<div ><input id="acc" type="text" name="acc" Placeholder="头像"></div>
+<div style="margin-top: 20px;"><input id="name" type="text" name="name" Placeholder="昵称可选填"></div>
+<div class="newAddress" style="margin-top: 20px;">
+				地址：
+				<select id="selProvince" onchange="changeCity( )" style="width:100px">
+					<option>--选择省份--</option>
+				</select>
+				<select id="selCity"  onchange="changeCounty( )" style="width:100px">
+					<option>--选择城市--</option>
+				</select>
+				<select id="selCounty"  onchange="changeTown( )" style="width:100px">
+					<option>--选择区县--</option>
+				</select>
+				<select id="selTown" style="width:100px">
+					<option>--选择街道镇--</option>
+				</select><br/><br/>
+				详细的地址：<input type="text" class="f-input"/ id="detailAddress"><br/>
+				<br/>
+			</div>
+<div style="margin-top: 20px;"><input id="name" type="text" name="name" Placeholder="昵称可选填"></div>
+<div >
+<input id="state" type="radio" name="state" value="0">保密
+<input id="state" type="radio" name="state" value="0">好友公开
+<input id="state" type="radio" name="state" value="0">全部公开		
+</div>
+<div ><input id="submit" type="button" name="submit" value="确认" style="width: 86px;" onclick="submit()"><input id="back" type="button" name="submit" value="取消" style="width: 86px;"  onclick="back()";></div>
+<div ></div>
+</div>
+</body>
+</html>

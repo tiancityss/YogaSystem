@@ -8,8 +8,8 @@ function register(){
 		},
 		 contentType: "application/json; charset=utf-8",
 		success: function(data){
-			if(data.equals("成功")){
-				location.href="http://localhost:8080/html/message.html";
+			if(data=="成功"){
+				location.href="http://localhost:8080/index.html";
 			}
 		}
 	})
