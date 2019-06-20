@@ -1,5 +1,11 @@
 package com.woniuxy.yogasystem.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -7,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
@@ -91,5 +99,31 @@ public User login(HttpServletRequest request,User user){
 	System.out.println(user2);
 	return user2;
 	
+}
+//上传图片
+@RequestMapping("/upload")
+@ResponseBody
+public String upload(@RequestParam(name="picture")MultipartFile picture,
+HttpServletRequest request) throws IllegalStateException, IOException {
+//获取文件名
+String filename = picture.getOriginalFilename();
+//获取保存文件的路径
+String path = request.getServletContext().getRealPath("headimg");
+System.out.println(path);
+File file = new File(path);
+if (!file.exists()) {
+file.mkdirs();
+}
+//新文件名（应该保存到数据库）
+filename = UUID.randomUUID().toString()+filename;
+//新路径
+path = path+File.separator+filename;
+System.out.println(path);
+file = new File(path);
+//保存文件
+picture.transferTo(file);
+Map<String, String>map=new  HashMap<String, String>();
+System.out.println(filename);
+return "/headimg/"+filename;
 }
 }
