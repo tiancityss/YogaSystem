@@ -87,6 +87,7 @@ public User login(HttpServletRequest request,User user){
 	user2=userService.login(user);
 	HttpSession session= request.getSession();
     session.setAttribute("uid", user2.getId());
+    session.setAttribute("acc", user2.getAcc());
 	System.out.println(user2);
 	return user2;
 	
