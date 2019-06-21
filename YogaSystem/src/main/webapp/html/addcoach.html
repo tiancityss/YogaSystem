@@ -13,7 +13,7 @@
 <div id="pic" style="width: 80px;height: 80px ;border: 1px solid;"><img alt="" src="/headimg/yuga.jpg"width="80px";height="80px"></div>
 <div >
 <form id="form" enctype="multipart/form-data">
-<input id="picture" type="file" name="picture">
+<input id="file1" type="file" name="picture"   multiple="multiple" >
 <input  id="up" type="button" value="上传" onclick="upload()" />
 </form>
 </div>
@@ -36,16 +36,20 @@
 				详细的地址：<input type="text" class="f-input"/ id="detailAddress"><br/>
 				<br/>
 			</div>
+			<div style="margin-top: 10px;margin-left: 15px;"><input id="school" type="text" name="school" Placeholder="流派"></div>
+			
 <div style="margin-top: 10px;margin-left: 15px;"><input id="salary" type="text" name="salary" Placeholder="收费标准">元</div>
+
 <div style="margin-top: 10px;">
-流派：
+任课类型：
 				<select id="selschool"  style="width:100px">
-					<option>--选择流派--</option>
+					<option>--选择类型--</option>
 					<option>全职</option>
 					<option>代课</option>
 					<option>兼职</option>
 				</select>
 </div>
+
 <div style="margin-top: 10px;">是否任课 <input type="radio" name="time">是 <input type="radio" name="time">否</div>
 <div style="margin-top: 10px">
 <div>
@@ -61,4 +65,14 @@
 </div>
 </div>
 </body>
+<!-- <script type="text/javascript">
+	imgUpload({
+		inputId:'file1', //input框id
+		//imgBox:'imgBox', //图片容器id
+		//buttonId:'btn', //提交按钮id
+		//upUrl:'/testController/uploadImg',  //提交地址
+		//data:'file', //参数名
+		//num:"10"//最多上传图片个数
+	})
+</script> -->
 </html>
