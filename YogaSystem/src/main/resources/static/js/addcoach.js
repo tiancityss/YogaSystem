@@ -8,7 +8,7 @@ function back(){
 		location.href="http://localhost:8080/index.html";
 	}
 }
-//上传图片并返回地址
+//上传头像并返回地址
 function upload(){
 	var formData = new FormData($("#form")[0]);
 	/* 	formData.append("type", type);//也可以添加其他字段 */
@@ -22,12 +22,13 @@ function upload(){
 					if (picadd == null) {
 						alert("请添加图片文件");
 					}
-					var context = '<input type="text" hidden  id="img" value="'+picadd+'" />';
-					alert(context)
+					/*var context = '<input type="text" hidden  id="img" value="'+picadd+'" />';
+					alert(context)*/
 					/*'<img id="a" src="'+picadd+'" width="80px";height="80px" ><br>'
 					+*/ 
 				
-					$("#pic").append(context);
+				/*	$("#pic").append(context);*/
+					alert("上传成功")
 				}
 			})
 }

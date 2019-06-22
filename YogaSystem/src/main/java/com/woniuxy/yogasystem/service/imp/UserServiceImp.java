@@ -23,8 +23,10 @@ private UserDao userdao;
 	
 	@Override
 	public boolean register(User user) {
+		boolean re=false;
+		userdao.register(user);
 		
-		return userdao.register(user);
+		return  re;
 	}
 
 	@Override

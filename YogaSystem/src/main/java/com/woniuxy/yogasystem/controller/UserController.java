@@ -122,9 +122,11 @@ System.out.println(path);
 file = new File(path);
 //保存文件
 picture.transferTo(file);
-Map<String, String>map=new  HashMap<String, String>();
+String realpath="/headimg/"+filename;
+HttpSession session= request.getSession();
+session.setAttribute("headpic", realpath);
 System.out.println(filename);
-return "/headimg/"+filename;
+return "上传成功";
 }
 
 //上传场馆图片
