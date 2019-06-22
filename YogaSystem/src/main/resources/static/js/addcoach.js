@@ -10,11 +10,11 @@ function back(){
 }
 //上传图片并返回地址
 function upload(){
-	var formData = new FormData($("#form1")[0]);
+	var formData = new FormData($("#form")[0]);
 	/* 	formData.append("type", type);//也可以添加其他字段 */
 			$.ajax({
 				type : "post",
-				url : "/user/uploadpic",
+				url : "/user/upload",
 				data : formData,
 				contentType : false,
 				processData : false,

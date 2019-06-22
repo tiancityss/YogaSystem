@@ -126,4 +126,44 @@ Map<String, String>map=new  HashMap<String, String>();
 System.out.println(filename);
 return "/headimg/"+filename;
 }
+
+//上传场馆图片
+@RequestMapping("/uploadpic")
+@ResponseBody
+public String uploadpic(@RequestParam(name="file")MultipartFile[] picture,
+HttpServletRequest request) throws IllegalStateException, IOException {
+	
+	String result=null;
+	Map<String, String>map=new  HashMap<String, String>();
+//获取文件名
+	System.out.println(1);
+	System.out.println(picture.length);
+	MultipartFile pic=null;
+	for (int i = 0; i < picture.length; i++) {
+		System.out.println(3);
+		pic=picture[i];
+		String filename = pic.getOriginalFilename();
+		//获取保存文件的路径
+		String path = request.getServletContext().getRealPath("veneusimg");
+		System.out.println(path);
+		File file = new File(path);
+		if (!file.exists()) {
+		file.mkdirs();
+		}
+		//新文件名（应该保存到数据库）
+		filename = UUID.randomUUID().toString()+filename;
+		//新路径
+		path = path+File.separator+filename;
+		System.out.println(path);
+		file = new File(path);
+		//保存文件
+		pic.transferTo(file);
+		map.put("pic","/veneusimg/"+filename );
+		
+	}
+	HttpSession session= request.getSession();
+    session.setAttribute("picmap", map);
+return result;
+
+}
 }

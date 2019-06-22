@@ -2,29 +2,7 @@ var imgSrc1 = [];  //存放图片路径
 var imgFile1 = []; //存放文件流
 var imgName1 = []; //存放图片名字
 
-//上传图片并返回地址
-/*function uploadpic(){
-	var formData = new FormData($("#form1")[0]);
-	 	formData.append("type", type);//也可以添加其他字段 
-			$.ajax({
-				type : "post",
-				url : "/user/upload",
-				data : formData,
-				contentType : false,
-				processData : false,
-				success : function(picadd) {
-					if (picadd == null) {
-						alert("请选择图片文件");
-					}
-					var context = '<input type="text" hidden  id="img" value="'+picadd+'" />';
-					alert(context)
-					'<img id="a" src="'+picadd+'" width="80px";height="80px" ><br>'
-					+ 
-				
-					$("#pic").append(context);
-				}
-			})
-}*/
+
 
 $(function(){
 	$("#file2").on('change',function() {
@@ -134,27 +112,40 @@ function getObjectURLImg(file) {
 }
 
 //上传场馆图片并返回地址
-function upload(){
-	var formData = new FormData($("#form")[0]);
+function uploadpic(){
+	//用FormData对象上传
+	var formData = new FormData($("#form1")[0]);
+	//由于formData对象中已经包含<input type='file'>的input标签，如果不删除，就会造成重复上传
+	formData.delete("file");
+	
 	/* 	formData.append("type", type);//也可以添加其他字段 */
+	for(var i=0;i<imgFile1.length;i++){
+		formData.append("file",imgFile1[i]);
+	}
+		
 			$.ajax({
 				type : "post",
-				url : "/user/upload",
+				url : "/user/uploadpic",
 				data : formData,
 				contentType : false,
 				processData : false,
-				success : function(picadd) {
-					if (picadd == null) {
-						alert("请选择图片文件");
-					}
-					var context = '<input type="text" hidden  id="img" value="'+picadd+'" />';
-					alert(context)
-					/*'<img id="a" src="'+picadd+'" width="80px";height="80px" ><br>'
-					+*/ 
-				
-					$("#pic").append(context);
+				success : function(data) {
+					alert("存入成功")
 				}
 			})
 }
+
+
+
+/*
+if (picadd == null) {
+	alert("请选择图片文件");
+}
+var context = '<input type="text" hidden  id="img" value="'+picadd+'" />';
+alert(context)
+'<img id="a" src="'+picadd+'" width="80px";height="80px" ><br>'
++ 
+
+$("#pic").append(context);*/
 
 	
