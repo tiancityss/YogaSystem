@@ -76,3 +76,33 @@ function getObjectURL(file) {
 	}
 	return url;
 }
+
+
+//上传信息
+function submit(){
+	var i =3;
+	$.ajax({
+		type : "post",
+		url:"/user/regcoach",
+		data:{
+			role:i,
+			school:$("#school").val(),
+			salary:$("#salary").val(),
+			//任课类型
+			authstatus:$("#selauthstatus").val(),
+			privatetime:$('input[type="radio"][name="time"]:checked').val(),
+			 sex:$('input[type="radio"][name="sex"]:checked').val(),
+			//信息是否显示
+			 status:$('input[type="radio"][name="state"]:checked').val(),
+			 province:$("#selProvince").val(),
+			 city:$("#selCity").val(),
+			 county:$("#selCounty").val(),
+			 town:$("#selTown").val(),
+			 detail:$("#detailAddress").val(),
+			 name:$("#name").val(), 
+		},
+		success:function(data){
+			alert(data)
+		}
+	})
+}

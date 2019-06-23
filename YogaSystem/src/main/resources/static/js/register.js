@@ -9,7 +9,9 @@ function register(){
 		 contentType: "application/json; charset=utf-8",
 		success: function(data){
 			if(data=="成功"){
+				alert(1)
 				location.href="http://localhost:8080/index.html";
+				alert(1)
 			}
 		}
 	})

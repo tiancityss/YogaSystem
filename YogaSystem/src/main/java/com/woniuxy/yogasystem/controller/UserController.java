@@ -2,7 +2,9 @@ package com.woniuxy.yogasystem.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.woniuxy.yogasystem.pojo.Address;
+import com.woniuxy.yogasystem.pojo.Trainee;
 import com.woniuxy.yogasystem.pojo.User;
 import com.woniuxy.yogasystem.service.UserService;
 import com.woniuxy.yogasystem.util.CodeUtil;
@@ -136,7 +140,8 @@ public String uploadpic(@RequestParam(name="file")MultipartFile[] picture,
 HttpServletRequest request) throws IllegalStateException, IOException {
 	
 	String result=null;
-	Map<String, String>map=new  HashMap<String, String>();
+	//Map<String, String>map=new  HashMap<String, String>();
+	List<String> piclist = new ArrayList<>();
 //获取文件名
 	System.out.println(1);
 	System.out.println(picture.length);
@@ -160,12 +165,44 @@ HttpServletRequest request) throws IllegalStateException, IOException {
 		file = new File(path);
 		//保存文件
 		pic.transferTo(file);
-		map.put("pic","/veneusimg/"+filename );
+		//map.put("pic", );
+		piclist.add("/veneusimg/"+filename);
 		
 	}
 	HttpSession session= request.getSession();
-    session.setAttribute("picmap", map);
+    session.setAttribute("piclist", piclist);
+    for (int i = 0; i < piclist.size(); i++) {
+		System.out.println(piclist.get(i));
+	}
 return result;
-
 }
+
+//学员添加信息
+@RequestMapping("/regtrainee")
+@ResponseBody
+public String regTrainee(HttpServletRequest request,Trainee trainee,Address address,int role){
+	System.out.println(role);
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	trainee.setPhone(phone);
+	trainee.setUid(uid);
+	trainee.setImg(img);
+	address.setUid(uid);
+	System.out.println(trainee);
+	System.out.println(address);
+	if(userService.regTrainee(trainee, address, role).contains("成功")){
+		result="信息已提交";
+	}
+
+	return result;
+	
+}
+
+
 }
