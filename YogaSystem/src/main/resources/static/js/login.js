@@ -14,6 +14,10 @@ function login() {
 					location.href = "http://localhost:8080/html/addmanager.html";
 				}else if(data.role==4){
 					location.href = "http://localhost:8080/html/_header.html";
+				}else if(data.role==2){
+					location.href = "http://localhost:8080/html/_header.html";
+				}else if(data.role==3){
+					location.href = "http://localhost:8080/html/_header.html";
 				}
 			} else {
 				alert("账号或密码错误");

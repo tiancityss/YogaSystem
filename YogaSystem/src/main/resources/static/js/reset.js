@@ -8,6 +8,7 @@ function reset(){
 		},
 		 contentType: "application/json; charset=utf-8",
 		 success: function(data){
+			 alert(1)
 				if(data=="成功"){
 					location.href="http://localhost:8080/html/login.html";
 					alert(1)
