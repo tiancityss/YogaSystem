@@ -42,7 +42,7 @@ public class CodeUtil {
         request.setSignName("yoga运动");    // TODO 修改成自己的
         //必填:短信模板-可在短信控制台中找到
         if(i==2){
-        	 request.setTemplateCode("SMS_168306968"); //	修改成自己的,传过来的参数是1了，此时为重置密码验证
+        	 request.setTemplateCode("SMS_168306968"); //	修改成自己的,传过来的参数是2了，此时为重置密码验证
         }else{
         	request.setTemplateCode("SMS_168306974");    // TODO 修改成自己的,传过来的参数是1了，此时为注册验证
         }

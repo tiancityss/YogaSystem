@@ -56,6 +56,37 @@ public String register(HttpServletRequest request,String code,User user){
 	return result;
 }
 
+//重置密码
+@RequestMapping("/reset")
+@ResponseBody
+public String reset(HttpServletRequest request,String code,User user){
+	String result="失败";
+	 HttpSession session= request.getSession();
+	 Object reCode=session.getAttribute("code");
+	 String realCode=(String) reCode;
+	 if(code.equals(realCode)){
+		 session.removeAttribute("code");
+		if( userService.reset(user)>0){
+			 result="成功";
+		}
+	 }
+	return result;
+	
+}
+
+//管理员注册
+@RequestMapping("/regmanager")
+@ResponseBody
+public String regManager(User user){
+	String result="失败";
+	if(userService.regManager(user)){
+		result="成功";
+	}
+	return result;
+	
+}
+
+
 //验证码
 @RequestMapping("/getcode")
 @ResponseBody
@@ -100,6 +131,30 @@ public User login(HttpServletRequest request,User user){
 	User user2=null;
 	user2=userService.login(user);
 	HttpSession session= request.getSession();
+	if(user2.getRole()==3){//如果登录时会管管理员
+		Venues venues=userService.findVenues(user2.getId());
+		if(venues!=null){
+			System.out.println("场馆信息"+venues);
+			session.setAttribute("name", venues.getName());
+			session.setAttribute("headimg", venues.getImg());
+		}
+	}else if(user2.getRole()==4){
+		Coach coach = userService.findCoach(user2.getId());
+		if(coach!=null){
+			System.out.println("教练信息"+coach);
+			session.setAttribute("name", coach.getName());
+			session.setAttribute("headimg", coach.getName());
+
+		}
+	}else if(user2.getRole()==5){
+		Trainee trainee = userService.findTrainee(user2.getId());
+		if(trainee!=null){
+			System.out.println("学员信息"+trainee);
+			session.setAttribute("name", trainee.getName());
+			session.setAttribute("headimg", trainee.getImg());
+		}
+	}
+	session.setAttribute("role", user2.getRole());
     session.setAttribute("uid", user2.getId());
     session.setAttribute("acc", user2.getAcc());
 	System.out.println(user2);
@@ -144,7 +199,7 @@ HttpServletRequest request) throws IllegalStateException, IOException {
 	String result=null;
 	//Map<String, String>map=new  HashMap<String, String>();
 	List<String> piclist = new ArrayList<>();
-//获取文件名
+//获取文件名	
 	System.out.println(1);
 	System.out.println(picture.length);
 	MultipartFile pic=null;

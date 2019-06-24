@@ -4,7 +4,7 @@ public class User {
 	private Integer id;
 	private String acc;
 	private String pwd;
-	private String role;
+	private int role;
 	public Integer getId() {
 		return id;
 	}
@@ -23,13 +23,14 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getRole() {
+
+	public int getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
-	public User(Integer id, String acc, String pwd, String role) {
+	public User(Integer id, String acc, String pwd, int role) {
 		super();
 		this.id = id;
 		this.acc = acc;

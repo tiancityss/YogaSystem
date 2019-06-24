@@ -104,5 +104,42 @@ private UserDao userdao;
 		}
 		return result;
 	}
+	
+	//重置密码
+	@Override
+	public int reset(User user) {
+		int i = 0;
+		i=userdao.reset(user);
+		return i;
+	}
+	
+	//查询场馆所有信息
+	@Override
+	public Venues findVenues(int uid) {
+		Venues venues=userdao.findVenues(uid);
+		return venues;
+	}
+	
+	
+	//查询教练所有信息
+	@Override
+	public Coach findCoach(int uid) {
+		Coach coach = userdao.findCoach(uid);
+		return coach;
+	}
+	@Override
+	public Trainee findTrainee(int uid) {
+		Trainee trainee = userdao.findTrainee(uid);
+		return trainee;
+	}
+	
+	
+	//注册管理员
+	@Override
+	public boolean regManager(User user) {
+		boolean re =false;
+		re=userdao.regManager(user);
+		return re;
+	}
 
 }

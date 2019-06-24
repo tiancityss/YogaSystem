@@ -28,12 +28,23 @@ public String findPwdByAcc(User user);
 //查询所有用户的信息
 @Select("select * from user where acc=#{arg0}")
 public User checkMessageByAcc(String acc); 
+//重置密码
+@Update("update user set pwd=#{pwd} where acc=#{acc}")
+public int reset(User user);
 //插入地址
 @Insert("insert into address (province,city,county,town,detail,uid)values(#{province},#{city},#{county},#{town},#{detail},#{uid})")
 public boolean insertAdd(Address address);
 //分配角色
 @Update("update user set role =#{arg0} where id=#{arg1}")
 public int roleupdate(int role,int uid);
+
+/*
+ * 超级管理员操作
+ */
+//注册管理员
+@Insert("insert into user (acc,pwd,role,flag) values(#{acc},#{pwd},2,0)")
+public boolean regManager(User user);
+
 
 /*
  * 对学员的一系列操作
@@ -45,7 +56,8 @@ public boolean insertdefaultByUid(User user);
 //更新 用户现在已有的信息
 @Update("update trainee set sex=#{sex},img=#{img}, phone=#{phone},status=#{status},name=#{name} where uid=#{uid}")
 public int updateDefault(Trainee trainee);
-
+@Select("select * from trainee where uid=#{uid}")
+public Trainee findTrainee(int uid);
 
 
 /*
@@ -58,6 +70,9 @@ public boolean insertCoachdefaultByUid(User user);
 //更新 教练现在已有的信息
 @Update("update coach set sex=#{sex},img=#{img}, phone=#{phone},infostatus=#{infostatus},name=#{name},privatetime=#{privatetime},salary=#{salary},school=#{school},authstatus=#{authstatus} where uid=#{uid}")
 public int updateCoachDefault(Coach coach);
+//查询教练所有信息
+@Select("select * from coach where uid=#{uid}")
+public Coach findCoach(int uid);
 
 
 /*
@@ -73,4 +88,7 @@ public int updateVenuesDefault(Venues venues);
 //插入场馆图片
 @Insert("insert into venues_img (venuesid,img,flag) values(#{arg1},#{arg0},0)")
 public boolean insertVenusePic(String pic,int venuesid);
+//查询场馆信息
+@Select("select * from venues where uid=#{uid}")
+public Venues findVenues(int uid);
  }
