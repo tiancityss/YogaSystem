@@ -10,7 +10,7 @@ function register(){
 		success: function(data){
 			if(data=="成功"){
 				alert(1)
-				location.href="http://localhost:8080/index.html";
+				location.href="http://localhost:8080/html/login.html";
 				alert(1)
 			}
 		}

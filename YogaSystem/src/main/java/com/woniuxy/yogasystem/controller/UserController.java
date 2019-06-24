@@ -22,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.woniuxy.yogasystem.pojo.Address;
+import com.woniuxy.yogasystem.pojo.Coach;
 import com.woniuxy.yogasystem.pojo.Trainee;
 import com.woniuxy.yogasystem.pojo.User;
+import com.woniuxy.yogasystem.pojo.Venues;
 import com.woniuxy.yogasystem.service.UserService;
 import com.woniuxy.yogasystem.util.CodeUtil;
 
@@ -203,6 +205,65 @@ public String regTrainee(HttpServletRequest request,Trainee trainee,Address addr
 	return result;
 	
 }
+//添加教练信息
+@RequestMapping("/regcoach")
+@ResponseBody
+public String regCoach(HttpServletRequest request,Coach coach,Address address,int role){
+	System.out.println(role);
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	coach.setPhone(phone);
+	coach.setUid(uid);
+	coach.setImg(img);
+	address.setUid(uid);
+	System.out.println(coach);
+	System.out.println(address);
+	if(userService.regCoach(coach, address, role).contains("成功")){
+		result="信息已提交";
+	}
+
+	return result;
+	
+} 
 
 
+
+//添加场馆信息
+@RequestMapping("/regvenues")
+@ResponseBody
+public String regCoach(HttpServletRequest request,Venues venues,Address address,int role){
+	System.out.println(role);
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	Object repiclist=session.getAttribute("piclist");
+	List<String> piclist=(List<String>) repiclist;
+	System.out.println("图片是否取出"+piclist.size());
+	for (int i = 0; i < piclist.size(); i++) {
+		System.out.println(piclist.get(i));
+	}
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	venues.setPhone(phone);
+	venues.setUid(uid);
+	venues.setImg(img);
+	address.setUid(uid);
+	System.out.println(venues);
+	System.out.println(address);
+	if(userService.regVenues(venues, address, role,piclist).contains("成功")){
+		result="信息已提交";
+	}
+
+	return result;
+	
+} 
 }

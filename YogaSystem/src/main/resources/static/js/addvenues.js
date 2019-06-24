@@ -136,16 +136,31 @@ function uploadpic(){
 }
 
 
-
-/*
-if (picadd == null) {
-	alert("请选择图片文件");
+//上传场馆信息
+function submit(){
+	var i =3;
+	$.ajax({
+		type : "post",
+		url:"/user/regvenues",
+		data:{
+			role:i,
+			 name:$("#name").val(), 
+			 province:$("#selProvince").val(),
+			 city:$("#selCity").val(),
+			 county:$("#selCounty").val(),
+			 town:$("#selTown").val(),
+			 detail:$("#detailAddress").val(),
+				//薪资
+				salary:$("#salary").val(),
+				descrie:$("TextArea").val(),
+			
+		},
+		success:function(data){
+			alert(data)
+		}
+	})
 }
-var context = '<input type="text" hidden  id="img" value="'+picadd+'" />';
-alert(context)
-'<img id="a" src="'+picadd+'" width="80px";height="80px" ><br>'
-+ 
 
-$("#pic").append(context);*/
+
 
 	

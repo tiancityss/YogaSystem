@@ -86,7 +86,7 @@ function getObjectURL(file) {
 
 //上传信息
 function submit(){
-	var i =4;
+	var i =5;
 	$.ajax({
 		type : "post",
 		url:"/user/regtrainee",

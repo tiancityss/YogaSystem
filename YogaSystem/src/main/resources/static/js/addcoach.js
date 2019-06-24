@@ -33,7 +33,7 @@ function upload(){
 			})
 }
 
-
+//监听文件上传框
 $(function(){
 	$("#file1").on('change',function() {
 		//获取type=file的input
@@ -55,7 +55,7 @@ $(function(){
 	})
 
 })
-
+//将图片展示出去
 function addNewContent(){
 	for(var a = 0; a < imgSrc.length; a++) {
 		$("#pic").html('<img id="a" src="'+imgSrc[a]+'" width="80px";height="80px" >');
@@ -80,20 +80,23 @@ function getObjectURL(file) {
 
 //上传信息
 function submit(){
-	var i =3;
+	var i =4;
 	$.ajax({
 		type : "post",
 		url:"/user/regcoach",
 		data:{
 			role:i,
+			//流派
 			school:$("#school").val(),
+			//薪资
 			salary:$("#salary").val(),
 			//任课类型
 			authstatus:$("#selauthstatus").val(),
+			//是否接客
 			privatetime:$('input[type="radio"][name="time"]:checked').val(),
 			 sex:$('input[type="radio"][name="sex"]:checked').val(),
 			//信息是否显示
-			 status:$('input[type="radio"][name="state"]:checked').val(),
+			 infostatus:$('input[type="radio"][name="infostatus"]:checked').val(),
 			 province:$("#selProvince").val(),
 			 city:$("#selCity").val(),
 			 county:$("#selCounty").val(),
