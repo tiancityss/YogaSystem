@@ -11,9 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @MapperScan("com.woniuxy.yogasystem.dao")
 @ComponentScan("com.woniuxy.yogasystem.config")
 public class YogaSystemApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(YogaSystemApplication.class, args);
 	}
-
 }

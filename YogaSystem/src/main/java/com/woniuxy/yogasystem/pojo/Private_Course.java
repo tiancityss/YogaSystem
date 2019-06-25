@@ -5,8 +5,20 @@ public class Private_Course {
 	private int vid;
 	private int cid;
 	private int price;
-	private String statTime;
-	private String endTime;
+	private String starttime;
+	public String getStarttime() {
+		return starttime;
+	}
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+	private Venues venues;
+	public Venues getVenues() {
+		return venues;
+	}
+	public void setVenues(Venues venues) {
+		this.venues = venues;
+	}
 	public int getId() {
 		return id;
 	}
@@ -25,23 +37,16 @@ public class Private_Course {
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
+
 	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getStatTime() {
-		return statTime;
+	@Override
+	public String toString() {
+		return "Private_Course [id=" + id + ", vid=" + vid + ", cid=" + cid + ", price=" + price + ", starttime="
+				+ starttime + ", venues=" + venues + "]";
 	}
-	public void setStatTime(String statTime) {
-		this.statTime = statTime;
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-	
 }

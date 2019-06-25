@@ -4,17 +4,45 @@ import java.util.List;
 
 public class Coach {
 	private int id;
+	private int uid;
 	private String phone;
-	private int infostatus;
-	private String addr;
+	private int infostatus;//信息公开状态
+	private String addr;//地址
 	private String school;
 	private int authentication;
 	private String name;
 	private String img;
 	private int privatetime;
+	private int salary;
+	private String coachstatus;
+	private int flag;
 	private List<Trainee> trainees;
 	private List<Venues> venues;
 	private List<Request_Message> messages;
+	public String getCoachstatus() {
+		return coachstatus;
+	}
+	public void setCoachstatus(String coachstatus) {
+		this.coachstatus = coachstatus;
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
 	public int getId() {
 		return id;
 	}
@@ -46,6 +74,7 @@ public class Coach {
 		this.school = school;
 	}
 	public int getAuthentication() {
+		
 		return authentication;
 	}
 	public void setAuthentication(int authentication) {
@@ -87,5 +116,11 @@ public class Coach {
 	public void setMessages(List<Request_Message> messages) {
 		this.messages = messages;
 	}
-	
+	@Override
+	public String toString() {
+		return "Coach [id=" + id + ", uid=" + uid + ", phone=" + phone + ", infostatus=" + infostatus + ", addr=" + addr
+				+ ", school=" + school + ", authentication=" + authentication + ", name=" + name + ", img=" + img
+				+ ", privatetime=" + privatetime + ", salary=" + salary + ", flag=" + flag + ", trainees=" + trainees
+				+ ", venues=" + venues + ", messages=" + messages + "]";
+	}	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Trainee {
 	private int id;
+	private int uid;
 	private String phone;
 	private int status;
 	private String addr;
@@ -12,6 +13,12 @@ public class Trainee {
 	private List<Coach> coachs;
 	private List<Venues> venues;
 	private List<Request_Message> messages;
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
 	public int getId() {
 		return id;
 	}

@@ -3,9 +3,9 @@ spring:
     cache: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/book?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://localhost:3306/yoga?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
-    password: 123456
+    password: root
 
 
 mybatis:
