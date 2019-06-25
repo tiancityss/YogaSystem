@@ -45,7 +45,6 @@ public class VenuesController {
 	public List<Coach> findSignCoachMsg(int uid){
 		return venuesService.findSignCoachMsg(uid);
 	}
-	
 	//签约教练
 	@RequestMapping("/appointCoach")
 	@ResponseBody

@@ -3,16 +3,16 @@ package com.woniuxy.yogasystem.pojo;
 public class Private_Course {
 	private int id;
 	private int vid;
-	private int cid;
+	private int cid;  
 	private int price;
 	private String starttime;
+	private Venues venues;
 	public String getStarttime() {
 		return starttime;
 	}
 	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
-	private Venues venues;
 	public Venues getVenues() {
 		return venues;
 	}
@@ -48,5 +48,5 @@ public class Private_Course {
 	public String toString() {
 		return "Private_Course [id=" + id + ", vid=" + vid + ", cid=" + cid + ", price=" + price + ", starttime="
 				+ starttime + ", venues=" + venues + "]";
-	}
+	} 
 }

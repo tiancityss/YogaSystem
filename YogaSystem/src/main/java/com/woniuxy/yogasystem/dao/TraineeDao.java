@@ -113,9 +113,4 @@ public interface TraineeDao {
 	//查看教练课程信息
 	public List<Private_Course> findCoachCourse(int uid);
 
-	
-
-	
-
-
 }
