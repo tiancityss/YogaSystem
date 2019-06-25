@@ -6,6 +6,7 @@ public class Trainee {
 	private int id;
 	private String phone;
 	private int status;
+	private int uid;
 	private String addr;
 	private String img;
 	private String name;
@@ -65,6 +66,12 @@ public class Trainee {
 	}
 	public void setMessages(List<Request_Message> messages) {
 		this.messages = messages;
+	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 	
 }

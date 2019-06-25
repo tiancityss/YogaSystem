@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Coach {
 	private int id;
+	private int uid;
 	private String phone;
 	private int infostatus;
 	private String addr;
@@ -86,6 +87,12 @@ public class Coach {
 	}
 	public void setMessages(List<Request_Message> messages) {
 		this.messages = messages;
+	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 	
 }

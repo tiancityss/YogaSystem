@@ -6,6 +6,8 @@ public class Venues {
 	private String addr;
 	private String phone;
 	private String detail;
+	private int vipprice;
+	private int uid;
 	public int getId() {
 		return id;
 	}
@@ -35,6 +37,18 @@ public class Venues {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public int getVipprice() {
+		return vipprice;
+	}
+	public void setVipprice(int vipprice) {
+		this.vipprice = vipprice;
+	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 	
 	

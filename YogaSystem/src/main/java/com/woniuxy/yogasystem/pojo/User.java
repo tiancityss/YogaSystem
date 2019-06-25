@@ -5,6 +5,7 @@ import java.util.List;
 public class User {
 	private int id;
 	private String acc;
+	
 	private String pwd;
 	private String role;
 	private List<String> authoritys;

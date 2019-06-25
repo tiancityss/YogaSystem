@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+<tr>
+<td>价格</td>
+<td>时间</td>
+<td>上课场馆地址</td>
+<td>场馆联系电话</td>
+<td>场馆描述</td>
+<td>操作</td>
+</tr>
+<tr th:each="courses:${courses}">
+<td th:text="${courses.price}"></td>
+<td th:text="${courses.startTime}"></td>
+<td th:text="${courses.venues.addr}"></td>
+<td th:text="${courses.venues.phone}"></td>
+<td th:text="${courses.venues.detail}"></td>
+<!-- 学员id，学员头像，学员姓名，教练id，教练课程id，教练价格，场馆id -->
+<td><a th:href="@{appointCoach(pid=${courses.id},uid2=${courses.cid},vid=${courses.venues.id},price=${courses.price},name=小李,img=111,uid=1)}">约私教</a></td>
+</tr>
+</body>
+</html>
