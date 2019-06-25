@@ -37,6 +37,9 @@ public boolean insertAdd(Address address);
 //分配角色
 @Update("update user set role =#{arg0} where id=#{arg1}")
 public int roleupdate(int role,int uid);
+//更新地址
+@Update("update address set province=#{param1.province},city=#{param1.city},county=#{param1.county},town=#{param1.town},detail=#{param1.detail} where uid=#{param2}")
+public int updateAdd(Address address,int uid);
 
 /*
  * 超级管理员操作
@@ -60,9 +63,7 @@ public int updateDefault(Trainee trainee);
 public Trainee findTrainee(int uid);
 @Select("select * from address where uid=#{uid}")
 public Address findTraineeAdd(int uid);
-//更新地址
-@Update("update address set province=#{param1.province},city=#{param1.city},county=#{param1.county},town=#{param1.town},detail=#{param1.detail} where uid=#{param2}")
-public int updateAdd(Address address,int uid);
+
 
 
 
@@ -102,4 +103,7 @@ public Venues findVenues(int uid);
 //查询场馆地址
 @Select("select * from address where uid=#{uid}")
 public Address findVenuesAdd(int uid);
+//软删除场馆图片
+@Update("update venues_img set flag=1 where venuesid=#{uid}")
+public int deleteVenuesPic(int uid);
  }

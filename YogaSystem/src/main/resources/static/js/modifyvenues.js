@@ -22,3 +22,30 @@ $(function(){
 		
 	})
 })
+
+
+
+//上传场馆信息
+function venuesSubmit(){
+	var i =3;
+	$.ajax({
+		type : "post",
+		url:"/user/modifyvenuesmes",
+		data:{
+			role:i,
+			 name:$("#name").val(), 
+			 province:$("#selProvince").val(),
+			 city:$("#selCity").val(),
+			 county:$("#selCounty").val(),
+			 town:$("#selTown").val(),
+			 detail:$("#detailAddress").val(),
+				//薪资
+				salary:$("#salary").val(),
+				descrie:$("TextArea").val(),
+			
+		},
+		success:function(data){
+			alert(data)
+		}
+	})
+}

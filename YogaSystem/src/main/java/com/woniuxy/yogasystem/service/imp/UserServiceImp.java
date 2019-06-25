@@ -180,5 +180,23 @@ private UserDao userdao;
 		}
 		return result;
 	}
+	
+	//修改场馆资料
+	@Override
+	public String updateVenuesMes(Venues venues, Address address, List<String> piclist) {
+		boolean re=false;
+		String result="失败";
+		if(userdao.updateVenuesDefault(venues)>0){
+			userdao.deleteVenuesPic(venues.getUid());
+			for (int i = 0; i < piclist.size(); i++) {
+				re=userdao.insertVenusePic(piclist.get(i), venues.getUid());
+			}
+			if(re){
+				userdao.updateAdd(address, venues.getUid());		
+				result="成功";
+			}
+		}
+		return result;
+	}
 
 }

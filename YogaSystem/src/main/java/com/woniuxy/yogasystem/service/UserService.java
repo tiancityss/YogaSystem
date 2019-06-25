@@ -41,4 +41,6 @@ public interface UserService {
 	public String updateTraineeMes(Trainee trainee,Address address);
 	//修改资料更新教练信息
 	public String updateCoachMes(Coach coach,Address address);
+	//修改资料更新场馆信息
+		public String updateVenuesMes(Venues venues,Address address,List<String> piclist);
 }

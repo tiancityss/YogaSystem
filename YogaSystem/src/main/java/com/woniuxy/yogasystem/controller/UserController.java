@@ -419,7 +419,35 @@ public ModelMap VenuesMes(HttpServletRequest request){
 	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
 }
 
-
+//修改场馆资料
+@RequestMapping("/modifyvenuesmes")
+@ResponseBody
+public String UpadteVenuesMes(HttpServletRequest request,Venues venues,Address address,int role){
+	System.out.println(role);
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	Object repiclist=session.getAttribute("piclist");
+	List<String> piclist=(List<String>) repiclist;
+	System.out.println("图片是否取出"+piclist.size());
+	for (int i = 0; i < piclist.size(); i++) {
+		System.out.println(piclist.get(i));
+	}
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	venues.setPhone(phone);
+	venues.setUid(uid);
+	venues.setImg(img);
+	address.setUid(uid);
+	System.out.println(venues);
+	System.out.println(address);
+	result=userService.updateVenuesMes(venues, address, piclist);
+	return result;
+	
+} 
 
 
 /*else if (role == 4){//教练
