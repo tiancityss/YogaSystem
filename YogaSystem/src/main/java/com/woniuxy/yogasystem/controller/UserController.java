@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -135,6 +136,7 @@ public User login(HttpServletRequest request,User user){
 		Venues venues=userService.findVenues(user2.getId());
 		if(venues!=null){
 			System.out.println("场馆信息"+venues);
+			session.setAttribute("venues", venues);
 			session.setAttribute("name", venues.getName());
 			session.setAttribute("headimg", venues.getImg());
 		}
@@ -142,6 +144,7 @@ public User login(HttpServletRequest request,User user){
 		Coach coach = userService.findCoach(user2.getId());
 		if(coach!=null){
 			System.out.println("教练信息"+coach);
+			session.setAttribute("coach", coach);
 			session.setAttribute("name", coach.getName());
 			session.setAttribute("headimg", coach.getName());
 
@@ -150,6 +153,7 @@ public User login(HttpServletRequest request,User user){
 		Trainee trainee = userService.findTrainee(user2.getId());
 		if(trainee!=null){
 			System.out.println("学员信息"+trainee);
+			session.setAttribute("trainee", trainee);
 			session.setAttribute("name", trainee.getName());
 			session.setAttribute("headimg", trainee.getImg());
 		}
@@ -321,4 +325,116 @@ public String regCoach(HttpServletRequest request,Venues venues,Address address,
 	return result;
 	
 } 
+
+//请求学员信息
+@RequestMapping("/modifytrainee")
+@ResponseBody
+public ModelMap traineeMes(HttpServletRequest request){
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object rerole=session.getAttribute("role");
+	int uid= Integer.parseInt(reuid.toString());
+	int role = Integer.parseInt(rerole.toString());
+	ModelMap map =new ModelMap();
+	Trainee trainee=(Trainee) session.getAttribute("trainee");
+	Address address= userService.findTraineeAdd(uid);
+	map.put("address", address);
+	map.put("message", trainee);
+	
+
+	return map ;
+	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
+}
+
+//修改学员资料
+@RequestMapping("/modifytraineemes")
+@ResponseBody
+public String UpdateTraineeMes(HttpServletRequest request,Trainee trainee,Address address ){
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	trainee.setUid(uid);
+	trainee.setImg(img);
+	trainee.setPhone(phone);
+	result=userService.updateTraineeMes(trainee, address);
+	return result;
+	
+}
+//请求教练信息
+@RequestMapping("/modifycoach")
+@ResponseBody
+public ModelMap coachMes(HttpServletRequest request){
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object rerole=session.getAttribute("role");
+	int uid= Integer.parseInt(reuid.toString());
+	int role = Integer.parseInt(rerole.toString());
+	ModelMap map =new ModelMap();
+	Coach coach=(Coach) session.getAttribute("coach");
+	map.put("message", coach);
+	return map ;
+	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
+}
+
+//修改教练资料
+@RequestMapping("/modifycoachmes")
+@ResponseBody
+public String UpadteCoachMes(HttpServletRequest request,Coach coach,Address address){
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	coach.setPhone(phone);
+	coach.setUid(uid);
+	coach.setImg(img);
+	address.setUid(uid);
+	System.out.println(coach);
+	System.out.println(address);
+	result=userService.updateCoachMes(coach, address);
+	return result;
+	
+} 
+
+@RequestMapping("/modifyvenues")
+@ResponseBody
+public ModelMap VenuesMes(HttpServletRequest request){
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object rerole=session.getAttribute("role");
+	int uid= Integer.parseInt(reuid.toString());
+	int role = Integer.parseInt(rerole.toString());
+	ModelMap map =new ModelMap();
+	Venues venues=	(Venues) session.getAttribute("venues");
+	map.put("message", venues);
+	return map ;
+	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
+}
+
+
+
+
+/*else if (role == 4){//教练
+	Coach coach=(Coach) session.getAttribute("coach");
+	Address address= userService.findCochAdd(uid);
+	map.put("address", address);
+	map.put("message", coach);
+}else if(role==5){//学员
+	Trainee trainee=(Trainee) session.getAttribute("trainee");
+	Address address= userService.findTraineeAdd(uid);
+	map.put("address", address);
+	map.put("message", trainee);
+		Venues venues=	(Venues) session.getAttribute("venues");
+	Address address= userService.findVenuesAdd(uid);
+	map.put("address", address);
+	map.put("message", venues);
+}*/
 }

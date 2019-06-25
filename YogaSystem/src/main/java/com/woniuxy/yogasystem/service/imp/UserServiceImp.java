@@ -127,6 +127,7 @@ private UserDao userdao;
 		Coach coach = userdao.findCoach(uid);
 		return coach;
 	}
+	//查询学员所有信息
 	@Override
 	public Trainee findTrainee(int uid) {
 		Trainee trainee = userdao.findTrainee(uid);
@@ -140,6 +141,44 @@ private UserDao userdao;
 		boolean re =false;
 		re=userdao.regManager(user);
 		return re;
+	}
+	//查询学员地址
+	@Override
+	public Address findTraineeAdd(int uid) {
+		
+		return userdao.findTraineeAdd(uid);
+	}
+	//查询教练地址
+	@Override
+	public Address findCochAdd(int uid) {
+		// TODO Auto-generated method stub
+		return userdao.findCochAdd(uid);
+	}
+	//查询场馆地址
+	@Override
+	public Address findVenuesAdd(int uid) {
+		// TODO Auto-generated method stub
+		return userdao.findVenuesAdd(uid);
+	}
+	
+	//更新学员信息
+	@Override
+	public String updateTraineeMes(Trainee trainee, Address address) {
+		String result="失败";
+		if(userdao.updateDefault(trainee)>0&&userdao.updateAdd(address, trainee.getUid())>0){
+			result="成功";
+		}
+		return result;
+	}
+	
+	//修改教练资料
+	@Override
+	public String updateCoachMes(Coach coach, Address address) {
+		String result="失败";
+		if(userdao.updateCoachDefault(coach)>0&&userdao.updateAdd(address, coach.getUid())>0){
+			result="成功";
+		}
+		return result;
 	}
 
 }

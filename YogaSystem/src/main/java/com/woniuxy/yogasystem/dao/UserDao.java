@@ -58,6 +58,12 @@ public boolean insertdefaultByUid(User user);
 public int updateDefault(Trainee trainee);
 @Select("select * from trainee where uid=#{uid}")
 public Trainee findTrainee(int uid);
+@Select("select * from address where uid=#{uid}")
+public Address findTraineeAdd(int uid);
+//更新地址
+@Update("update address set province=#{param1.province},city=#{param1.city},county=#{param1.county},town=#{param1.town},detail=#{param1.detail} where uid=#{param2}")
+public int updateAdd(Address address,int uid);
+
 
 
 /*
@@ -73,6 +79,8 @@ public int updateCoachDefault(Coach coach);
 //查询教练所有信息
 @Select("select * from coach where uid=#{uid}")
 public Coach findCoach(int uid);
+@Select("select * from address where uid=#{uid}")
+public Address findCochAdd(int uid);
 
 
 /*
@@ -91,4 +99,7 @@ public boolean insertVenusePic(String pic,int venuesid);
 //查询场馆信息
 @Select("select * from venues where uid=#{uid}")
 public Venues findVenues(int uid);
+//查询场馆地址
+@Select("select * from address where uid=#{uid}")
+public Address findVenuesAdd(int uid);
  }

@@ -31,4 +31,14 @@ public interface UserService {
 	public Coach findCoach(int uid);
 	//查询学员全部信息
 	public Trainee findTrainee(int uid);
+	//查询学员地址
+	public Address findTraineeAdd(int uid);
+	//查询教练地址
+	public Address findCochAdd(int uid);
+	//查询场馆地址
+	public Address findVenuesAdd(int uid);
+	//修改资料更新学员信息
+	public String updateTraineeMes(Trainee trainee,Address address);
+	//修改资料更新教练信息
+	public String updateCoachMes(Coach coach,Address address);
 }
