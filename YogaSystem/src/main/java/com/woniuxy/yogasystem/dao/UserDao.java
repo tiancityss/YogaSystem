@@ -75,11 +75,15 @@ public int deleteMes(int uid);
 @Update("update apply set flag=1 where uid=#{uid}")
 public int deleteApply(int uid);
 //地址硬删除
-@Delete("delete * from address where uid=#{uid}")
+@Delete("delete  from address where uid=#{uid}")
 public int deleteAdd(int uid);
+//图片硬删
+@Delete("delete  from venues_img where venuesid=#{uid}")
+public int deleteVenuesPicture(int uid);
 //把信息插入到场馆表里
 @Insert("insert into venues (uid,img,name,phone,descrie,flag,salary,vx,vy) values (#{uid},#{img},#{name},#{phone},#{descrie},#{flag},#{salary},#{vx},#{vy})")
 public boolean addVenues(Apply apply);
+
 
 /*
  * 对学员的一系列操作

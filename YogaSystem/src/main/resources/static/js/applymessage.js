@@ -33,7 +33,7 @@ function venuesAdopt(uid){
 function coachRefuse(uid){
 	var i= 1;
 	$.ajax({
-		url:"/user/coachRefuse",
+		url:"/user/refuse",
 		type:"post",
 		data:{
 			role:i,

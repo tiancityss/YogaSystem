@@ -567,22 +567,14 @@ public List<ApplyMessage> searchVenuesMes(){
 //同意申请
 @RequestMapping("/agree")
 @ResponseBody
-public void agreeCoach(int uid1,int role){
-	if(role==1){
-		userService.addCoach(uid1, role);
-	}else {
-		userService.addVenues(uid1, role);
-	}
+public void agreeApply(int uid1,int role){
+		userService.addAgree(uid1, role);
 }
 
 //拒绝申请
 @RequestMapping("/refuse")
 @ResponseBody
 public void refuse(int uid1,int role){
-	if(role==1){
-		userService.refuseCoach(uid1, role);
-	}else {
-		userService.refuseVenuse(uid1, role);
-	}
+userService.refuse(uid1, role);
 }
 }

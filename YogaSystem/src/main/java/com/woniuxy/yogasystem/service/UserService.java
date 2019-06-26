@@ -28,14 +28,10 @@ public interface UserService {
 	public List<ApplyMessage> findCoachApply();
 	//查询applymessage里所有场馆申请请求
 	public List<ApplyMessage> findVenuesApply();
-	//同意并添加教练
-	public void addCoach(int uid, int role);
-	//同意并添加场馆
-	public void addVenues(int uid, int role);
-	//拒绝教练
-	public void refuseCoach(int uid, int role);
-	//拒绝场馆
-	public void refuseVenuse(int uid ,int role);
+	//同意并添加教练或场馆
+	public void addAgree(int uid, int role);
+	//拒绝教练或者场馆
+	public void refuse(int uid, int role);
 	/*
 	 * 学员操作
 	 */

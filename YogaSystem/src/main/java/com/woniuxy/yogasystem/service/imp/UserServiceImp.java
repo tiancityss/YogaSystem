@@ -39,7 +39,7 @@ public class UserServiceImp implements UserService {
 		re = userdao.register(user);
 		return re;
 	}
-
+//登录
 	@Override
 	public User login(User user) {
 		User user2 = null;
@@ -83,43 +83,52 @@ public class UserServiceImp implements UserService {
 		
 		return userdao.findVenuesApply();
 	}
-	//同意并添加教练
+	//同意并添加教练或场馆
 	@Override
-	public void addCoach(int uid, int role) {
-		Apply coach=userdao.findMes(uid);
-		if(coach!=null){
-			if(userdao.addCoach(coach)){
-				if(userdao.deleteMes(uid)>0){
-					userdao.roleupdate(role, uid);
+	public void addAgree(int uid, int role) {		
+		if(role==1){
+			Apply coach=userdao.findMes(uid);
+			if(coach!=null){
+				if(userdao.addCoach(coach)){
+					if(userdao.deleteMes(uid)>0&&userdao.deleteApply(uid)>0){
+						userdao.roleupdate(role, uid);
+					}
+				}
+			}
+		}else if(role==2){
+			Apply venues=userdao.findMes(uid);
+			if(venues!=null){
+				if(userdao.addVenues(venues)){
+					if(userdao.deleteMes(uid)>0&&userdao.deleteApply(uid)>0){
+						userdao.roleupdate(role, uid);
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
+	//拒绝教练或场馆
+	@Override
+	public void refuse(int uid, int role) {
+		int newrole=5;//替换成游客
+		int i=5;
+		if(userdao.deleteMes(uid)>0){
+			if(userdao.deleteApply(uid)>0){
+				if(role==1){
+					userdao.deleteAdd(uid);
+					userdao.roleupdate(newrole, uid);
+				}else if(role==2){
+					userdao.deleteAdd(uid);
+					userdao.deleteVenuesPicture(uid);
+					userdao.roleupdate(newrole, uid);
 				}
 			}
 		}
 		
 	}
-	//同意并添加场馆
-	@Override
-	public void addVenues(int uid, int role) {
-		Apply venues=userdao.findMes(uid);
-		if(venues!=null){
-			if(userdao.addVenues(venues)){
-				if(userdao.deleteMes(uid)>0){
-					userdao.roleupdate(role, uid);
-				}
-			}
-		}
-	}
-	//拒绝教练
-	@Override
-	public void refuseCoach(int uid, int role) {
-		userdao.deleteMes(uid);
-		
-	}
-	//拒绝场馆
-	@Override
-	public void refuseVenuse(int uid, int role) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	
 	/*
