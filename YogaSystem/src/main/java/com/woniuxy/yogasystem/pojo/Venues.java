@@ -9,6 +9,8 @@ private int flag;
 private String detail;
 private String descrie;
 private int salary;
+private float vx;
+private float vy;
 public int getUid() {
 	return uid;
 }
@@ -57,7 +59,21 @@ public int getSalary() {
 public void setSalary(int salary) {
 	this.salary = salary;
 }
-public Venues(int uid, String img, String name, String phone, int flag, String detail, String descrie, int salary) {
+
+public float getVx() {
+	return vx;
+}
+public void setVx(float vx) {
+	this.vx = vx;
+}
+public float getVy() {
+	return vy;
+}
+public void setVy(float vy) {
+	this.vy = vy;
+}
+public Venues(int uid, String img, String name, String phone, int flag, String detail, String descrie, int salary,
+		float vx, float vy) {
 	super();
 	this.uid = uid;
 	this.img = img;
@@ -67,6 +83,8 @@ public Venues(int uid, String img, String name, String phone, int flag, String d
 	this.detail = detail;
 	this.descrie = descrie;
 	this.salary = salary;
+	this.vx = vx;
+	this.vy = vy;
 }
 public Venues() {
 	super();
@@ -75,7 +93,7 @@ public Venues() {
 @Override
 public String toString() {
 	return "Venues [uid=" + uid + ", img=" + img + ", name=" + name + ", phone=" + phone + ", flag=" + flag
-			+ ", detail=" + detail + ", descrie=" + descrie + ", salary=" + salary + "]";
+			+ ", detail=" + detail + ", descrie=" + descrie + ", salary=" + salary + ", vx=" + vx + ", vy=" + vy + "]";
 }
 
 

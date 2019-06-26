@@ -37,7 +37,6 @@ function register(){
 		success: function(data){
 			alert(data)
 			if(data=="成功"){
-				alert(1)
 				location.href="http://localhost:8080/html/addmanager.html";
 				
 			}

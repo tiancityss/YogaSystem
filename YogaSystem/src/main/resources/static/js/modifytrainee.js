@@ -48,7 +48,7 @@ $(function(){
 })
 
 function resubmit(){
-	var i =5;
+	var i =0;
 	$.ajax({
 		type : "post",
 		url:"/user/modifytraineemes",

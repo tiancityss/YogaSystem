@@ -138,10 +138,11 @@ function uploadpic(){
 
 //上传场馆信息
 function submit(){
-	var i =3;
+	//等待申请身份6
+	var i =6;
 	$.ajax({
 		type : "post",
-		url:"/user/regvenues",
+		url:"/user/applyvenues",
 		data:{
 			role:i,
 			 name:$("#name").val(), 
@@ -161,6 +162,19 @@ function submit(){
 	})
 }
 
-
+//查询场馆名字是否被注册
+$(function(){
+	$("#name").blur(function(){
+		$.ajax({
+			url:"/user/checkname",
+			data:{
+				name:$("#name").val(),
+			},
+			success:function(data){
+				alert(data)
+			}
+		})
+	})
+})
 
 	

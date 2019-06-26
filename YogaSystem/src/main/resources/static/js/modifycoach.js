@@ -64,7 +64,7 @@ $(function(){
 
 //上传信息
 function coachResubmit(){
-	var i =4;
+	var i =1;
 	$.ajax({
 		type : "post",
 		url:"/user/modifycoachmes",

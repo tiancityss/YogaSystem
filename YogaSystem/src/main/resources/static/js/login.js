@@ -6,20 +6,20 @@ function login() {
 		},
 		success : function(data) {
 			var re = $.isEmptyObject(data);
-			alert(data.role)
 			if (!re) {
-				if (data.role == 0) {
+				//0学员 1教练 2场馆 3管理 4超管  5游客
+				if (data.role == 5) {
 					location.href = "http://localhost:8080/html/message.html";
-				} else if(data.role == 1){
+				} else if(data.role == 4){
 					location.href = "http://localhost:8080/html/addmanager.html";
-				}else if(data.role==4){
+				}else if(data.role==0){
 					location.href = "http://localhost:8080/html/_header.html";
-				}else if(data.role==2){
+				}else if(data.role==1){
+					location.href = "http://localhost:8080/html/_header.html";
+				}else if(data.role==2||data.role==6){
 					location.href = "http://localhost:8080/html/_header.html";
 				}else if(data.role==3){
-					location.href = "http://localhost:8080/html/_header.html";
-				}else if(data.role==5){
-					location.href = "http://localhost:8080/html/_header.html";
+					location.href = "http://localhost:8080/html/applymessage.html";
 				}
 			} else {
 				alert("账号或密码错误");

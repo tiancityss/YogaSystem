@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.woniuxy.yogasystem.pojo.Address;
+import com.woniuxy.yogasystem.pojo.ApplyMessage;
 import com.woniuxy.yogasystem.pojo.Coach;
 import com.woniuxy.yogasystem.pojo.Trainee;
 import com.woniuxy.yogasystem.pojo.User;
@@ -132,7 +133,8 @@ public User login(HttpServletRequest request,User user){
 	User user2=null;
 	user2=userService.login(user);
 	HttpSession session= request.getSession();
-	if(user2.getRole()==3){//如果登录时会管管理员
+	//0学员 1教练 2场馆 3管理 4超管  5游客
+	if(user2.getRole()==2){//如果登录时会管管理员
 		Venues venues=userService.findVenues(user2.getId());
 		if(venues!=null){
 			System.out.println("场馆信息"+venues);
@@ -140,7 +142,7 @@ public User login(HttpServletRequest request,User user){
 			session.setAttribute("name", venues.getName());
 			session.setAttribute("headimg", venues.getImg());
 		}
-	}else if(user2.getRole()==4){
+	}else if(user2.getRole()==1){//登录时教练
 		Coach coach = userService.findCoach(user2.getId());
 		if(coach!=null){
 			System.out.println("教练信息"+coach);
@@ -149,7 +151,7 @@ public User login(HttpServletRequest request,User user){
 			session.setAttribute("headimg", coach.getName());
 
 		}
-	}else if(user2.getRole()==5){
+	}else if(user2.getRole()==0){//学员登录
 		Trainee trainee = userService.findTrainee(user2.getId());
 		if(trainee!=null){
 			System.out.println("学员信息"+trainee);
@@ -165,7 +167,7 @@ public User login(HttpServletRequest request,User user){
 	return user2;
 	
 }
-//上传图片
+//上传头像图片
 @RequestMapping("/upload")
 @ResponseBody
 public String upload(@RequestParam(name="picture")MultipartFile picture,
@@ -237,7 +239,9 @@ HttpServletRequest request) throws IllegalStateException, IOException {
 	}
 return result;
 }
-
+/*
+ * 学员操作
+ */
 //学员添加信息
 @RequestMapping("/regtrainee")
 @ResponseBody
@@ -257,15 +261,64 @@ public String regTrainee(HttpServletRequest request,Trainee trainee,Address addr
 	address.setUid(uid);
 	System.out.println(trainee);
 	System.out.println(address);
+	if(trainee.getImg()==null){
+		String defaultImg="/headimg/yuga.jpg";
+		trainee.setImg(defaultImg);
+	}
 	if(userService.regTrainee(trainee, address, role).contains("成功")){
 		result="信息已提交";
 	}
+	return result;
+}
 
+
+//请求学员信息
+@RequestMapping("/modifytrainee")
+@ResponseBody
+public ModelMap traineeMes(HttpServletRequest request){
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object rerole=session.getAttribute("role");
+	int uid= Integer.parseInt(reuid.toString());
+	int role = Integer.parseInt(rerole.toString());
+	ModelMap map =new ModelMap();
+	//Trainee trainee=(Trainee) session.getAttribute("trainee");
+	Trainee trainee = userService.findTrainee(uid);
+	map.put("message", trainee);
+	return map ;
+	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
+}
+
+//修改学员资料
+@RequestMapping("/modifytraineemes")
+@ResponseBody
+public String UpdateTraineeMes(HttpServletRequest request,Trainee trainee,Address address ){
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	trainee.setUid(uid);
+	trainee.setImg(img);
+	trainee.setPhone(phone);
+	if(trainee.getImg()==null){
+		String oldImg=(String) session.getAttribute("headimg");
+		trainee.setImg(oldImg);
+	}
+	result=userService.updateTraineeMes(trainee, address);
 	return result;
 	
 }
+
+
+/*
+ * 教练操作
+ */
 //添加教练信息
-@RequestMapping("/regcoach")
+/*@RequestMapping("/regcoach")
 @ResponseBody
 public String regCoach(HttpServletRequest request,Coach coach,Address address,int role){
 	System.out.println(role);
@@ -286,14 +339,95 @@ public String regCoach(HttpServletRequest request,Coach coach,Address address,in
 	if(userService.regCoach(coach, address, role).contains("成功")){
 		result="信息已提交";
 	}
+	return result;	
+} */
 
+//申请教练
+@RequestMapping("/applycoach")
+@ResponseBody
+public String applyCoach(HttpServletRequest request,Coach coach,Address address,int role){
+	String result="申请失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	coach.setPhone(phone);
+	coach.setUid(uid);
+	coach.setImg(img);
+	address.setUid(uid);
+	if(coach.getImg()==null){
+		String defaultImg="/headimg/yuga.jpg";
+		coach.setImg(defaultImg);
+	}
+	result=userService.applyCoach(coach, address, role);
+	return result;
+}
+//请求教练信息
+@RequestMapping("/modifycoach")
+@ResponseBody
+public ModelMap coachMes(HttpServletRequest request){
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object rerole=session.getAttribute("role");
+	int uid= Integer.parseInt(reuid.toString());
+	int role = Integer.parseInt(rerole.toString());
+	ModelMap map =new ModelMap();
+	//Coach coach=(Coach) session.getAttribute("coach");
+	Coach coach = userService.findCoach(uid);
+	map.put("message", coach);
+	return map ;
+	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
+}
+
+//修改教练资料
+@RequestMapping("/modifycoachmes")
+@ResponseBody
+public String UpadteCoachMes(HttpServletRequest request,Coach coach,Address address){
+	String result="失败";
+	HttpSession session= request.getSession();
+	Object reuid=session.getAttribute("uid");
+	Object reacc=session.getAttribute("acc");
+	Object reimg = session.getAttribute("headpic");
+	String img = (String) reimg;
+	int uid= Integer.parseInt(reuid.toString());
+	String phone=(String) reacc;
+	coach.setPhone(phone);
+	coach.setUid(uid);
+	coach.setImg(img);
+	address.setUid(uid);
+	if(coach.getImg()==null){
+		String oldImg=(String) session.getAttribute("headimg");
+		coach.setImg(oldImg);
+	}
+	System.out.println(coach);
+	System.out.println(address);
+	result=userService.updateCoachMes(coach, address);
 	return result;
 	
 } 
 
 
 
-//添加场馆信息
+
+/*
+ * 场馆操作
+ */
+//检查场馆名字是否可用
+@RequestMapping("/checkname")
+@ResponseBody
+public String checkName(String name){
+	String result="场馆已被注册！";
+	result=userService.checkName(name);
+	return result;
+	
+}
+
+
+
+/*//添加场馆信息
 @RequestMapping("/regvenues")
 @ResponseBody
 public String regCoach(HttpServletRequest request,Venues venues,Address address,int role){
@@ -324,86 +458,42 @@ public String regCoach(HttpServletRequest request,Venues venues,Address address,
 
 	return result;
 	
-} 
-
-//请求学员信息
-@RequestMapping("/modifytrainee")
+} */
+//申请成为场馆
+@RequestMapping("/applyvenues")
 @ResponseBody
-public ModelMap traineeMes(HttpServletRequest request){
-	HttpSession session= request.getSession();
-	Object reuid=session.getAttribute("uid");
-	Object rerole=session.getAttribute("role");
-	int uid= Integer.parseInt(reuid.toString());
-	int role = Integer.parseInt(rerole.toString());
-	ModelMap map =new ModelMap();
-	Trainee trainee=(Trainee) session.getAttribute("trainee");
-	Address address= userService.findTraineeAdd(uid);
-	map.put("address", address);
-	map.put("message", trainee);
-	
-
-	return map ;
-	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
-}
-
-//修改学员资料
-@RequestMapping("/modifytraineemes")
-@ResponseBody
-public String UpdateTraineeMes(HttpServletRequest request,Trainee trainee,Address address ){
+public String regCoach(HttpServletRequest request,Venues venues,Address address,int role){
+	System.out.println(role);
 	String result="失败";
 	HttpSession session= request.getSession();
 	Object reuid=session.getAttribute("uid");
 	Object reacc=session.getAttribute("acc");
 	Object reimg = session.getAttribute("headpic");
+	Object repiclist=session.getAttribute("piclist");
+	List<String> piclist=(List<String>) repiclist;
+	System.out.println("图片是否取出"+piclist.size());
+	for (int i = 0; i < piclist.size(); i++) {
+		System.out.println(piclist.get(i));
+	}
 	String img = (String) reimg;
 	int uid= Integer.parseInt(reuid.toString());
 	String phone=(String) reacc;
-	trainee.setUid(uid);
-	trainee.setImg(img);
-	trainee.setPhone(phone);
-	result=userService.updateTraineeMes(trainee, address);
-	return result;
-	
-}
-//请求教练信息
-@RequestMapping("/modifycoach")
-@ResponseBody
-public ModelMap coachMes(HttpServletRequest request){
-	HttpSession session= request.getSession();
-	Object reuid=session.getAttribute("uid");
-	Object rerole=session.getAttribute("role");
-	int uid= Integer.parseInt(reuid.toString());
-	int role = Integer.parseInt(rerole.toString());
-	ModelMap map =new ModelMap();
-	Coach coach=(Coach) session.getAttribute("coach");
-	map.put("message", coach);
-	return map ;
-	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
-}
-
-//修改教练资料
-@RequestMapping("/modifycoachmes")
-@ResponseBody
-public String UpadteCoachMes(HttpServletRequest request,Coach coach,Address address){
-	String result="失败";
-	HttpSession session= request.getSession();
-	Object reuid=session.getAttribute("uid");
-	Object reacc=session.getAttribute("acc");
-	Object reimg = session.getAttribute("headpic");
-	String img = (String) reimg;
-	int uid= Integer.parseInt(reuid.toString());
-	String phone=(String) reacc;
-	coach.setPhone(phone);
-	coach.setUid(uid);
-	coach.setImg(img);
+	venues.setPhone(phone);
+	venues.setUid(uid);
+	venues.setImg(img);
 	address.setUid(uid);
-	System.out.println(coach);
+	System.out.println(venues);
 	System.out.println(address);
-	result=userService.updateCoachMes(coach, address);
+	if(venues.getImg()==null){
+		String defaultImg="/headimg/yuga.jpg";
+		venues.setImg(defaultImg);
+	}
+	result=userService.applyVenues(venues, address, role, piclist);
 	return result;
-	
-} 
+}
 
+
+//申请场馆信息
 @RequestMapping("/modifyvenues")
 @ResponseBody
 public ModelMap VenuesMes(HttpServletRequest request){
@@ -413,7 +503,8 @@ public ModelMap VenuesMes(HttpServletRequest request){
 	int uid= Integer.parseInt(reuid.toString());
 	int role = Integer.parseInt(rerole.toString());
 	ModelMap map =new ModelMap();
-	Venues venues=	(Venues) session.getAttribute("venues");
+	//Venues venues=	(Venues) session.getAttribute("venues");
+	Venues venues=userService.findVenues(uid);
 	map.put("message", venues);
 	return map ;
 	//String realpath="/headimg/3c3f328e-f4b8-4a7a-b516-7c3e224943b9u=2724886373,3500404552&fm=26&gp=0.jpg";
@@ -442,27 +533,56 @@ public String UpadteVenuesMes(HttpServletRequest request,Venues venues,Address a
 	venues.setUid(uid);
 	venues.setImg(img);
 	address.setUid(uid);
+	if(venues.getImg()==null){
+		String oldImg=(String) session.getAttribute("headimg");
+		venues.setImg(oldImg);
+	}
 	System.out.println(venues);
 	System.out.println(address);
 	result=userService.updateVenuesMes(venues, address, piclist);
 	return result;
 	
 } 
+/*
+ * 管理员操作
+ */
+//查询applymessage里所有教练申请请求
+@RequestMapping("/findCoachMessage")
+@ResponseBody
+public List<ApplyMessage> searchCoachMes(){
+	List<ApplyMessage> CoachApply = new ArrayList<>();
+	CoachApply=userService.findCoachApply();
+	return CoachApply;
+}
+//查询applymessage里所有场馆申请请求
+@RequestMapping("/findVenuesMessage")
+@ResponseBody
+public List<ApplyMessage> searchVenuesMes(){
+	List<ApplyMessage> CoachApply = new ArrayList<>();
+	CoachApply=userService.findVenuesApply();
+	return CoachApply;
+}
 
 
-/*else if (role == 4){//教练
-	Coach coach=(Coach) session.getAttribute("coach");
-	Address address= userService.findCochAdd(uid);
-	map.put("address", address);
-	map.put("message", coach);
-}else if(role==5){//学员
-	Trainee trainee=(Trainee) session.getAttribute("trainee");
-	Address address= userService.findTraineeAdd(uid);
-	map.put("address", address);
-	map.put("message", trainee);
-		Venues venues=	(Venues) session.getAttribute("venues");
-	Address address= userService.findVenuesAdd(uid);
-	map.put("address", address);
-	map.put("message", venues);
-}*/
+//同意申请
+@RequestMapping("/agree")
+@ResponseBody
+public void agreeCoach(int uid1,int role){
+	if(role==1){
+		userService.addCoach(uid1, role);
+	}else {
+		userService.addVenues(uid1, role);
+	}
+}
+
+//拒绝申请
+@RequestMapping("/refuse")
+@ResponseBody
+public void refuse(int uid1,int role){
+	if(role==1){
+		userService.refuseCoach(uid1, role);
+	}else {
+		userService.refuseVenuse(uid1, role);
+	}
+}
 }

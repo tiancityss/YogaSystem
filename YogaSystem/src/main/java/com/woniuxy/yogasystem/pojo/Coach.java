@@ -3,8 +3,10 @@ package com.woniuxy.yogasystem.pojo;
 public class Coach {
 private int uid;
 private String phone;
-private String infostatus;
+private int infostatus;
 private String school;
+private float vx;
+private float vy;
 private int sex;
 //认课类型
 private String authstatus;
@@ -27,10 +29,11 @@ public String getPhone() {
 public void setPhone(String phone) {
 	this.phone = phone;
 }
-public String getInfostatus() {
+
+public int getInfostatus() {
 	return infostatus;
 }
-public void setInfostatus(String infostatus) {
+public void setInfostatus(int infostatus) {
 	this.infostatus = infostatus;
 }
 public String getSchool() {
@@ -88,13 +91,28 @@ public int getPrivatetime() {
 public void setPrivatetime(int privatetime) {
 	this.privatetime = privatetime;
 }
-public Coach(int uid, String phone, String infostatus, String school, int sex, String authstatus, String authentication,
-		String name, String img, int flag, int salary, int privatetime) {
+
+public float getVx() {
+	return vx;
+}
+public void setVx(float vx) {
+	this.vx = vx;
+}
+public float getVy() {
+	return vy;
+}
+public void setVy(float vy) {
+	this.vy = vy;
+}
+public Coach(int uid, String phone, int infostatus, String school, float vx, float vy, int sex, String authstatus,
+		String authentication, String name, String img, int flag, int salary, int privatetime) {
 	super();
 	this.uid = uid;
 	this.phone = phone;
 	this.infostatus = infostatus;
 	this.school = school;
+	this.vx = vx;
+	this.vy = vy;
 	this.sex = sex;
 	this.authstatus = authstatus;
 	this.authentication = authentication;
@@ -110,10 +128,13 @@ public Coach() {
 }
 @Override
 public String toString() {
-	return "Coach [uid=" + uid + ", phone=" + phone + ", infostatus=" + infostatus + ", school=" + school + ", sex="
-			+ sex + ", authstatus=" + authstatus + ", authentication=" + authentication + ", name=" + name + ", img="
-			+ img + ", flag=" + flag + ", salary=" + salary + ", privatetime=" + privatetime + "]";
+	return "Coach [uid=" + uid + ", phone=" + phone + ", infostatus=" + infostatus + ", school=" + school + ", vx=" + vx
+			+ ", vy=" + vy + ", sex=" + sex + ", authstatus=" + authstatus + ", authentication=" + authentication
+			+ ", name=" + name + ", img=" + img + ", flag=" + flag + ", salary=" + salary + ", privatetime="
+			+ privatetime + "]";
 }
+
+
 
 
 

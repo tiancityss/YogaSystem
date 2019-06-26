@@ -2,11 +2,14 @@ package com.woniuxy.yogasystem.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.woniuxy.yogasystem.pojo.Address;
+import com.woniuxy.yogasystem.pojo.Apply;
+import com.woniuxy.yogasystem.pojo.ApplyMessage;
 import com.woniuxy.yogasystem.pojo.Coach;
 import com.woniuxy.yogasystem.pojo.Trainee;
 import com.woniuxy.yogasystem.pojo.User;
@@ -20,7 +23,7 @@ public interface UserDao {
 @Select("select * from user where acc=#{acc}")
 public User checkacc(String acc);
 //注册信息
-@Insert("insert into user(acc,pwd,role,flag) values (#{acc},#{pwd},0,0)")
+@Insert("insert into user(acc,pwd,role,flag) values (#{acc},#{pwd},5,0)")
 public boolean register(User user); 
 //通过账户查密码
 @Select("select pwd from user where acc=#{acc}")
@@ -43,11 +46,40 @@ public int updateAdd(Address address,int uid);
 
 /*
  * 超级管理员操作
+ * 0学院 1教练 2场馆 3管理 4超管  5游客
  */
 //注册管理员
-@Insert("insert into user (acc,pwd,role,flag) values(#{acc},#{pwd},2,0)")
+@Insert("insert into user (acc,pwd,role,flag) values(#{acc},#{pwd},3,0)")
 public boolean regManager(User user);
 
+
+/*
+ * 管理员操作
+ */
+//查询applymessage里所有教练申请请求
+@Select("select * from applymessage where type=1 and flag=0")
+public List<ApplyMessage> findCoachApply();
+//查询applymessage里所有场馆申请请求
+@Select("select * from applymessage where type=0 and flag=0")
+public List<ApplyMessage> findVenuesApply();
+//找出申请的所有信息
+@Select("select * from apply where uid=#{uid} and flag=0")
+public Apply findMes(int uid);
+//把信息插入到教练表里
+@Insert("insert into coach(uid,phone,infostatus,name,flag,sex,img,authentication,privatetime,salary,school,authstatus,vx,vy) values(#{uid},#{phone},#{infostatus},#{name},#{flag},#{sex},#{img},0,#{privatetime},#{salary},#{school},#{authstatus},#{vx},#{vy}) ")
+public boolean addCoach(Apply apply);
+//把申请信息从申请表软删除
+@Update("update applymessage set flag=1 where uid=#{uid}")
+public int deleteMes(int uid);
+//从申请applp表软删除
+@Update("update apply set flag=1 where uid=#{uid}")
+public int deleteApply(int uid);
+//地址硬删除
+@Delete("delete * from address where uid=#{uid}")
+public int deleteAdd(int uid);
+//把信息插入到场馆表里
+@Insert("insert into venues (uid,img,name,phone,descrie,flag,salary,vx,vy) values (#{uid},#{img},#{name},#{phone},#{descrie},#{flag},#{salary},#{vx},#{vy})")
+public boolean addVenues(Apply apply);
 
 /*
  * 对学员的一系列操作
@@ -68,7 +100,7 @@ public Address findTraineeAdd(int uid);
 
 
 /*
- * 队教练补充资料的一系列操作
+ * 对教练的一系列操作
  */
 
 //填写资料时给教练一个默认的手机号  uid 状态 名字 性别 头像 认证 是否任课 薪资
@@ -82,12 +114,23 @@ public int updateCoachDefault(Coach coach);
 public Coach findCoach(int uid);
 @Select("select * from address where uid=#{uid}")
 public Address findCochAdd(int uid);
-
+//把申请教练信息添加到临时申请表里
+@Insert("insert into apply (uid,phone,infostatus,name,flag,sex,img,authentication,privatetime,salary,school,authstatus,vx,vy) values(#{uid},#{phone},#{infostatus},#{name},0,#{sex},#{img},#{authentication},#{privatetime},#{salary},#{school},#{authstatus},0,0)")
+public boolean applyCoach(Coach coach);
+//把申请信息放入applymessage内  type教练是1
+@Insert("insert into applymessage (uid,phone,name,img,salary,school,sex,authstatus,type,flag) values(#{uid},#{phone},#{name},#{img},#{salary},#{school},#{sex},#{authstatus},1,0)")
+public boolean applyCoachMes(Coach coach);
 
 /*
  * 对场馆的一系列操作
  * 
  */
+//查询场馆是否被注册
+@Select("select * from venues where name=#{name}")
+public Venues checkName(String name);
+//查询场馆是否被申请注册
+@Select("select * from applymessage where name=#{name}")
+public ApplyMessage checkNameFromApply(String name);
 //填写资料时给场馆一个默认的手机号  uid 名字 性 头像 认证  薪资 描述
 @Insert("insert into venues (uid,img,name,phone,descrie,flag,salary) values (#{id},'/headimg/yuga.jpg',#{acc},#{acc},' ',0,0)")
 public boolean insertVenuesdefaultByUid(User user);
@@ -106,4 +149,10 @@ public Address findVenuesAdd(int uid);
 //软删除场馆图片
 @Update("update venues_img set flag=1 where venuesid=#{uid}")
 public int deleteVenuesPic(int uid);
+//把申请场馆信息添加到临时申请表里
+@Insert("insert into apply (uid,phone,name,flag,img,salary,vx,vy,descrie) values(#{uid},#{phone},#{name},0,#{img},#{salary},0,0,#{descrie})")
+public boolean applyVenues(Venues venues);
+//把申请信息放入applymessage内  type场馆是0
+@Insert("insert into applymessage (uid,phone,name,img,salary,type,flag,descrie) values(#{uid},#{phone},#{name},#{img},#{salary},0,0,#{descrie})")
+public boolean applyVenuesMes(Venues venues);
  }

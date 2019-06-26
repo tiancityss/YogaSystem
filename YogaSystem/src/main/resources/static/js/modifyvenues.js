@@ -27,7 +27,7 @@ $(function(){
 
 //上传场馆信息
 function venuesSubmit(){
-	var i =3;
+	var i =2;
 	$.ajax({
 		type : "post",
 		url:"/user/modifyvenuesmes",

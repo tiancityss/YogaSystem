@@ -11,6 +11,8 @@ private String add;
 private String img;
 private String name;
 private int flag;
+private float vx;
+private float vy;
 public int getId() {
 	return id;
 }
@@ -65,7 +67,21 @@ public int getFlag() {
 public void setFlag(int flag) {
 	this.flag = flag;
 }
-public Trainee(int id, int uid, int sex, String phone, int status, String add, String img, String name, int flag) {
+
+public float getVx() {
+	return vx;
+}
+public void setVx(float vx) {
+	this.vx = vx;
+}
+public float getVy() {
+	return vy;
+}
+public void setVy(float vy) {
+	this.vy = vy;
+}
+public Trainee(int id, int uid, int sex, String phone, int status, String add, String img, String name, int flag,
+		float vx, float vy) {
 	super();
 	this.id = id;
 	this.uid = uid;
@@ -76,6 +92,8 @@ public Trainee(int id, int uid, int sex, String phone, int status, String add, S
 	this.img = img;
 	this.name = name;
 	this.flag = flag;
+	this.vx = vx;
+	this.vy = vy;
 }
 public Trainee() {
 	super();
@@ -84,8 +102,9 @@ public Trainee() {
 @Override
 public String toString() {
 	return "Trainee [id=" + id + ", uid=" + uid + ", sex=" + sex + ", phone=" + phone + ", status=" + status + ", add="
-			+ add + ", img=" + img + ", name=" + name + ", flag=" + flag + "]";
+			+ add + ", img=" + img + ", name=" + name + ", flag=" + flag + ", vx=" + vx + ", vy=" + vy + "]";
 }
+
 
 
 }

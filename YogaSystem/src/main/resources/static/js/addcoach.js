@@ -78,12 +78,14 @@ function getObjectURL(file) {
 }
 
 
-//上传信息
+//申请教练上传信息
 function submit(){
-	var i =4;
+	//6申请
+	var i =6;
 	$.ajax({
 		type : "post",
-		url:"/user/regcoach",
+		//url:"/user/regcoach",
+		url:"/user/applycoach",
 		data:{
 			role:i,
 			//流派
