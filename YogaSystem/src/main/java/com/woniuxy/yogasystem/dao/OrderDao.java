@@ -6,6 +6,6 @@ import com.woniuxy.yogasystem.pojo.Order_Form;
 
 public interface OrderDao {
 	
-	@Insert("insert into order_form(tid,cid,price,classtime,starttime,vid) values(#{tid},#{cid},#{price},#{classTime},#{startTime},#{vid})")
+	@Insert("insert into order_form(tid,cid,price,starttime,vid,number) values(#{tid},#{cid},#{price},#{startTime},#{vid},#{number})")
 	public boolean addOrder(Order_Form form);
 }

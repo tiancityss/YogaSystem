@@ -13,6 +13,14 @@ public class Coach {
 	private String name;
 	private String img;
 	private int privatetime;
+	private float vx;
+	private float vy;
+	private int sex;
+	private int salary;
+	//认课类型
+	private String authstatus;
+	private Address address;
+	
 	private List<Trainee> trainees;
 	private List<Venues> venues;
 	private List<Request_Message> messages;
@@ -93,6 +101,49 @@ public class Coach {
 	}
 	public void setUid(int uid) {
 		this.uid = uid;
+	}
+	public int getSex() {
+		return sex;
+	}
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public String getAuthstatus() {
+		return authstatus;
+	}
+	public void setAuthstatus(String authstatus) {
+		this.authstatus = authstatus;
+	}
+	@Override
+	public String toString() {
+		return "Coach [id=" + id + ", uid=" + uid + ", phone=" + phone + ", infostatus=" + infostatus + ", addr=" + addr
+				+ ", school=" + school + ", authentication=" + authentication + ", name=" + name + ", img=" + img
+				+ ", privatetime=" + privatetime + ", sex=" + sex + ", salary=" + salary + ", authstatus=" + authstatus
+				+ ", trainees=" + trainees + ", venues=" + venues + ", messages=" + messages + "]";
+	}
+	public float getVx() {
+		return vx;
+	}
+	public void setVx(float vx) {
+		this.vx = vx;
+	}
+	public float getVy() {
+		return vy;
+	}
+	public void setVy(float vy) {
+		this.vy = vy;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 }

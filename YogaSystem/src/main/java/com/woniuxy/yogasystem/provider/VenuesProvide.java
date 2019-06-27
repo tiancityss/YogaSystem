@@ -18,8 +18,8 @@ public class VenuesProvide {
 		if (venues.getAddr() != null && venues.getAddr().length() != 0) {
 			sql.WHERE("`addr` like '%" + venues.getAddr() + "%'");
 		}
-		if (venues.getDetail() != null && venues.getDetail().length() != 0) {
-			sql.WHERE("`detail` like '%" + venues.getDetail() + "%'");
+		if (venues.getDescrie() != null && venues.getDescrie().length() != 0) {
+			sql.WHERE("`detail` like '%" + venues.getDescrie() + "%'");
 		}
 		return sql.toString();
 	}
@@ -47,8 +47,8 @@ public class VenuesProvide {
 		if (trainee.getName() != null && trainee.getName().length() != 0) {
 			sql.WHERE("name like '%" + trainee.getName() + "%'");
 		}
-		if (trainee.getAddr() != null && trainee.getAddr().length() != 0) {
-			sql.WHERE("addr like '%" + trainee.getAddr() + "%'");
+		if (trainee.getAdd() != null && trainee.getAdd().length() != 0) {
+			sql.WHERE("addr like '%" + trainee.getAdd() + "%'");
 		}
 		return sql.toString();
 	}

@@ -15,11 +15,11 @@ public interface Coach_VenuesDao {
 	public boolean add(Coach_Venues coach_Venues);
 
 	// 查看教练的身份，是兼职，全职，代课。
-	@Select("select coachstatus from coach where uid=#{cid}")
+	@Select("select authstatus from coach where uid=#{cid}")
 	public String findCoachstatusByCid(int cid);
 
 	// 插入签约教练信息表
-	@Insert("Insert into coach_venues(cid,vid,salary) values(#{cid},#{vid},#{salary}")
+	@Insert("Insert into coach_venues(cid,vid,salary) values(#{cid},#{vid},#{salary})")
 	public void insertMsg(Coach_Venues coach_venues);
 
 	// 查询教练签约的场馆vid及场馆的详细信息根据教练cid

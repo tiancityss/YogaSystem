@@ -7,12 +7,15 @@ public class Trainee {
 	private String phone;
 	private int status;
 	private int uid;
-	private String addr;
+	private String add;
 	private String img;
 	private String name;
 	private List<Coach> coachs;
 	private List<Venues> venues;
 	private List<Request_Message> messages;
+	private int sex;
+	private float vx;
+	private float vy;
 	public int getId() {
 		return id;
 	}
@@ -31,12 +34,7 @@ public class Trainee {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getAddr() {
-		return addr;
-	}
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
+	
 	public String getImg() {
 		return img;
 	}
@@ -72,6 +70,30 @@ public class Trainee {
 	}
 	public void setUid(int uid) {
 		this.uid = uid;
+	}
+	public String getAdd() {
+		return add;
+	}
+	public void setAdd(String add) {
+		this.add = add;
+	}
+	public int getSex() {
+		return sex;
+	}
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+	public float getVx() {
+		return vx;
+	}
+	public void setVx(float vx) {
+		this.vx = vx;
+	}
+	public float getVy() {
+		return vy;
+	}
+	public void setVy(float vy) {
+		this.vy = vy;
 	}
 	
 }

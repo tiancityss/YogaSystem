@@ -37,7 +37,7 @@ $(function() {
 													+ '</div>'
 													+ '<div class="btn-group">'
 													+ '<button type="button" class="btn btn-secondary m-b-5 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">地址：'
-													+ po.addr
+													+ po.add
 													+ ' <span class="caret"></span></button>'
 													+ '</div>'
 													+ '</div>'
@@ -52,7 +52,7 @@ $(function() {
 					if (role == 2) {
 						$
 						.ajax({
-							url : "/coach/findSignTraineeMsg",
+							url : "/venues/findSignTraineeMsg",
 							type : "post",
 							data : {
 								uid : 3
@@ -80,7 +80,7 @@ $(function() {
 											+ '</div>'
 											+ '<div class="btn-group">'
 											+ '<button type="button" class="btn btn-secondary m-b-5 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">地址：'
-											+ po.addr
+											+ po.add
 											+ ' <span class="caret"></span></button>'
 											+ '</div>'
 											+ '</div>'

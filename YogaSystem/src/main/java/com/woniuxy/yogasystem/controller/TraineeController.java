@@ -3,6 +3,7 @@ package com.woniuxy.yogasystem.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,7 +60,9 @@ public class TraineeController {
 	@PostMapping("/findVenuesDetailMsg")
 	@ResponseBody
 	public Venues findVenuesDetailMsg(int uid) {
-		return traineeService.findVenuesDetailMsg(uid);
+		Venues findVenuesDetailMsg = traineeService.findVenuesDetailMsg(uid);
+		System.out.println(findVenuesDetailMsg);
+		return findVenuesDetailMsg;
 	}
 
 	// 搜索教练功能==图文展示
@@ -83,19 +86,20 @@ public class TraineeController {
 	// 查询我的教练信息
 	@PostMapping("/findMyCoachMsg")
 	@ResponseBody
-	public List<Coach> findMyCoachMsg(int uid) {
-		System.out.println(123);
+	public List<Coach> findMyCoachMsg(HttpSession session) {
+		int uid = (int)session.getAttribute("uid");
+		System.out.println(uid);
 		List<Coach> coachs = traineeService.findMyCoachMsg(uid);
-		System.out.println(coachs);
 		return coachs;
 	}
 
 	// 查看我的场馆
-	@GetMapping("/findMyVenuesMsg")
-	public String findMyVenuesMsg(int uid, ModelMap map) {
+	@PostMapping("/findMyVenuesMsg")
+	@ResponseBody
+	public List<Venues> findMyVenuesMsg(HttpSession session) {
+		int uid = (int)session.getAttribute("uid");
 		List<Venues> venues = traineeService.findMyVenuesMsg(uid);
-		map.put("venues", venues);
-		return "/html/myvenues.html";
+		return venues;
 	}
 
 	// 约私教
@@ -105,15 +109,18 @@ public class TraineeController {
 	// 被邀请者（教练）uid2，教练私教课程pid，教练price，
 	@RequestMapping("/appointCoach")
 	@ResponseBody
-	public String appointCoach(Trainee trainee, int uid2, int pid, int price, int vid) {
+	public String appointCoach(HttpSession session,Trainee trainee, int uid2, int pid, int price, int vid) {
+		int uid = (int)session.getAttribute("uid");
+		trainee.setUid(uid);
 		return traineeService.sendCoachMsg(trainee, uid2, pid, price, vid);
 	}
 
 	@RequestMapping("/appointVenues")
 	@ResponseBody
 	// 约场馆
-	public String appointVenues(Trainee trainee, int uid2, int price) {
-		return traineeService.sendVenuesMsg(trainee, uid2, price);
+	public String appointVenues(HttpSession session,int uid2, int price) {
+		int uid1 = (int)session.getAttribute("uid");
+		return traineeService.sendVenuesMsg(uid1, uid2, price);
 	}
 
 	// 查看通知消息
@@ -133,7 +140,6 @@ public class TraineeController {
 	public String findCoachCourse(int uid, ModelMap map) {
 		List<Private_Course> courses = traineeService.findCoachCourse(uid);
 		map.put("courses", courses);
-		System.out.println(courses.get(0).getVenues());
 		return "/html/coachcourse.html";
 	}
 

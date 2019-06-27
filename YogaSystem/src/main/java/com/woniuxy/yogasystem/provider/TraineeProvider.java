@@ -36,8 +36,8 @@ public class TraineeProvider {
 		if(venues.getAddr()!=null&&venues.getAddr().length()!=0){
 			sql.WHERE("addr like '%"+venues.getAddr()+"%'");
 		}
-		if(venues.getDetail()!=null&&venues.getAddr().length()!=0){
-			sql.WHERE("detail like '%"+venues.getDetail()+"%'");
+		if(venues.getDescrie()!=null&&venues.getAddr().length()!=0){
+			sql.WHERE("detail like '%"+venues.getDescrie()+"%'");
 		}
 		if(venues.getUid()>0){
 			sql.WHERE("uid="+venues.getUid());

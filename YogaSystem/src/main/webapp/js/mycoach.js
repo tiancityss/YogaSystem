@@ -6,7 +6,7 @@ $(function() {
 				success : function(data) {
 					$("#role").val(data)
 					var role = $("#role").val();
-					if (role == 1) {
+					if (role == 0) {
 						alert(1)
 						$
 								.ajax({
@@ -53,7 +53,7 @@ $(function() {
 					if (role == 2) {
 						$
 						.ajax({
-							url : "/venues/findSignTraineeMsg",
+							url : "/venues/findSignCoachMsg",
 							type : "post",
 							data : {
 								uid : 1
@@ -62,7 +62,7 @@ $(function() {
 								alert(2)
 								var content = '<div class="new-row zurb-row">'
 										+ '<div class="zurb-div-sm-12">'
-										+ '<h4 class="page-title">我的学员</h4>'
+										+ '<h4 class="page-title">我的教练</h4>'
 										+ '</div>' + '</div>';
 								for (var i = 0; i < data.length; i++) {
 									var po = data[i]

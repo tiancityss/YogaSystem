@@ -14,10 +14,10 @@ import com.woniuxy.yogasystem.pojo.Request_Message;
 
 public interface MessageDao {
 	
-	@Select("select * from request_message inner join coach on coach.uid=request_message.uid2 where uid2=#{param1} and type=#{param2} and request_message.flag=0")
+	@Select("select * from request_message  where uid2=#{param1} and type=#{param2} and request_message.flag=0")
 	public List<Request_Message> findMessageById(int id,int type);
 	
-	@Select("select * from request_message inner join coach on coach.uid=request_message.uid2 where uid2=#{param1} and type=0 and request_message.flag=0")
+	@Select("select * from request_message where uid2=#{param1} and type=0 and request_message.flag=0")
 	@Results({
 		@Result(id=true,column="id",property="id"),
 		@Result(column="uid1",property="uid1"),

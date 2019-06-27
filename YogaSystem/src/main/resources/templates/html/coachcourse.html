@@ -17,11 +17,11 @@
 <tr th:each="courses:${courses}">
 <td th:text="${courses.price}"></td>
 <td th:text="${courses.startTime}"></td>
-<td th:text="${courses.venues.addr}"></td>
+<!-- <td th:text="${courses.venues.addr}"></td> -->
 <td th:text="${courses.venues.phone}"></td>
-<td th:text="${courses.venues.detail}"></td>
+<td th:text="${courses.venues.descrie}"></td>
 <!-- 学员id，学员头像，学员姓名，教练id，教练课程id，教练价格，场馆id -->
-<td><a th:href="@{appointCoach(pid=${courses.id},uid2=${courses.cid},vid=${courses.venues.id},price=${courses.price},name=小李,img=111,uid=1)}">约私教</a></td>
+<td><a th:href="@{appointCoach(pid=${courses.id},uid2=${courses.cid},vid=${courses.venues.id},price=${courses.price})}">约私教</a></td>
 </tr>
 </body>
 </html>

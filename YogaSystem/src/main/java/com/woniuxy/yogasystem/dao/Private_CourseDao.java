@@ -10,6 +10,6 @@ public interface Private_CourseDao {
 	@Select("select * from private_course where id=#{id} and flag=0")
 	public Private_Course findPrivate(int id);
 	
-	@Update("update private_course set flag=1 where id=#{id}")
-	public boolean remove(int id);
+	@Update("update private_course set flag=1,tid=#{param2} where id=#{param1}")
+	public boolean remove(int id,int tid);
 }

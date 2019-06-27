@@ -42,7 +42,7 @@ public interface TraineeService {
 	public String sendCoachMsg(Trainee trainee, int uid2, int pid, int price, int vid);
 
 	// 约场馆
-	public String sendVenuesMsg(Trainee trainee, int uid2, int price);
+	public String sendVenuesMsg(int uid1, int uid2, int price);
 
 	// 查看通知消息
 	public List<Request_Message> findMsgContent(int uid);

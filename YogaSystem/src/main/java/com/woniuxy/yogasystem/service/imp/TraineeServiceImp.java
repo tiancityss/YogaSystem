@@ -73,14 +73,16 @@ public class TraineeServiceImp implements TraineeService {
 	// 查询我的教练
 	@Override
 	public List<Coach> findMyCoachMsg(int uid) {
-		Trainee trainee = traineeDao.findTraineeById(uid);
-		return traineeDao.findMyCoachMsg(trainee.getId());
+		Trainee trainee = traineeDao.findTraineeByUId(uid);
+		List<Coach> findMyCoachMsg = traineeDao.findMyCoachMsg(trainee.getId());
+		return findMyCoachMsg;
 	}
 
 	// 查看我的场馆信息
 	@Override
 	public List<Venues> findMyVenuesMsg(int uid) {
-		return traineeDao.findMyVenuesMsg(uid);
+		Trainee trainee = traineeDao.findTraineeByUId(uid);
+		return traineeDao.findMyVenuesMsg(trainee.getId());
 	}
 	// 约私教
 	// url:/trainee//appointCoach
@@ -99,13 +101,14 @@ public class TraineeServiceImp implements TraineeService {
 			return "您的账户余额已不足，请充值";
 		}
 		Coach coach = coachDao.findCoachByCid(uid2);
+		Trainee currentTrainee = traineeDao.findTraineeByUId(traineeId);
 		// 插入消息表
-		String content = trainee.getName() + "预约了您";
+		String content = currentTrainee.getName() + "学员预约了您";
 		Request_Message rm = new Request_Message();
 		rm.setContent(content);
-		rm.setImg(trainee.getImg());
-		rm.setName(trainee.getName());
-		rm.setUid1(trainee.getUid());
+		rm.setImg(currentTrainee.getImg());
+		rm.setName(currentTrainee.getName());
+		rm.setUid1(traineeId);
 		rm.setUid2(coach.getUid());
 		rm.setCharacter(0);
 		rm.setType(0);
@@ -119,20 +122,20 @@ public class TraineeServiceImp implements TraineeService {
 
 	// 学员约场馆
 	@Override
-	public String sendVenuesMsg(Trainee trainee, int uid2, int price) {
-		int traineeId = trainee.getUid();// 学员id
-		int traineeBalance = traineeDao.selectBalance(traineeId);
+	public String sendVenuesMsg(int uid1, int uid2, int price) {
+		Trainee trainee = traineeDao.findTraineeByUId(uid1);
+		int traineeBalance = traineeDao.selectBalance(uid1);
 		// 根据场馆的课程pid查询教练对应的课程价格
 		if (traineeBalance < price) {
 			return "您的账户余额已不足，请充值";
 		}
 		// 插入消息表
-		String content = trainee.getName() + "预约了您";
+		String content = trainee.getName() + "请求成为学员";
 		Request_Message rm = new Request_Message();
 		rm.setContent(content);
 		rm.setImg(trainee.getImg());
 		rm.setName(trainee.getName());
-		rm.setUid1(trainee.getUid());
+		rm.setUid1(uid1);
 		rm.setUid2(uid2);
 		rm.setCharacter(0);
 		rm.setType(0);

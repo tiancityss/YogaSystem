@@ -27,7 +27,7 @@ import com.woniuxy.yogasystem.service.CoachService;
 @RequestMapping("/coach")
 public class CoachController {
 	@Resource
-	private CoachService coachService;
+	private CoachService coachService ;
 	
 	@ResponseBody
 	@RequestMapping("/findCoach")
@@ -45,8 +45,9 @@ public class CoachController {
 	//教练签约场馆
 	@RequestMapping("/signVenues")
 	@ResponseBody
-	public String signVenues(Integer cid,Integer vid){
+	public String signVenues(HttpSession session,Integer vid){
 		String result = "签约失败";
+		int cid = (int)session.getAttribute("uid");
 		result = coachService.signVenues(cid, vid);
 		return result;
 	}
@@ -54,12 +55,13 @@ public class CoachController {
 	//教练查询申请信息
 	@RequestMapping("/findResMessage")
 	@ResponseBody
-	public Map<String, Object> findResMessage(Integer uid,HttpSession session){
+	public Map<String, Object> findResMessage(HttpSession session){
 		Map<String , Object> map = new HashMap<>();
-		List<Request_Message> mes = coachService.findResMessage(uid);
-		//String role = (String)session.getAttribute("role");
+		int role = (int)session.getAttribute("role");
+		int uid = (int)session.getAttribute("uid");
+		List<Request_Message> mes = coachService.findResMessage(uid);	
 		map.put("mes", mes);
-		map.put("role", 2);
+		map.put("role", role);
 		return map;
 	}
 	
@@ -75,7 +77,8 @@ public class CoachController {
 	//教练拒绝学员签约
 	@RequestMapping("/refuse")
 	@ResponseBody
-	public String refuse(int cid, int tid, int mid){
+	public String refuse(HttpSession session,int tid, int mid){
+		int cid = (int)session.getAttribute("uid");
 		String result = "处理失败";
 		result = coachService.refuse(cid, tid, mid);
 		return result;
@@ -84,8 +87,9 @@ public class CoachController {
 	//展示教练的收到的提示消息
 	@RequestMapping("/findHintMessage")
 	@ResponseBody
-	public List<Request_Message> findHintMessage(HttpSession session,int uid){
-		//int uid = (int)session.getAttribute("uid");
+	public List<Request_Message> findHintMessage(HttpSession session){
+		int uid = (int)session.getAttribute("uid");
+		System.out.println(uid);
 		return coachService.findHintMessage(uid);
 	}
 	
@@ -99,15 +103,15 @@ public class CoachController {
 	//查看我的场馆
 	@RequestMapping("/findMyVenues")
 	@ResponseBody	
-	public List<Venues> findVenues(HttpSession session,int uid){
-		//int uid = (int)session.getAttribute("uid");
+	public List<Venues> findVenues(HttpSession session){
+		int uid = (int)session.getAttribute("uid");
 		return coachService.findMyVenues(uid);
 	}
 	//查看我的学员
 	@RequestMapping("/findMyTrainee")
 	@ResponseBody	
-	public List<Trainee> findTrainee(HttpSession session,int uid){
-		//int uid = (int)session.getAttribute("uid");
+	public List<Trainee> findTrainee(HttpSession session){
+		int uid = (int)session.getAttribute("uid");
 		return coachService.findTrainee(uid);
 	}
 	
@@ -130,9 +134,8 @@ public class CoachController {
 	@RequestMapping("/findRole")
 	@ResponseBody
 	public int findRole(HttpSession session){
-		//int role = (int)session.getAttribute("role");
+		int role = (int)session.getAttribute("role");
 		
-		int role = 1;
 		return role;
 	}
 }

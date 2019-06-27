@@ -6,9 +6,9 @@ public class Order_Form {
 	private int cid;
 	private int vid;
 	private int price;
-	private String classTime;
 	private String startTime;
 	private int status;
+	private String number;
 	public int getId() {
 		return id;
 	}
@@ -39,12 +39,7 @@ public class Order_Form {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getClassTime() {
-		return classTime;
-	}
-	public void setClassTime(String classTime) {
-		this.classTime = classTime;
-	}
+	
 	public String getStartTime() {
 		return startTime;
 	}
@@ -56,6 +51,12 @@ public class Order_Form {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
 	}
 	
 }

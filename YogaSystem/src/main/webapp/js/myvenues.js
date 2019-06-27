@@ -50,9 +50,10 @@ $(function() {
 								})
 					}
 					if (role == 0) {
+						alert(1)
 						$
 								.ajax({
-									url : "/coach/findSingleVenues",
+									url : "/trainee/findMyVenuesMsg",
 									type : "post",
 									data : {
 										uid : 3

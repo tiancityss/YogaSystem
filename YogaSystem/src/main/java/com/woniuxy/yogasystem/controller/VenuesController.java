@@ -3,6 +3,7 @@ package com.woniuxy.yogasystem.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +26,7 @@ public class VenuesController {
 	public String findVenues(ModelMap map, int id) {
 		Venues venues = venuesService.findVenues(id);
 		map.put("po", venues);
+		System.out.println(venues);
 		return "/html/venues.html";
 	}
 
@@ -45,14 +47,16 @@ public class VenuesController {
 	// 查看我的签约学员
 	@RequestMapping("/findSignTraineeMsg")
 	@ResponseBody
-	public List<Trainee> findSignTraineeMsg(int uid) {
+	public List<Trainee> findSignTraineeMsg(HttpSession session) {
+		int uid = (int) session.getAttribute("uid");
 		return venuesService.findSignTraineeMsg(uid);
 	}
 
 	// 查看我签约的教练
 	@RequestMapping("/findSignCoachMsg")
 	@ResponseBody
-	public List<Coach> findSignCoachMsg(int uid) {
+	public List<Coach> findSignCoachMsg(HttpSession session) {
+		int uid = (int) session.getAttribute("uid");
 		return venuesService.findSignCoachMsg(uid);
 	}
 
@@ -75,16 +79,16 @@ public class VenuesController {
 	@RequestMapping("/acceptCoachMsg")
 	@ResponseBody
 	public String acceptCoachMsg(int uid1, int uid2, int mid) {
-		String msg = venuesService.acceptCoachMsg(uid1, uid2, mid);
+		System.out.println(2);
+		String msg = venuesService.acceptCoachMsg(uid2, uid1, mid);
 		return msg;
 	}
 
 	@RequestMapping("/acceptTrainMsg")
 	@ResponseBody
 	// 场馆接受学员通知的消息
-	public String acceptTrainMsg(int vid, int tid, int id) {
-		String msg = venuesService.acceptTrainMsg(vid, tid, id);
-		System.out.println(msg);
+	public String acceptTrainMsg(int uid1, int uid2, int mid) {
+		String msg = venuesService.acceptTrainMsg(uid1, uid2, mid);
 		return msg;
 	}
 

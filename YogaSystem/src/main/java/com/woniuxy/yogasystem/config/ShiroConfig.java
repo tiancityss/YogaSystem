@@ -31,7 +31,7 @@ public class ShiroConfig {
 	@Bean
 	public UserRealm realm(CredentialsMatcher matcher){
 		UserRealm userRealm = new UserRealm();
-		userRealm.setCredentialsMatcher(matcher);
+		//userRealm.setCredentialsMatcher(matcher);
 		userRealm.setCachingEnabled(true);
 		userRealm.setAuthenticationCachingEnabled(true);
 		userRealm.setAuthenticationCacheName("authentication");
@@ -62,11 +62,27 @@ public class ShiroConfig {
 		
 		//设置过滤器链
 		Map<String, String> map = new HashMap<>();
+		//html	
 		
+		map.put("/css/**", "anon");
+		map.put("/fonts/**", "anon");
+		map.put("/headimg/**", "anon");
+		map.put("/js/**", "anon");
+		//map.put("/images/**", "anon");
+		//map.put("/veneusimg/**", "anon");
 		
+		map.put("/html/login.html", "anon");
+		map.put("/html/register.html", "anon");
 		
-		
-		
+		//controller
+		map.put("/user/login", "anon");
+		map.put("/user/register", "anon");
+		map.put("/user/getcode", "anon");
+		map.put("/user/checkacc", "anon");
+		//静态资源	
+		map.put("/logout", "logout");
+		map.put("/**", "authc");
+		System.out.println(map);
 		bean.setFilterChainDefinitionMap(map);
 		
 		return bean;

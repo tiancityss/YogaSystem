@@ -29,4 +29,9 @@ public class Trainee_Venues {
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
+	@Override
+	public String toString() {
+		return "Trainee_Venues [id=" + id + ", tid=" + tid + ", vid=" + vid + ", flag=" + flag + "]";
+	}
+	
 }

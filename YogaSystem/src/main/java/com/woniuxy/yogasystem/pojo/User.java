@@ -7,7 +7,7 @@ public class User {
 	private String acc;
 	
 	private String pwd;
-	private String role;
+	private int role;
 	private List<String> authoritys;
 	public int getId() {
 		return id;
@@ -27,10 +27,11 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getRole() {
+	
+	public int getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 	public List<String> getAuthoritys() {
@@ -38,6 +39,17 @@ public class User {
 	}
 	public void setAuthoritys(List<String> authoritys) {
 		this.authoritys = authoritys;
+	}
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public User(int id, String acc, String pwd, int role) {
+		super();
+		this.id = id;
+		this.acc = acc;
+		this.pwd = pwd;
+		this.role = role;
 	}
 	
 }

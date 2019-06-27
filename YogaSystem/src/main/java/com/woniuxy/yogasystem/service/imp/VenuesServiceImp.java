@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.yogasystem.dao.CoachDao;
 import com.woniuxy.yogasystem.dao.Coach_VenuesDao;
@@ -19,7 +20,7 @@ import com.woniuxy.yogasystem.pojo.Trainee_Venues;
 import com.woniuxy.yogasystem.pojo.Venues;
 import com.woniuxy.yogasystem.pojo.Venues_Img;
 import com.woniuxy.yogasystem.service.VenuesService;
-
+@Transactional
 @Service("venuesService")
 public class VenuesServiceImp implements VenuesService {
 	@Resource
@@ -53,13 +54,15 @@ public class VenuesServiceImp implements VenuesService {
 	// 查看我签约的学员
 	@Override
 	public List<Trainee> findSignTraineeMsg(int uid) {
-		return venuesDao.findSignTraineeMsg(uid);
+		Venues venues = venuesDao.findVenuesByUId(uid);
+		return venuesDao.findSignTraineeMsg(venues.getId());
 	}
 
 	// 查看我签约的场馆
 	@Override
 	public List<Coach> findSignCoachMsg(int uid) {
-		return venuesDao.findSignCoachMsg(uid);
+		Venues venues = venuesDao.findVenuesByUId(uid);
+		return venuesDao.findSignCoachMsg(venues.getId());
 	}
 
 	// 签约教练发送的请求的消息
@@ -89,6 +92,8 @@ public class VenuesServiceImp implements VenuesService {
 	// 接受教练申请消息
 	@Override
 	public String acceptCoachMsg(int vid, int cid, int id) {
+		Venues venues = venuesDao.findVenuesByUId(vid);
+		Coach coach = coachDao.findCoachById(cid);
 		// 查看教练身份，分配工资
 		String status = coach_VenuesDao.findCoachstatusByCid(cid);
 		Coach_Venues cv = new Coach_Venues();
@@ -101,29 +106,32 @@ public class VenuesServiceImp implements VenuesService {
 		if (status.equals("代课")) {
 			cv.setSalary(500);
 		}
-		cv.setCid(cid);
-		cv.setVid(vid);
+		cv.setCid(coach.getId());
+		cv.setVid(venues.getId());
 		// 将信息插入教练签约工资表==签约成功
 		coach_VenuesDao.insertMsg(cv);
 		// 接受到的消息处理之后将flag=1
 		venuesDao.handleAllMsg(id);
+		//改变教练认证
+		coachDao.updateinfostatus(coach.getUid());
 		// 向教练发送消息
 		Request_Message rm = answerMsg(vid, cid);
 		venuesDao.insertCoachMsg(rm);
-		return "签约成功";
+		return "等待对方付款";
 	}
 
 	// 接受学员申请消息
 	@Override
 	public String acceptTrainMsg(int uid1, int uid2, int mid) {
-		Trainee trainee = traineeDao.findTraineeById(uid1);
-		Venues venues = venuesDao.findVenuesById(uid2);
+		Trainee trainee = traineeDao.findTraineeByUId(uid1);
+		Venues venues = venuesDao.findVenuesByUId(uid2);
 		// 插入学员和场馆关系信息表==签约成功
 		Trainee_Venues tv = new Trainee_Venues();
 		tv.setTid(trainee.getId());
 		tv.setVid(venues.getId());
 		trainee_VenuesDao.insertMsg(tv);
 		// 接受到的消息处理之后将flag=1
+		System.out.println(123);
 		venuesDao.handleAllMsg(mid);
 		// 向学员发送消息
 		Request_Message rm = answerMsg(uid2, uid1);
@@ -147,10 +155,12 @@ public class VenuesServiceImp implements VenuesService {
 		rm.setUid1(vid);
 		rm.setUid2(uid);
 		Venues venues = venuesDao.findVenuesMsg(vid);
-		String content = venues.getName() + "接受了您的请求";
+		String content = "场馆接受了您的请求";
 		rm.setContent(content);
-		rm.setType(0);
+		rm.setType(1);
 		rm.setCharacter(2);
+		rm.setName(venues.getName());
+		rm.setImg(venues.getImg());
 		return rm;
 	}
 

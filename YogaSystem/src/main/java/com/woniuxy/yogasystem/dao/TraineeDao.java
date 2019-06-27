@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -22,10 +23,10 @@ public interface TraineeDao {
 	@Select("select * from trainee inner join trainee_coach on trainee_coach.tid=trainee.id where cid=#{cid}")
 	public List<Trainee> findTraineeByCid(int cid);
 
-	@Select("select * from trainee where id=#{id}")
+	@Select("select * from trainee where id=#{id} and flag=0")
 	public Trainee findTraineeById(int id);
 
-	@Select("select * from trainee where uid=#{id}")
+	@Select("select * from trainee where uid=#{id} and flag=0")
 	public Trainee findTraineeByUId(int id);
 
 	// 查看教练的基本信息
@@ -39,7 +40,10 @@ public interface TraineeDao {
 			@Result(column = "authentication", property = "authentication"),
 			@Result(column = "name", property = "name"), @Result(column = "img", property = "img"),
 			@Result(column = "privatetime", property = "privatetime"), @Result(column = "uid", property = "uid"),
-			@Result(column = "uid", property = "venues", many = @Many(select = "com.woniuxy.yogasystem.dao.Coach_VenuesDao.findVenuesDetailMsg")) })
+			@Result(column = "uid", property = "venues", many = @Many(select = "com.woniuxy.yogasystem.dao.Coach_VenuesDao.findVenuesDetailMsg")),
+			@Result(column="uid",property="address",one=@One(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress"))
+	})
+			
 	public Coach findCoachDetailMsg(int uid);
 
 	// 查看场馆的基本信息
@@ -65,11 +69,11 @@ public interface TraineeDao {
 	public List<Venues> findVenues(Venues venues);
 
 	// 查询我的教练
-	@Select("select * from trainee_coach inner join coach on coach.id=trainee_coach.cid" + " WHERE tid=#{uid}")
+	@Select("select * from trainee_coach inner join coach on coach.id=trainee_coach.cid WHERE tid=#{uid}")
 	public List<Coach> findMyCoachMsg(int uid);
 
 	// 查询我的场馆
-	@Select("select * from trainee_venues inner join venues on venues.uid=trainee_venues.vid" + " WHERE tid=#{uid}")
+	@Select("select * from trainee_venues inner join venues on venues.id=trainee_venues.vid" + " WHERE tid=#{uid}")
 	public List<Venues> findMyVenuesMsg(int uid);
 
 	// 学员邀请教练信息插入消息表中
@@ -97,8 +101,12 @@ public interface TraineeDao {
 	@Select("select * from private_course where cid=#{uid}")
 	@Results({ @Result(id = true, column = "id", property = "id"), @Result(column = "cid", property = "cid"),
 			@Result(column = "price", property = "price"), @Result(column = "starttime", property = "startTime"),
-			@Result(column = "vid", property = "venues", many = @Many(select = "com.woniuxy.yogasystem.dao.VenuesDao.findVenuesMsg")) })
+			@Result(column = "vid", property = "venues", many = @Many(select = "com.woniuxy.yogasystem.dao.VenuesDao.findVenuesById")) })
 	// 查看教练课程信息
 	public List<Private_Course> findCoachCourse(int uid);
+
+	@Select("select img from trainee where uid=#{uid}")
+	public String findHead(int uid);
+
 
 }

@@ -12,7 +12,7 @@ $(function() {
 						+ '<table class="table mb-0 border">' + '<tbody>'
 						+ '<tr>' + '<td colspan="2"><a href="/venues/find?id='
 						+ po.id
-						+ '"><img src="/demo2.jpg" width="100%"'
+						+ '"><img src="'+po.img+'" width="100%"'
 						+ 'height="150" /></a></td>'
 						+ '</tr>'
 						+ '<tr>'
@@ -24,13 +24,13 @@ $(function() {
 						+ '<tr>'
 						+ '<td>地址</td>'
 						+ '<td>'
-						+ po.addr
+						+ po.address.town+""+po.address.detail
 						+ '</td>'
 						+ '</tr>'
 						+ '<tr>'
 						+ '<td>详细</td>'
 						+ '<td>'
-						+ po.detail
+						+ po.descrie
 						+ '</td>'
 						+ '</tr>'
 						+ '</tbody>'

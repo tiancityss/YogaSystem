@@ -39,7 +39,7 @@
 						
 						<!--消息-->
 						<li class="dropdown notification-list notification-box">
-						  <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="/html/message.html" role="button" aria-haspopup="false" aria-expanded="false">
+						  <a class="nav-link dropdown-toggle waves-effect waves-light nav-user"  href="/html/message.html"  >
 						    <i class="mdi mdi-email-outline"></i>
 						  </a>
 						</li>
@@ -54,7 +54,7 @@
 						
             <li class="dropdown notification-list">
               <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="/images/users/avatar-12.jpg" alt="user" class="rounded-circle">
+                <img src="/images/users/avatar-12.jpg" id="headimg" alt="user" class="rounded-circle">
               </a>
               <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 <a href="profile.html" class="dropdown-item notify-item">
@@ -121,6 +121,13 @@
   <script type="text/javascript">
     var x = document.getElementById('topnav').innerHTML;;
     localStorage.setItem('header', x);
+    $.ajax({
+    	url:"/user/findhead",
+    	success:function(data){
+    		alert(data)
+    		$("#headimg").prop("src",data	)
+    	}
+    })
   </script>
 </body>
 

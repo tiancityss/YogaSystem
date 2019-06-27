@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.woniuxy.yogasystem.pojo.Coach;
 import com.woniuxy.yogasystem.pojo.Request_Message;
@@ -14,7 +15,7 @@ import com.woniuxy.yogasystem.pojo.Trainee;
 
 public interface CoachDao {
 	
-	@Select("select * from coach where uid=#{id}")
+	@Select("select * from coach where uid=#{id} and flag=0")
 	@Results({
 		@Result(id=true,column="id",property="id"),
 		@Result(column="phone",property="phone"),
@@ -25,8 +26,11 @@ public interface CoachDao {
 		@Result(column="name",property="name"),
 		@Result(column="img",property="img"),
 		@Result(column="privatetime",property="privatetime"),
-		@Result(column="uid",property="uid")
-		//@Result(column="id",property="trainees",many=@Many(select="com.woniuxy.yogasystem.dao.TraineeDao.findTraineeByCid")),
+		@Result(column="uid",property="uid"),
+		@Result(column="sex",property="sex"),
+		@Result(column="salary",property="salary"),
+		@Result(column="authstatus",property="authstatus"),
+		@Result(column="uid",property="address",many=@Many(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress"))
 		//@Result(column="id",property="venues",many=@Many(select="com.woniuxy.yogasystem.dao.VenuesDao.findVenuesByCid")),
 		//@Result(column="id",property="messages",many=@Many(select="com.woniuxy.yogasystem.dao.MessageDao.findMessageByCid"))
 	})
@@ -36,6 +40,14 @@ public interface CoachDao {
 	
 	@Select("select * from coach where id=#{cid}")
 	public Coach findCoachByCid(int cid);
+
+	
+	@Select("select img from coach where uid=#{uid}")
+	public String findHead(int uid);
+
+
+	@Update("update coach set infostatus=2 where uid=#{uid}")
+	public void updateinfostatus(int uid);
 	
 	
 

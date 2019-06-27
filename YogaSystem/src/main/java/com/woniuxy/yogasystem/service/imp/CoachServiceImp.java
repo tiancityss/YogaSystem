@@ -1,6 +1,7 @@
 package com.woniuxy.yogasystem.service.imp;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -75,14 +76,16 @@ public class CoachServiceImp implements CoachService{
 		Trainee trainee = traineeDao.findTraineeByUId(uid1);
 		order.setCid(coach.getId());
 		order.setTid(trainee.getId());
+		String number = UUID.randomUUID().toString()+""+System.currentTimeMillis();
+		order.setNumber(number);
 		//生成订单
 		orderDao.addOrder(order);
 		//删除申请
 		messageDao.removeMesByPid(pid);
 		//删除课程表
-		private_CourseDao.remove(pid);
+		private_CourseDao.remove(pid,trainee.getId());
 		//添加学员教练关系
-		trainee_CoachDao.add(uid1, uid2);
+		trainee_CoachDao.add(trainee.getId(), coach.getId());
 		//生成反馈信息给学员
 		Request_Message message = new Request_Message(uid2, uid1, "教练同意了你的签约", coach.getName(), coach.getImg(), 1,1);
 		messageDao.insertMes(message);
@@ -105,7 +108,6 @@ public class CoachServiceImp implements CoachService{
 	@Override
 	public List<Request_Message> findHintMessage(int id) {
 		List<Request_Message> findMessageById = messageDao.findMessageById(id, 1);
-		System.out.println(findMessageById);
 		return findMessageById;
 	}
 	
@@ -115,7 +117,6 @@ public class CoachServiceImp implements CoachService{
 	
 	public List<Venues> findVenues(Venues venues){
 		List<Venues> findVenues = venuesDao.findVenues(venues);
-		System.out.println(findVenues);
 		return findVenues;
 	}
 	
@@ -149,7 +150,7 @@ public class CoachServiceImp implements CoachService{
 		//删除消息 
 		messageDao.removeMes(mid);
 		//生成关系
-		new Coach_Venues(coach.getId(), vid, venues.getVipprice());
+		new Coach_Venues(coach.getId(), vid, venues.getSalary());
 		return "签约成功";
 	}
 	

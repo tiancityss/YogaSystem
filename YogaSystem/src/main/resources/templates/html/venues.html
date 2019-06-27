@@ -43,7 +43,7 @@
           <div class="card m-b-20">
             <div class="card-body">
               <div class="productdec text-center">
-                <img class="" alt="Product" src="images/products/1.png">
+                <img class="" alt="Product" th:src="${po.img}">
               </div>
               <div class="text-center m-t-20 m-b-20">
                 
@@ -51,7 +51,7 @@
               </div>
               <hr>
               <h4 class="m-b-0 m-t-20">场馆描述</h4>
-              <p>[[${po.detail}]]</p>
+              <p>[[${po.descrie}]]</p>
               <hr>
               <h4 class="m-b-0 m-t-20">详细信息</h4>
               <div class="pro_detail">
@@ -60,22 +60,25 @@
                     <div class="zurb-div-sm-3 text-muted m-b-10">姓名</div>
                     <div class="zurb-div-sm-3 m-b-10">[[${po.name}]]</div>
                   </li>
-                  <li class=" row">
+                  <li class=" row"	>
                     <div class="zurb-div-sm-3 text-muted m-b-10">地址</div>
-                    <div class="zurb-div-sm-3 m-b-10">[[${po.addr}]]</div>
+                    <div class="zurb-div-sm-3 m-b-10">[[${po.address.province}]]</div>
                   </li>
                   <li class="p-b-20 row">
                     <div class="zurb-div-sm-3 text-muted m-b-10">联系方式</div>
                     <div class="zurb-div-sm-3 m-b-10">[[${po.phone}]]</div>
                   </li>
-                  <li class="p-b-20 row">
-                    <div class="zurb-div-sm-3 text-muted m-b-10">薪资</div>
-                    <div class="zurb-div-sm-3 m-b-10">[[${po.vipprice}]]</div>
+                  <li class="p-b-20 row" th:if="${session.role} eq '0'">
+                    <div class="zurb-div-sm-3 text-muted m-b-10">年费</div>
+                    <div class="zurb-div-sm-3 m-b-10">[[${po.salary}]]</div>
                   </li>
-                  
+                  <li class="p-b-20 row" >
+                    <div class="zurb-div-sm-3 text-muted m-b-10">年费</div>
+                    <div class="zurb-div-sm-3 m-b-10">[[${po.salary}]]</div>
+                  </li>
                 </ul>
-                <a href="javascript:void(0);" id="coachSign">申请成功该场馆教练</a><br/>
-                <a href="javascript:void(0);" id="teaineeSign">申请成功该场馆学员</a><br/>
+                <a href="javascript:void(0);" id="coachSign" th:if="${session.role} eq '1'">申请成功该场馆教练</a><br/>
+                <a href="javascript:void(0);" id="teaineeSign" th:if="${session.role} eq '0'">报名</a><br/>
 				<a href="#" class="btn btn-primary"><i class="ti-shopping-cart"> </i> 留言</a><br/>
               </div>
               
@@ -112,7 +115,7 @@
   <script>
   $(function(){
 		$("#coachSign").click(function(){
-			var venuesId = [[${po.id}]]; 
+			var venuesId = [[${po.uid}]]; 
 			$.ajax({
 				url:"/coach/signVenues",
 				type:"post",
@@ -127,17 +130,13 @@
 		$("#teaineeSign").click(function(){
 			var venuesId = [[${po.id}]]; 
 			var uid = [[${po.uid}]]; 
-			var price = [[${po.vipprice}]]; 
+			var price = [[${po.salary}]]; 
 			$.ajax({
 				url:"/trainee/appointVenues",
 				type:"post",
 				data:{
 					"uid2":uid,
 					"price":price,
-					
-					"name":"小李",
-					"img":"111",
-					"uid":"1"	
 				},
 				datatype:"json",
 				success:function(data){
