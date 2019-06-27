@@ -154,7 +154,8 @@ function submit(){
 				//薪资
 				salary:$("#salary").val(),
 				descrie:$("TextArea").val(),
-			
+				vx:$("#vx").val(),
+				 vy:$("#vy").val(),
 		},
 		success:function(data){
 			alert(data)
@@ -171,7 +172,10 @@ $(function(){
 				name:$("#name").val(),
 			},
 			success:function(data){
-				alert(data)
+				//alert(data)
+				var con="";
+			con+=' <a id="mes" style="color: red">'+data+'</a>';
+			$("#mes").html(con)
 			}
 		})
 	})

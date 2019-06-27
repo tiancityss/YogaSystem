@@ -43,8 +43,10 @@ public class CodeUtil {
         //必填:短信模板-可在短信控制台中找到
         if(i==2){
         	 request.setTemplateCode("SMS_168306968"); //	修改成自己的,传过来的参数是2了，此时为重置密码验证
-        }else{
+        }else if(i==1){
         	request.setTemplateCode("SMS_168306974");    // TODO 修改成自己的,传过来的参数是1了，此时为注册验证
+        }else{
+        	request.setTemplateCode("SMS_168306974");    // TODO 修改成自己的,传过来的参数是3了，此时为验证登陆
         }
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
 //        request.setTemplateParam("{\"name\":\"Tom\", \"code\":\"123\"}");

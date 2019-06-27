@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
   <title>申请教练</title>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=R8YywfG4g6hRyZOL1tyEnnlXy0qAzfpB"></script>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta content="Sample content" name="description" />
@@ -47,7 +48,7 @@
         <div class="zurb-div-xl-12">
           <div class="card m-b-20">
             <h5 class="card-header">Coach Form</h5>
-            <div class="card-body" style="height: 1000px;">
+            <div class="card-body" style="height: 1250px;">
             <div id="pic" style="width: 80px;height: 80px ;border: 1px solid; margin-left: 510px;"><img alt="" src="/headimg/yuga.jpg"width="80px";height="80px"></div>
  <br>
  <br>
@@ -85,9 +86,15 @@
 					<option>--选择街道镇--</option>
 				</select><br/><br/>
 				</div>
-				详细的地址：<input class="form-control" type="text" class="f-input"/ id="detailAddress" class="form-control">
+				详细的地址*必填通过地图选取：<div id="detailbaidu">
+				<input class="form-control" type="text" class="f-input"/ id="detailAddress"  ></div>
 			</div>
-                <div class="form-group">
+			<div id="allmap" class="form-control" style="height: 300px"></div>
+			<div id="zuo" >
+				<input id="vx" type="hidden"  placeholder="横坐标"/>
+				<input id="vy" type="hidden"  placeholder="纵坐标"/>
+			</div>
+                <div class="form-group" style="margin-top: 10px;" >
                 <label for="school">流派 *</label>
                 <input id="school" type="text" name="school" Placeholder="流派" class="form-control">
                 </div>
@@ -127,6 +134,7 @@
 <script src="/js/addcoach.js" ></script>
 <script src="/js/address.js" ></script>
   <script  src="/js/popper.min.js"></script>
+     <script  src="/js/baidumap.js"></script>
   <script  src="/js/bootstrap.min.js"></script>
   <script  src="/js/waves.js"></script>
   <script  src="/js/jquery.slimscroll.js"></script>

@@ -40,6 +40,7 @@
       <div class="text-center">
         <h3 class="text-uppercase font-bold mb-0">Sign In</h3>
       </div>
+      <span style="float: right;"><a style="color: #6F89B4" href="messagelogin.html">短信登录</a></span>
       <div class="">
         <form class="form-horizontal m-t-20" action="index.html">
           <div class="form-group">
@@ -49,17 +50,19 @@
           </div>
           <div class="form-group">
             <div class="zurb-div-xs-12">
-              <input id="" class="form-control" type="password" required="" placeholder="Password">
+              <input id="pwd" class="form-control" type="password" required="" placeholder="Password">
             </div>
           </div>
           <div class="form-group ">
             <div class="zurb-div-xs-12">
               <div class="checkbox checkbox-custom">
                 <input id="checkbox-signup" type="checkbox">
-                <label for="checkbox-signup"> Remember me </label>
+                <label for="checkbox-signup"style="width: 150px;"> Remember me</label>          
+                <span><a id="mes" style="color: red"></a></span>
               </div>
             </div>
           </div>
+          
           <div class="form-group text-center m-t-30">
             <div class="zurb-div-xs-12">
               <button  id="submit" class="btn btn-lg btn-secondary w-lg waves-effect waves-light btn-block" type="button" onclick="login()">Log In</button>

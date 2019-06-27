@@ -48,9 +48,30 @@ public class UserServiceImp implements UserService {
 			return user2;
 		} else {
 			user2 = userdao.checkMessageByAcc(user.getAcc());
+			if(user2.getPwd().equals(user.getPwd())){
+				System.out.println("密码正确");
+				return user2;
+				
+			}
 		}
-		return user2;
+		return null;
 	}
+	
+	//短信登陆
+	@Override
+	public User mesLogin(User user) {
+		User user2 = null;
+		if (userdao.checkacc(user.getAcc()) == null) {
+			return user2;
+		}  else {
+			user2 = userdao.checkMessageByAcc(user.getAcc());
+			
+				System.out.println("密码正确");
+				return user2;		
+		}
+	}
+
+	
 
 	// 重置密码
 	@Override
@@ -214,7 +235,7 @@ public class UserServiceImp implements UserService {
 	public String updateCoachMes(Coach coach, Address address) {
 		String result = "失败";
 		if (userdao.updateCoachDefault(coach) > 0 && userdao.updateAdd(address, coach.getUid()) > 0) {
-			result = "成功";
+			result = "修改成功！";
 		}
 		return result;
 	}
@@ -266,7 +287,7 @@ public class UserServiceImp implements UserService {
 					userdao.insertAdd(address);
 					
 					userdao.roleupdate(role, venues.getUid());
-					result = "成功";
+					result = "修改成功！";
 				}
 			}
 		}
@@ -317,11 +338,12 @@ public class UserServiceImp implements UserService {
 			}
 			if (re) {
 				userdao.updateAdd(address, venues.getUid());
-				result = "成功";
+				result = "修改成功！";
 			}
 		}
 		return result;
 	}
+
 
 
 

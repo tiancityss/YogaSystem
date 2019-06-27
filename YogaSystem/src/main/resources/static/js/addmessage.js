@@ -101,6 +101,8 @@ function submit(){
 			 county:$("#selCounty").val(),
 			 town:$("#selTown").val(),
 			 detail:$("#detailAddress").val(),
+			 vx:$("#vx").val(),
+			 vy:$("#vy").val(),
 			 name:$("#name").val(), 
 		},
 		success:function(data){

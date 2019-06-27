@@ -17,6 +17,22 @@ function reset(){
 	})
 }
 
+//重复密码验证
+$(function(){
+	$("#rpwd").blur(function(){
+		var pass=$("#pwd").val();
+		var rpass=$("#rpwd").val();
+		if(pass!=rpass){
+			//alert("两次密码不一致");
+			var con="";
+			con+=' <a id="mes" style="color: #6F89B4">两次密码不一致</a>';
+			$("#mes").html(con)
+		}
+	})
+})
+
+
+
 
 
 //验证码获取

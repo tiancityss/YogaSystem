@@ -3,6 +3,7 @@ function login() {
 		url : "/user/login",
 		data : {
 			acc : $("#acc").val(),
+			pwd:$("#pwd").val(),
 		},
 		success : function(data) {
 			var re = $.isEmptyObject(data);
@@ -22,7 +23,10 @@ function login() {
 					location.href = "http://localhost:8080/html/applymessage.html";
 				}
 			} else {
-				alert("账号或密码错误");
+				//alert("账号或密码错误");
+				var con="";
+				con+=' <a id="mes" style="color: #6F89B4">账号或密码错误</a>';
+				$("#mes").html(con)
 			}
 
 		}

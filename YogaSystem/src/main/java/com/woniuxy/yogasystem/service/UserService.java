@@ -18,6 +18,8 @@ public interface UserService {
 	public boolean regManager(User user);
 	//登录
 	public User login(User user);
+	//短信登陆
+	public User mesLogin(User user);
 	//找回密码
 	public int reset(User user);
 	
