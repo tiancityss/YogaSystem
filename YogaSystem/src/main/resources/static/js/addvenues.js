@@ -154,7 +154,8 @@ function submit(){
 				//薪资
 				salary:$("#salary").val(),
 				descrie:$("TextArea").val(),
-			
+				vx:$("#vx").val(),
+				 vy:$("#vy").val(),
 		},
 		success:function(data){
 			alert(data)

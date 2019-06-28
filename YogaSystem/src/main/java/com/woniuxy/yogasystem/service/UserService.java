@@ -97,4 +97,22 @@ public interface UserService {
 
 	// 查询头像
 	public String findhead(int role, int uid);
+	
+	
+	
+	
+    public List<Coach> selectAllCoach();
+
+    
+    public Coach selectCoach(Integer uid);
+
+    
+    public Trainee selectTrainee(Integer uid);
+    
+    
+    public Venues selectVenue(Integer uid);
+
+    
+    public List<Venues> selectAllVenues();
+
 }

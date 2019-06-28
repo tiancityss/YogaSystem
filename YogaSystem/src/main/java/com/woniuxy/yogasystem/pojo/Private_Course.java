@@ -6,7 +6,11 @@ public class Private_Course {
 	private int cid;
 	private int price;
 	private String startTime;
-	private Venues venues;
+	private String cname;
+	private String vname;
+	private String endtime;
+	private int flag;
+	private int tid;
 	public int getId() {
 		return id;
 	}
@@ -38,17 +42,38 @@ public class Private_Course {
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Venues getVenues() {
-		return venues;
+	public String getCname() {
+		return cname;
 	}
-	public void setVenues(Venues venues) {
-		this.venues = venues;
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
-	@Override
-	public String toString() {
-		return "Private_Course [id=" + id + ", vid=" + vid + ", cid=" + cid + ", price=" + price + ", startTime="
-				+ startTime + ", venues=" + venues + "]";
+	public String getVname() {
+		return vname;
 	}
+	public void setVname(String vname) {
+		this.vname = vname;
+	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	public int getTid() {
+		return tid;
+	}
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
+	
+	
 	
 	
 }

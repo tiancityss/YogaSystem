@@ -47,9 +47,7 @@ public class VenuesProvide {
 		if (trainee.getName() != null && trainee.getName().length() != 0) {
 			sql.WHERE("name like '%" + trainee.getName() + "%'");
 		}
-		if (trainee.getAdd() != null && trainee.getAdd().length() != 0) {
-			sql.WHERE("addr like '%" + trainee.getAdd() + "%'");
-		}
+		
 		return sql.toString();
 	}
 

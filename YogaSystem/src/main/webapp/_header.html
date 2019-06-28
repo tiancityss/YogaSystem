@@ -59,7 +59,7 @@
               <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 <a href="profile.html" class="dropdown-item notify-item">
                   <i class="ti-user m-r-5"></i> 个人信息 </a>
-								<a href="profile.html" class="dropdown-item notify-item">
+								<a href="order/showMoney" class="dropdown-item notify-item">
 								  <i class="ti-user m-r-5"></i> 我的钱包 </a>	
                 <a href="#" class="dropdown-item notify-item">
                   <i class="ti-settings m-r-5"></i> 我的好友 </a>
@@ -71,7 +71,7 @@
                   <i class="ti-lock m-r-5"></i>我的场馆 </a>
                 <a href="/html/mytrainee.html" class="dropdown-item notify-item">
                   <i class="ti-power-off m-r-5"></i> 我的学员 </a>
-								<a href="#;" class="dropdown-item notify-item">
+								<a href="/order/findOrderMsg" class="dropdown-item notify-item">
 								  <i class="ti-power-off m-r-5"></i> 我的订单 </a>
               </div>
             </li>
@@ -124,7 +124,6 @@
     $.ajax({
     	url:"/user/findhead",
     	success:function(data){
-    		alert(data)
     		$("#headimg").prop("src",data	)
     	}
     })

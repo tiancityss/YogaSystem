@@ -1,21 +1,17 @@
 package com.woniuxy.yogasystem.pojo;
 
 public class Order_Evaluation {
-	private int id;
-	private int vid;
+	private String id;
 	private int level;
 	private String detail;
-	public int getId() {
+	private int flag;
+	
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-	public int getVid() {
-		return vid;
-	}
-	public void setVid(int vid) {
-		this.vid = vid;
 	}
 	public int getLevel() {
 		return level;
@@ -28,6 +24,12 @@ public class Order_Evaluation {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 	
 }

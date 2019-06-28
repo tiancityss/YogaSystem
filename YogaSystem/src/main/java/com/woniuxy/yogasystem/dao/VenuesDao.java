@@ -24,7 +24,6 @@ public interface VenuesDao {
 	@Results({
 		@Result(id=true,column="id",property="id"),
 		@Result(column="name",property="name"),
-		@Result(column="addr",property="addr"),
 		@Result(column="phone",property="phone"),
 		@Result(column="salary",property="salary"),
 		@Result(column="descrie",property="descrie"),

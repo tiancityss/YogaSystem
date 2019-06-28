@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.woniuxy.yogasystem.dao.CoachDao;
+import com.woniuxy.yogasystem.dao.MoneybagDao;
 import com.woniuxy.yogasystem.dao.TraineeDao;
 import com.woniuxy.yogasystem.dao.UserDao;
 import com.woniuxy.yogasystem.dao.VenuesDao;
@@ -14,6 +15,7 @@ import com.woniuxy.yogasystem.pojo.Address;
 import com.woniuxy.yogasystem.pojo.Apply;
 import com.woniuxy.yogasystem.pojo.ApplyMessage;
 import com.woniuxy.yogasystem.pojo.Coach;
+import com.woniuxy.yogasystem.pojo.Moneybag;
 import com.woniuxy.yogasystem.pojo.Trainee;
 import com.woniuxy.yogasystem.pojo.User;
 import com.woniuxy.yogasystem.pojo.Venues;
@@ -29,7 +31,10 @@ public class UserServiceImp implements UserService {
 	private CoachDao coachDao;
 	@Resource
 	private VenuesDao venuesDao;
-
+	@Resource
+	private MoneybagDao moneybagDao;
+	
+	
 	// 检测操作
 	@Override
 	public String checkacc(String acc) {
@@ -46,6 +51,10 @@ public class UserServiceImp implements UserService {
 	public boolean register(User user) {
 		boolean re = false;
 		re = userdao.register(user);
+		if(re){
+			int uid = userdao.checkacc(user.getAcc()).getId();
+			re = moneybagDao.addMon(uid);
+		}
 		return re;
 	}
 
@@ -349,5 +358,30 @@ public class UserServiceImp implements UserService {
 		System.out.println(img);
 		return img;
 	}
+	
+	
+	
+    public List<Coach> selectAllCoach() {
+        return userdao.selectAllCoach();
+    }
 
+    
+    public Coach selectCoach(Integer uid) {
+        return userdao.selectCoach(uid);
+    }
+
+    
+    public Trainee selectTrainee(Integer uid) {
+        return userdao.selectTrainee(uid);
+    }
+
+    
+    public Venues selectVenue(Integer uid) {
+        return userdao.selectVenue(uid);
+    }
+
+    
+    public List<Venues> selectAllVenues() {
+        return userdao.selectAllVenues();
+    }
 }

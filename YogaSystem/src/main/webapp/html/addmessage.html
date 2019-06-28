@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=R8YywfG4g6hRyZOL1tyEnnlXy0qAzfpB"></script>
   <title>申请学员</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +14,7 @@
 
 <body id="body-main">
   <header id="iframe-header">
-    <iframe src="/_header.html" style="display:none" id="iframe-header"></iframe>
+    <iframe src="_header.html" style="display:none" id="iframe-header"></iframe>
     <div id="topnav">
       <div class="top-header-animation">
         <div id="particles-js" class="zindex1"></div>
@@ -47,7 +48,7 @@
         <div class="zurb-div-xl-12">
           <div class="card m-b-20">
             <h5 class="card-header">Trainee Form</h5>
-            <div class="card-body" style="height: 1000px;">
+            <div class="card-body" style="height: 960px;">
             <div id="pic" style="width: 80px;height: 80px ;border: 1px solid; margin-left: 510px;"><img alt="" src="/headimg/yuga.jpg"width="80px";height="80px"></div>
  <br>
  <br>
@@ -85,11 +86,19 @@
 					<option>--选择街道镇--</option>
 				</select><br/><br/>
 				</div>
-				详细的地址：<input class="form-control" type="text" class="f-input"/ id="detailAddress" class="form-control">
+				详细的地址*必填通过地图选取：<div id="detailbaidu">
+				<input class="form-control" type="text" class="f-input"/ id="detailAddress" ></div>
+				
 			</div>
-               
+              
+		<div id="allmap" class="form-control" style="height: 300px"></div>
+			<div id="zuo" >
+				<input  id="vx" type="hidden"  placeholder="横坐标"/>
+				<input id="vy" type="hidden"  placeholder="纵坐标"/>
+			</div>
+	
                 
-<div  >
+<div  style="margin-top: 20px">
 <input id="state" type="radio" name="state" value="0">保密
 <input id="state" type="radio" name="state" value="1">好友公开
 <input id="state" type="radio" name="state" value="2">全部公开		
@@ -105,8 +114,10 @@
       </div>
         <script  src="/js/jquery.min.js"></script>
         <script src="/js/addmessage.js" ></script>
+        
 <script src="/js/address.js" ></script>
   <script  src="/js/popper.min.js"></script>
+   <script  src="/js/baidumap.js"></script>
   <script  src="/js/bootstrap.min.js"></script>
   <script  src="/js/waves.js"></script>
   <script  src="/js/jquery.slimscroll.js"></script>
@@ -119,6 +130,7 @@
   <script  src="/js/jquery.app.js"></script>
   <script  src="/js/created.js"></script>
   <script  src="/js/created.js"></script>
+  
   <script >
     $(document).("ready", function(e) {
       $('form').parsley();
@@ -126,52 +138,3 @@
   </script>
 </body>
 </html>
-
-<!-- <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script src="/js/addmessage.js" ></script>
-<script src="/js/address.js" ></script>
-<script src="/js/addmessage.js" ></script>
-</head>
-<body>
-补充资料
-<input type="button" value="我要当教练" onclick="addcoach()">
-<input type="button" value="我要申请会馆" onclick="addvenues()">
-
-<div style="width:700px; margin-left: 450px ; margin-top: 100px;border: 1px solid;" align="center">
-<div id="pic" style="width: 80px;height: 80px ;border: 1px solid;"><img alt="" src="/headimg/yuga.jpg"width="80px";height="80px"></div>
-<div >
-<form id="form" enctype="multipart/form-data">
-<input id="picture" type="file" name="picture">
-<input  id="up" type="button" value="上传" onclick="upload()" />
-</form>
-</div>
-<div style="margin-top: 20px;"><input id="name" type="text" name="name" Placeholder="昵称可选填"></div>
-<div style="margin-top: 10px;">性别 <input type="radio" name="sex" value="1">男 <input type="radio" name="sex" value="0">女</div>
-<div class="newAddress" style="margin-top: 20px;">
-				地址：
-				<select id="selProvince" onchange="changeCity( )" style="width:100px">
-					<option>--选择省份--</option>
-				</select>
-				<select id="selCity"  onchange="changeCounty( )" style="width:100px">
-					<option>--选择城市--</option>
-				</select>
-				<select id="selCounty"  onchange="changeTown( )" style="width:100px">
-					<option>--选择区县--</option>
-				</select>
-				<select id="selTown" style="width:100px">
-					<option>--选择街道镇--</option>
-				</select><br/><br/>
-				详细的地址：<input type="text" class="f-input"/ id="detailAddress"><br/>
-				<br/>
-			</div>
-
-<div >
-<input id="state" type="radio" name="state" value="0">保密
-<input id="state" type="radio" name="state" value="1">好友公开
-<input id="state" type="radio" name="state" value="2">全部公开		
-</div>
-<div ><input id="submit" type="button" name="submit" value="确认" style="width: 86px;" onclick="submit()"><input id="back" type="button" name="submit" value="取消" style="width: 86px;"  onclick="back()";></div>
-<div ></div>
-</div> -->

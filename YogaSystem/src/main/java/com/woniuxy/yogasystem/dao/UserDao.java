@@ -32,7 +32,7 @@ public interface UserDao {
 	public String findPwdByAcc(User user);
 
 	// 查询所有用户的信息
-	@Select("select * from user where acc=#{arg0}")
+	@Select("select * from user where acc=#{acc}")
 	public User checkMessageByAcc(String acc);
 
 	// 重置密码
@@ -102,11 +102,11 @@ public interface UserDao {
 	 */
 
 	// 填写资料时给学员一个默认的手机号 uid 状态 名字
-	@Insert("insert into trainee(uid,phone,status,name,flag,sex,img) values(#{id},#{acc},0,#{acc},0,1,'/headimg/yuga.jpg')")
+	@Insert("insert into trainee(uid,phone,status,name,flag,sex,img,vx,vy) values(#{id},#{acc},0,#{acc},0,1,'/headimg/yuga.jpg',0,0)")
 	public boolean insertdefaultByUid(User user);
 
 	// 更新 用户现在已有的信息
-	@Update("update trainee set sex=#{sex},img=#{img}, phone=#{phone},status=#{status},name=#{name} where uid=#{uid}")
+	@Update("update trainee set sex=#{sex},img=#{img}, phone=#{phone},status=#{status},name=#{name},vx=#{vx},vy=#{vy} where uid=#{uid}")
 	public int updateDefault(Trainee trainee);
 
 	@Select("select * from trainee where uid=#{uid}")
@@ -124,7 +124,7 @@ public interface UserDao {
 	public boolean insertCoachdefaultByUid(User user);
 
 	// 更新 教练现在已有的信息
-	@Update("update coach set sex=#{sex},img=#{img}, phone=#{phone},infostatus=#{infostatus},name=#{name},privatetime=#{privatetime},salary=#{salary},school=#{school},authstatus=#{authstatus} where uid=#{uid}")
+	@Update("update coach set sex=#{sex},img=#{img}, phone=#{phone},infostatus=#{infostatus},name=#{name},privatetime=#{privatetime},salary=#{salary},school=#{school},authstatus=#{authstatus},vx=#{vx},vy=#{vy} where uid=#{uid}")
 	public int updateCoachDefault(Coach coach);
 
 	// 查询教练所有信息
@@ -135,7 +135,7 @@ public interface UserDao {
 	public Address findCochAdd(int uid);
 
 	// 把申请教练信息添加到临时申请表里
-	@Insert("insert into apply (uid,phone,infostatus,name,flag,sex,img,authentication,privatetime,salary,school,authstatus,vx,vy) values(#{uid},#{phone},#{infostatus},#{name},0,#{sex},#{img},#{authentication},#{privatetime},#{salary},#{school},#{authstatus},0,0)")
+	@Insert("insert into apply (uid,phone,infostatus,name,flag,sex,img,authentication,privatetime,salary,school,authstatus,vx,vy) values(#{uid},#{phone},#{infostatus},#{name},0,#{sex},#{img},#{authentication},#{privatetime},#{salary},#{school},#{authstatus},#{vx},#{vy})")
 	public boolean applyCoach(Coach coach);
 
 	// 把申请信息放入applymessage内 type教练是1
@@ -159,7 +159,7 @@ public interface UserDao {
 	public boolean insertVenuesdefaultByUid(User user);
 
 	// 更新场馆已有的信息
-	@Update("update venues set img=#{img},name=#{name},phone=#{phone},descrie=#{descrie},salary=#{salary}")
+	@Update("update venues set img=#{img},name=#{name},phone=#{phone},descrie=#{descrie},salary=#{salary},vx=#{vx},vy=#{vy} where uid=#{uid}")
 	public int updateVenuesDefault(Venues venues);
 
 	// 插入场馆图片
@@ -179,10 +179,27 @@ public interface UserDao {
 	public int deleteVenuesPic(int uid);
 
 	// 把申请场馆信息添加到临时申请表里
-	@Insert("insert into apply (uid,phone,name,flag,img,salary,vx,vy,descrie) values(#{uid},#{phone},#{name},0,#{img},#{salary},0,0,#{descrie})")
+	@Insert("insert into apply (uid,phone,name,flag,img,salary,vx,vy,descrie) values(#{uid},#{phone},#{name},0,#{img},#{salary},#{vx},#{vy},#{descrie})")
 	public boolean applyVenues(Venues venues);
 
 	// 把申请信息放入applymessage内 type场馆是0
 	@Insert("insert into applymessage (uid,phone,name,img,salary,type,flag,descrie) values(#{uid},#{phone},#{name},#{img},#{salary},0,0,#{descrie})")
 	public boolean applyVenuesMes(Venues venues);
+	
+	
+	@Select("select * from trainee where uid=#{uid}")
+    public Trainee selectTrainee(Integer uid);
+
+    @Select("select * from coach")
+    public List<Coach> selectAllCoach();
+
+    @Select("select * from coach where uid=#{uid}")
+    public Coach selectCoach(Integer uid);
+
+    @Select("select * from venues")
+    public List<Venues> selectAllVenues();
+
+    @Select("select * from venues where uid=#{uid}")
+    public Venues selectVenue(Integer uid);
+
 }

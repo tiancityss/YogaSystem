@@ -108,5 +108,5 @@ public interface TraineeDao {
 	@Select("select img from trainee where uid=#{uid}")
 	public String findHead(int uid);
 
-
+	
 }

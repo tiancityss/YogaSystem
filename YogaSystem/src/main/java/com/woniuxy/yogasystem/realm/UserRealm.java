@@ -35,10 +35,10 @@ public class UserRealm extends AuthorizingRealm{
 		User user = new User();
 		user.setAcc(account);
 		User currentUser = userService.login(user);
+		System.out.println(currentUser);
 		if(currentUser==null){
 			return null;
 		}
-		System.out.println(currentUser);
 		AuthenticationInfo info = new SimpleAuthenticationInfo(currentUser.getAcc(), currentUser.getPwd(),getName());
 		return info;
 	}

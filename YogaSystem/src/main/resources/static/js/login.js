@@ -14,11 +14,11 @@ function login() {
 				} else if(data.role == 4){
 					location.href = "http://localhost:8080/html/addmanager.html";
 				}else if(data.role==0){
-					location.href = "http://localhost:8080/_header.html";
+					location.href = "http://localhost:8080/showAdd2.html";
 				}else if(data.role==1){
-					location.href = "http://localhost:8080/_header.html";
+					location.href = "http://localhost:8080/showAdd2.html";
 				}else if(data.role==2||data.role==6){
-					location.href = "http://localhost:8080/_header.html";
+					location.href = "http://localhost:8080/showAdd2.html";
 				}else if(data.role==3){
 					location.href = "http://localhost:8080/applymessage.html";
 				}

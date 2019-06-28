@@ -87,6 +87,8 @@ function coachResubmit(){
 			 town:$("#selTown").val(),
 			 detail:$("#detailAddress").val(),
 			 name:$("#name").val(), 
+			 vx:$("#vx").val(),
+			 vy:$("#vy").val(),
 		},
 		success:function(data){
 			alert(data)

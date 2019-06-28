@@ -1,6 +1,7 @@
 package com.woniuxy.yogasystem.config;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -61,25 +62,28 @@ public class ShiroConfig {
 		bean.setUnauthorizedUrl("/html/error.html");
 		
 		//设置过滤器链
-		Map<String, String> map = new HashMap<>();
-		//html	
-		
+		Map<String, String> map = new LinkedHashMap<>();
+			
+		//静态资源	
 		map.put("/css/**", "anon");
 		map.put("/fonts/**", "anon");
 		map.put("/headimg/**", "anon");
 		map.put("/js/**", "anon");
-		//map.put("/images/**", "anon");
-		//map.put("/veneusimg/**", "anon");
+		map.put("/images/**", "anon");
+		map.put("/veneusimg/**", "anon");
 		
+		//html
 		map.put("/html/login.html", "anon");
 		map.put("/html/register.html", "anon");
 		
 		//controller
+		map.put("/order/notify_url", "anon");
 		map.put("/user/login", "anon");
 		map.put("/user/register", "anon");
 		map.put("/user/getcode", "anon");
 		map.put("/user/checkacc", "anon");
-		//静态资源	
+		
+		
 		map.put("/logout", "logout");
 		map.put("/**", "authc");
 		System.out.println(map);
