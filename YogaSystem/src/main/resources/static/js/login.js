@@ -25,7 +25,7 @@ function login() {
 			} else {
 				//alert("账号或密码错误");
 				var con="";
-				con+=' <a id="mes" style="color: #6F89B4">账号或密码错误</a>';
+				con+=' <a id="mes" style="color: red">账号或密码错误</a>';
 				$("#mes").html(con)
 			}
 

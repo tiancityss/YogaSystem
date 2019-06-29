@@ -12,7 +12,7 @@ function register(){
 				location.href="http://localhost:8080/html/login.html";
 			}else{
 				var con="";
-				con+=' <a id="mes" style="color: #6F89B4">'+data+'</a>';
+				con+=' <a id="mes" style="color: red">'+data+'</a>';
 				$("#mes").html(con)
 			}
 		}
@@ -62,7 +62,7 @@ $(function(){
 		if(pass!=rpass){
 			//alert("两次密码不一致");
 			var con="";
-			con+=' <a id="mes" style="color: #6F89B4">两次密码不一致</a>';
+			con+=' <a id="mes" style="color: red">两次密码不一致</a>';
 			$("#mes").html(con)
 		}
 	})
@@ -79,7 +79,7 @@ $(function(){
 			success:function(data){
 				//alert(data)
 				var con="";
-				con+=' <a id="mes" style="color: #6F89B4">'+data+'</a>';
+				con+=' <a id="mes" style="color: red">'+data+'</a>';
 				$("#mes").html(con)
 			}
 		})
