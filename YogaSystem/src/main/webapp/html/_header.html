@@ -10,6 +10,8 @@
   <meta content="sample-author" name="author" />
   <link rel="/shortcut icon" href="/images/favicon.ico">
   <link href="/css/style.css" rel="stylesheet" type="text/css" />
+  <script  src="/js/jquery.min.js"></script>
+
 </head>
 
 <body id="body-main">
@@ -104,17 +106,26 @@
             <li class="has-submenu">
               <a href="#"><i class="ti-files"></i><span> 学员查看 </span> </a>
               
-            </li>
-            
-            
-           
-            
-            
+            </li>      
           </ul>
         </div>
       </div>
     </div>
   </header>
+  <div>
+   <a href="#"><img  src="/images/yoga3.jpeg" alt="" style="width: 100%" /></a>
+  </div>
+   <div style="float: left;">
+  <video  width="670" height="auto"  id="whVideo" autoplay webkit-playsinline x5-playsinline playsinline  poster="/images/dayday.jpg" >
+    <source src="https://sessionpackage.dailyyoga.com.cn/dailyyogaoverview1547206043299" type="video/mp4">
+</video>
+  </div>
+  <div style="">
+   <a href="#"><img  src="/images/yoga6.jpeg" alt="" style="width: 912px;height: 376px;" /></a>
+  </div>
+	<img src="/images/amst.jpeg" style="margin: auto;">
+ 
+  
 <script  src="/js/jquery.min.js"></script>
   <script  src="/js/popper.min.js"></script>
   <script  src="/js/bootstrap.min.js"></script>
@@ -133,5 +144,41 @@
     localStorage.setItem('header', x);
   </script>
 </body>
-
 </html>
+  	<script>
+    $(function(){
+        var v = document.getElementById("whVideo");
+        
+        // 隐藏播放控制条，并且用点击 video 节点的时候 控制暂停和播放
+        var vPaused = v.paused;
+        if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+            $(document).one('touchstart',function(){
+                if(vPaused == true){
+                    v.play();
+                }
+            });
+            $(v).on('touchstart', function(){
+                var vPaused = v.paused;
+                if(vPaused == true){
+                    v.play();
+                }else{
+                    v.pause();
+                }
+            });
+        }else{
+            $(document).one('click',function(){
+                if(vPaused == true){
+                    v.play();
+                }
+            });
+            $(v).on('click', function(){
+                var vPaused = v.paused;
+                if(vPaused == true){
+                    v.play();
+                }else{
+                    v.pause();
+                }
+            });
+        }
+    })
+</script>

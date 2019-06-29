@@ -1,0 +1,17 @@
+.video-box{
+	position: relative;
+}
+.video-box video{
+	display: inline-block;
+  vertical-align: baseline;
+}
+.video-box .video-img{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+    background: url(/web/pic/v.jpg) no-repeat;
+    background-size: 100% 100%;
+		cursor:pointer
+}
