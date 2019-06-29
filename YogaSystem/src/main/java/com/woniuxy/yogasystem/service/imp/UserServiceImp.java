@@ -1,6 +1,8 @@
 package com.woniuxy.yogasystem.service.imp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -384,4 +386,28 @@ public class UserServiceImp implements UserService {
     public List<Venues> selectAllVenues() {
         return userdao.selectAllVenues();
     }
+    
+    
+    @Override
+	public Map<String, Object> findAllInfoByUid(int uid) {
+		// TODO Auto-generated method stub
+		User user = userdao.findUserByUid(uid);
+		int character = user.getRole();
+		Map<String, Object>map=new HashMap<>();
+		map.put("user", user);
+		switch (character) {
+		case 0:
+			map.put("object", userdao.findTraineeByUid(uid));
+			return map;
+		
+		case 1:
+			map.put("object", userdao.findCoachByUid(uid));
+			return map;
+			
+		case 2:
+			map.put("object", userdao.findVenuesByUid(uid));
+			return map;
+		}
+		return null;
+	}
 }

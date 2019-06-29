@@ -37,6 +37,7 @@ public interface TraineeDao {
 	@Results({ @Result(id = true, column = "id", property = "id"), @Result(column = "phone", property = "phone"),
 			@Result(column = "infostatus", property = "infostatus"), @Result(column = "addr", property = "addr"),
 			@Result(column = "school", property = "school"),
+			@Result(column = "uid", property = "uid"),
 			@Result(column = "authentication", property = "authentication"),
 			@Result(column = "name", property = "name"), @Result(column = "img", property = "img"),
 			@Result(column = "privatetime", property = "privatetime"), @Result(column = "uid", property = "uid"),

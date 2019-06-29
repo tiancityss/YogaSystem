@@ -1,40 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
- <script  src="/js/jquery.min.js"></script>
- <script type="text/javascript">
- $(function(){
-	 $.ajax({
-		 url:"/user/test",
-		 success:function(data){
-			 var con="";
-			 var rad=""
-			 con+='<input type="text" value='+data.coach.sex+' >'
-				 
-				 
-				 ""
-			/* alert(data.coach.sex) */
-			 $("#div").append(con);
-			 
-			 if(data.coach.sex==0){
-				 rad+='<input type="radio" value="0" name="sex"  checked="checked"  />女'+'<input type="radio" value="0" name="sex"   />男'	 
-			 }
-			 if(data.coach.sex==1){
-				 rad+='<input type="radio" value="0"  checked="checked"  />男'	
-			 }
-			 $("#div").append(rad);
-		 }
-	 })
- })
- </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<div  id="div"> 
-<!-- <input type="text" th:value="${coach.sex}"  > -->
-<!-- <input type="radio" value="0"   name="xx" ${sex==0 ? "checked='checked'" : ""} />女
-<input type="radio" value="1" name="xx" ${sex==1 ? "checked='checked'" : ""} />男 -->
-</div>
+	<!-- <script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript">
+		function upfile() {
+			var formData = new FormData($("#form")[0]);
+			/* 	formData.append("type", type);//也可以添加其他字段 */
+			$.ajax({
+						type : "post",
+						url : "/upload",
+						data : formData,
+						contentType : false,
+						processData : false,
+						success : function(res) {
+							if (res == null) {
+								alert("请选择图片文件");
+							}
+							var context = '<img id="a" src="'+res+'" ><br>'
+									+ '<input type="text" hidden  id="img" value="'+res+'" />';
+						
+							$("#form").append(context);
+						}
+					})
+		}
+	</script> -->
+	<form action="../upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+     <input type="submit" value="上 传">
+</form>
 </body>
 </html>

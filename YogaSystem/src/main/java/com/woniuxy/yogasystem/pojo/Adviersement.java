@@ -5,6 +5,18 @@ public class Adviersement {
 	private String title;
 	private String content;
 	private String img;
+	private int flag;
+	@Override
+	public String toString() {
+		return "Adviersement [id=" + id + ", title=" + title + ", content=" + content + ", img=" + img + ", flag="
+				+ flag + "]";
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 	public int getId() {
 		return id;
 	}

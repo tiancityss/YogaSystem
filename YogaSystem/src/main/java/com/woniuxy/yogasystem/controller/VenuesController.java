@@ -1,5 +1,6 @@
 package com.woniuxy.yogasystem.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.yogasystem.pojo.Coach;
 import com.woniuxy.yogasystem.pojo.Request_Message;
@@ -99,4 +101,15 @@ public class VenuesController {
 		return "拒绝成功";
 	}
 
+	
+	@RequestMapping("/fingImg")
+	@ResponseBody
+	public ModelAndView findImgById(int uid){
+		ModelAndView mv=new ModelAndView();
+		List<String> img=new ArrayList<>();
+		img=venuesService.findImgById(uid);
+		mv.addObject("img", img);
+		mv.setViewName("html/venuesImage.html");
+		return mv;
+	}
 }

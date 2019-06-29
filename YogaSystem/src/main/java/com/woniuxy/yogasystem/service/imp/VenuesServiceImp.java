@@ -177,4 +177,11 @@ public class VenuesServiceImp implements VenuesService {
 		return rm;
 	}
 
+
+	@Override
+	public List<String> findImgById(int otherUid) {
+		List<String> img=null;
+		img=venuesDao.findImgById(otherUid);
+		return img;
+	}
 }

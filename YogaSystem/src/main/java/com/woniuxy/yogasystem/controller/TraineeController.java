@@ -44,9 +44,11 @@ public class TraineeController {
 	// 查看教练的详细信息
 	@GetMapping("/findCoachDetailMsg")
 	public String findCoachDetailMsg(int uid, ModelMap map) {
+		System.out.println(uid);
 		Coach coach = traineeService.findCoachDetailMsg(uid);
+		System.out.println(coach);
 		map.put("coach", coach);
-		return "html/coach.html";
+		return "/html/coach.html";
 	}
 
 	// 查看场馆的基本信息

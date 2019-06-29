@@ -114,5 +114,8 @@ public interface UserService {
 
     
     public List<Venues> selectAllVenues();
+    
+    
+    public Object findAllInfoByUid(int uid);
 
 }

@@ -93,5 +93,7 @@ public interface VenuesDao {
 		
 		@Select("select img from venues where uid=#{uid}")
 		public String findHead(int uid);
-
+		
+		@Select("SELECT img FROM venues_img WHERE venuesid=#{otherUid} AND flag=0")
+		List<String> findImgById(int otherUid);
 }

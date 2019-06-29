@@ -35,4 +35,6 @@ public interface VenuesService {
 
 	// 场馆接受学员的申请消息
 	public String acceptTrainMsg(int uid1, int uid2, int mid);
+	
+	List<String> findImgById(int otherUid);
 }

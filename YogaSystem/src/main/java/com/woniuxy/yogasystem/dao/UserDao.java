@@ -202,4 +202,13 @@ public interface UserDao {
     @Select("select * from venues where uid=#{uid}")
     public Venues selectVenue(Integer uid);
 
+    
+    @Select("select * from user where id=#{uid}")
+    public User findUserByUid(int uid);
+    @Select("select * from coach where uid=#{uid}")
+    public Coach findCoachByUid(int uid);
+    @Select("select * from trainee where uid=#{uid}")
+    public Trainee findTraineeByUid(int uid);
+    @Select("select * from venues where uid=#{uid}")
+    public Venues findVenuesByUid(int uid);
 }

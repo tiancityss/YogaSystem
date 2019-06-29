@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.woniuxy.yogasystem.pojo.Address;
@@ -153,7 +154,7 @@ public class UserController {
 						System.out.println("教练信息" + coach);
 						session.setAttribute("coach", coach);
 						session.setAttribute("name", coach.getName());
-						session.setAttribute("headimg", coach.getName());
+						session.setAttribute("headimg", coach.getImg());
 
 					}
 				} else if (user2.getRole() == 0) {// 学员登录
@@ -579,4 +580,59 @@ public class UserController {
 		System.out.println(role + ":" + uid);
 		return userService.findhead(role, uid);
 	}
+	
+	
+	public ModelAndView mv = new ModelAndView();
+
+	@RequestMapping("/chat")
+	@ResponseBody
+	public ModelAndView test(String mineId, String otherId,HttpSession session) {
+		System.out.println(mineId);
+		String name =(String)session.getAttribute("name");
+		mv.addObject("myName",name);
+		mv.addObject("mineAcc", mineId);
+		mv.addObject("otherAcc", otherId);
+		
+		mv.setViewName("/html/chatOne.html");
+		return mv;
+	}
+
+	@RequestMapping("/chat1")
+	@ResponseBody
+	public ModelAndView test(String otherId,HttpSession session) {
+		int mineId = (int)session.getAttribute("uid");
+		System.out.println(mineId);
+		System.out.println(otherId);
+		String name =(String)session.getAttribute("name");
+		mv.addObject("myName",name);
+		mv.addObject("mineAcc", mineId);
+		mv.addObject("otherAcc", otherId);
+		
+		mv.setViewName("/html/chatOne.html");
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping("/chatroom")
+	@ResponseBody
+	public ModelAndView testRoom(String mineId, String roomId,HttpSession session) {
+		String name =(String)session.getAttribute("name");
+		mv.addObject("myName",name);
+		mv.addObject("mineAcc", mineId);
+		mv.addObject("roomAcc", roomId);
+		mv.setViewName("/html/chatRoom.html");
+		return mv;
+	}
+
+	@RequestMapping("/otherInfo")
+	public String otherInfo(ModelMap map, int uid, String img, String name) {
+		map.put("uid", uid);
+		map.put("img", img);
+		map.put("name", name);
+		System.out.println(map);
+		return "redirect:/html/text.html";
+
+	}
+
 }

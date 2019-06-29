@@ -87,6 +87,7 @@
                   </li>
                 </ul>
 				<a href="#" class="btn btn-primary"><i class="ti-shopping-cart"> </i> 留言</a><br/>
+				<a href="javascript:void(0);" id="follows1" class="btn btn-primary"><i class="ti-shopping-cart"> </i>关注</a><br/>
               </div>
             </div>
           </div>
@@ -120,6 +121,12 @@
   <script  src="/js/venues.js"></script>
   <script type="text/javascript" th:inline="javascript">
   $(function(){
+	  $("#follows1").click(function(){
+		  var coach = [[${coach.uid}]]
+		  location.href="/follows/insertFollows?followuid="+coach;
+		 
+	  })
+	  
 	  var uid = [[${coach.authentication}]];
 		if(uid==0){
 			$("#authentication").html("未认证");
