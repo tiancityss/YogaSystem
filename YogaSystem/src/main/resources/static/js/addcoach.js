@@ -110,6 +110,7 @@ function submit(){
 		},
 		success:function(data){
 			alert(data)
+			location.href="/index";
 		}
 	})
 }

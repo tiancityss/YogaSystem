@@ -21,6 +21,13 @@ import com.woniuxy.yogasystem.provider.TraineeProvider;
 public interface TraineeDao {
 
 	@Select("select * from trainee inner join trainee_coach on trainee_coach.tid=trainee.id where cid=#{cid}")
+	@Results({
+		@Result(id=true,column="id",property="id"),
+		@Result(column="name",property="name"),
+		@Result(column="phone",property="phone"),
+		@Result(column="img",property="img"),
+		@Result(column="uid",property="address",one=@One(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress")),
+	})
 	public List<Trainee> findTraineeByCid(int cid);
 
 	@Select("select * from trainee where id=#{id} and flag=0")
@@ -63,6 +70,16 @@ public interface TraineeDao {
 	// 搜索教练功能
 	// 根据条件教练的详细信息=条件检索：姓名，流派，认证，id
 	@SelectProvider(type = TraineeProvider.class, method = "findCoachMsg")
+	@Results({
+		@Result(id=true,column="id",property="id"),
+		@Result(column="id",property="id"),
+		@Result(column="uid",property="uid"),
+		@Result(column="name",property="name"),
+		@Result(column="img",property="img"),
+		@Result(column="school",property="school"),
+		@Result(column="uid",property="address",one=@One(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress")),
+		
+	})
 	public List<Coach> findCoachMsg(Coach coach);
 	// 搜索场馆功能
 	// 根据条件场馆的详细信息=条件检索：姓名，地址
@@ -75,6 +92,12 @@ public interface TraineeDao {
 
 	// 查询我的场馆
 	@Select("select * from trainee_venues inner join venues on venues.id=trainee_venues.vid" + " WHERE tid=#{uid}")
+	@Results({ @Result(id = true, column = "id", property = "id"), 
+				@Result(column = "phone", property = "phone"),
+			    @Result(column = "img", property = "img"),
+				@Result(column = "name", property = "name"),
+				@Result(column="uid",property="address",one=@One(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress"))
+			})
 	public List<Venues> findMyVenuesMsg(int uid);
 
 	// 学员邀请教练信息插入消息表中

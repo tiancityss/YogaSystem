@@ -14,7 +14,7 @@
 </head>
 <body id="body-main">
   <header id="iframe-header">
-    <iframe src="_header.html" style="display:none" id="iframe-header"></iframe>
+    <iframe src="/_header.html" style="display:none" id="iframe-header"></iframe>
     <div id="topnav">
       <div class="top-header-animation">
         <div id="particles-js" class="zindex1"></div>
@@ -86,7 +86,7 @@
                   <a th:href="@{findCoachCourse(uid=${coach.uid})}">查看他的课程信息</a>
                   </li>
                 </ul>
-				<a href="#" class="btn btn-primary"><i class="ti-shopping-cart"> </i> 留言</a><br/>
+				<a href="javascript:void(0);" id="contact" class="btn btn-primary"><i class="ti-shopping-cart"> </i> 留言</a><br/>
 				<a href="javascript:void(0);" id="follows1" class="btn btn-primary"><i class="ti-shopping-cart"> </i>关注</a><br/>
               </div>
             </div>
@@ -121,7 +121,14 @@
   <script  src="/js/venues.js"></script>
   <script type="text/javascript" th:inline="javascript">
   $(function(){
+	  
+	  $("#contact").click(function(){
+		  var id = [[${coach.uid}]]
+		  location.href="http://localhost:8080/user/chat1?otherId="+id
+	  })
+	  
 	  $("#follows1").click(function(){
+		  
 		  var coach = [[${coach.uid}]]
 		  location.href="/follows/insertFollows?followuid="+coach;
 		 

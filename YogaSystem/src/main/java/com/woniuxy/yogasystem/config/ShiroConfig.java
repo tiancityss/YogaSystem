@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.Filter;
 
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -14,6 +15,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.woniuxy.yogasystem.filter.RolesFilter;
 import com.woniuxy.yogasystem.realm.UserRealm;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
@@ -56,6 +58,11 @@ public class ShiroConfig {
 		//配置安全管理器
 		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 		bean.setSecurityManager(manager);
+		
+		//自定义过滤
+		Map<String, Filter> filterMap = new HashMap<>();
+		filterMap.put("or", new RolesFilter());
+		bean.setFilters(filterMap);
 		//配置登录页面
 		bean.setLoginUrl("/html/login.html");
 		//无权限
@@ -75,6 +82,11 @@ public class ShiroConfig {
 		//html
 		map.put("/html/login.html", "anon");
 		map.put("/html/register.html", "anon");
+		map.put("/html/_header.html", "anon");
+		map.put("/html/findvenues.html", "anon");
+		
+		map.put("/html/findcoach.html", "anon");
+		
 		
 		//controller
 		map.put("/order/notify_url", "anon");
@@ -82,6 +94,12 @@ public class ShiroConfig {
 		map.put("/user/register", "anon");
 		map.put("/user/getcode", "anon");
 		map.put("/user/checkacc", "anon");
+		map.put("/index", "anon");
+		map.put("/trainee/findCoachMsg", "anon");
+		map.put("/coach/findVenues", "anon");
+		map.put("/venues/find", "authc,or[0,1,3,4]");
+		map.put("/trainee/findCoachDetailMsg", "authc,or[0,2,3,4]");
+		
 		
 		
 		map.put("/logout", "logout");
@@ -105,5 +123,8 @@ public class ShiroConfig {
 	public ShiroDialect shiroDialect() {
 	    return new ShiroDialect();
 	} 
+	
+	
+	
 	
 }

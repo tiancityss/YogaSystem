@@ -131,7 +131,6 @@ public class VenuesServiceImp implements VenuesService {
 		tv.setVid(venues.getId());
 		trainee_VenuesDao.insertMsg(tv);
 		// 接受到的消息处理之后将flag=1
-		System.out.println(123);
 		venuesDao.handleAllMsg(mid);
 		// 向学员发送消息
 		Request_Message rm = answerMsg(uid2, uid1);

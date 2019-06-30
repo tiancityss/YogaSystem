@@ -39,7 +39,6 @@
 					url : "/ad/findAllAd",
 					type : "post",
 					success : function(res) {
-						alert(res);
 						var context1 = "";
 						var context2 = "";
 						for (var i = 0; i < res.length; i++) {
@@ -68,7 +67,7 @@
 
 <body>
 	<header id="iframe-header">
-		<iframe src="_header.html" style="display: none" id="iframe-header"></iframe>
+		<iframe src="/_header.html" style="display: none" id="iframe-header"></iframe>
 		<div id="topnav">
 			<div class="top-header-animation">
 				<div id="particles-js" class="zindex1"></div>
@@ -121,6 +120,7 @@
 	<script src="/js/jquery.core.js"></script>
 	<script src="/js/jquery.app.js"></script>
 	<script src="/js/created.js"></script>
+	
 </body>
 <style>
 body {

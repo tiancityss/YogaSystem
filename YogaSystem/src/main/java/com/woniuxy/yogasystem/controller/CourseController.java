@@ -169,11 +169,9 @@ public class CourseController {
     public ModelAndView insertPrivate(HttpServletRequest request,Private_Course course){
         Integer uid = (Integer) request.getSession().getAttribute("uid");
         Coach coach=userService.selectCoach(uid);
-        System.out.println(coach);
         course.setCid(coach.getId());
         ModelAndView modelAndView = new ModelAndView();
             //查询出当天有没有公开课,根据日期查
-        System.out.println(course);
         List<Private_Course> list2=courseService.selectPrivateCourse(course);
             if(list2.size()==0){
                 courseService.insertPrivateCourse(course);

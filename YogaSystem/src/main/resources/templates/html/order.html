@@ -17,7 +17,7 @@
 
 <body id="body-main">
 <header id="iframe-header">
-  <iframe src="_header.html" style="display:none" id="iframe-header"></iframe>
+  <iframe src="/_header.html" style="display:none" id="iframe-header"></iframe>
   <div id="topnav">
     <div class="top-header-animation">
       <div id="particles-js" class="zindex1"></div>
@@ -94,7 +94,7 @@
 <td>[[${order.status}]]</td>
 <td th:switch="${order.status}">
 <span th:case="待支付"><a th:href="@{pay(uid=1,vuid=${order.venues.uid},cuid=${order.coach.uid},number=${order.number},price=-${order.price})}" th:if="${role}==0">付款</a><span th:if="${role==1}">教学完成</span></span>
-<span th:case="已支付"><a th:href="@{deleteOrder(number=${order.number})}"th:if="${role}==0">评论</a></span>
+<span th:case="已支付"><a th:href="@{toaddEvaluation(number=${order.number})}"th:if="${role}==0">评论</a></span>
 <span th:case="未支付"><a th:href="@{updateOrder(number=${order.number})}" th:if="${role}==1">我上完课了</a></span>
 </td>
 </tr>

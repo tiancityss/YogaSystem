@@ -28,7 +28,6 @@ public class VenuesController {
 	public String findVenues(ModelMap map, int id) {
 		Venues venues = venuesService.findVenues(id);
 		map.put("po", venues);
-		System.out.println(venues);
 		return "/html/venues.html";
 	}
 
@@ -81,7 +80,6 @@ public class VenuesController {
 	@RequestMapping("/acceptCoachMsg")
 	@ResponseBody
 	public String acceptCoachMsg(int uid1, int uid2, int mid) {
-		System.out.println(2);
 		String msg = venuesService.acceptCoachMsg(uid2, uid1, mid);
 		return msg;
 	}

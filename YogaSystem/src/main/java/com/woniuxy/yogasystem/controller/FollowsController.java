@@ -85,7 +85,6 @@ public class FollowsController {
 		Map<String, String> map = new HashMap<>();
 		String img = (String) session.getAttribute("headimg");
 		String name = (String) session.getAttribute("name");
-		System.out.println(name);
 		map.put("img", img);
 		map.put("name", name);
 		return map;
@@ -98,7 +97,6 @@ public class FollowsController {
 		int uid = (int) session.getAttribute("uid");
 		follows.setUid(uid);
 		follows.setFollowuid(followuid);
-		System.out.println(followuid);
 		followsService.deleteFollows(follows);
 		return "redirect:/html/profile.html";
 	}
@@ -110,16 +108,13 @@ public class FollowsController {
 			int uid=(int) session.getAttribute("uid");
 			Map<String, Object>map=(Map<String, Object>) userService.findAllInfoByUid(followuid);
 			User user= (User) map.get("user");
-			System.out.println(user);
 			Object object= map.get("object");
-			System.out.println(object);
 			Follows follows=new Follows();
 			follows.setFollowuid(followuid);
 			follows.setMyimg(myimg);
 			follows.setMyname(myname);
 			follows.setCharacter(user.getRole());
 			follows.setUid(uid);
-			System.out.println(1);
 			if ( object instanceof Trainee) {
 				Trainee trainee=(Trainee) object;
 				follows.setName(trainee.getName());
@@ -159,7 +154,6 @@ public class FollowsController {
 
 		// 查询是否是好友关系
 		relation = followsService.findFollowByUid(uid, otherUid);
-		System.out.println("relation" + relation);
 		// 查询个人信息
 		map1 = (Map<String, Object>) userService.findAllInfoByUid(otherUid);
 		// 查询地址
@@ -175,12 +169,10 @@ public class FollowsController {
 			Trainee trainee = (Trainee) obj;
 			status = trainee.getStatus();
 			if (status == 2 || (status == 1 && relation == 1)) {
-				System.out.println(trainee);
 				map.put("trainee", trainee);
 				return map;
 			} else {
 				obj = "对方信息保密";
-				System.out.println(obj);
 				map.put("message", obj);
 				return map;
 			}
@@ -191,15 +183,11 @@ public class FollowsController {
 			status = coach.getInfostatus();
 
 			if (status == 2 || (status == 1 && relation == 1)) {
-				// System.out.println(coach);
 				map.put("coach", coach);
-				System.out.println(map);
 				return map;
 			} else {
 				obj = "对方信息保密";
-				System.out.println(obj);
 				map.put("message", obj);
-				System.out.println(map);
 				return map;
 			}
 		} // 场馆
@@ -208,9 +196,8 @@ public class FollowsController {
 			Venues venues = (Venues) obj;
 			map.put("venues", venues);
 			map.put("img", img);
-			System.out.println(map);
 			return map;
-		}System.out.println("失败");
+		}
 		return null;
 	}
 

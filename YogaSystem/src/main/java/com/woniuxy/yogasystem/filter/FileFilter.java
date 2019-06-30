@@ -21,9 +21,7 @@ public class FileFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("验证文件格式");
 		if (!(request instanceof MultipartHttpServletRequest)) {
-			System.out.println("不是文件上传放行");
 			chain.doFilter(request, response);
 		}else {
 			MultipartHttpServletRequest mhsr =
@@ -45,7 +43,6 @@ public class FileFilter implements Filter{
 					request.getRequestDispatcher("file.jsp")
 					.forward(request, response);
 					flag = false;*/
-						System.out.println("文件格式正确");
 						chain.doFilter(request, response);
 					
 					}

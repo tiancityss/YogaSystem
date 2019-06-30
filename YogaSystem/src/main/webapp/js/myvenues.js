@@ -29,7 +29,7 @@ $(function() {
 													+ po.name
 													+ '</h5>'
 													+ '<div class="card-body">'
-													+ '<img src="images/agsquare.png" />'
+													+ '<img src="'+po.img+'" />'
 													+ '<div class="btn-group">'
 													+ '<button type="button" class="btn btn-primary m-b-5 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">电话：'
 													+ po.phone
@@ -37,7 +37,7 @@ $(function() {
 													+ '</div>'
 													+ '<div class="btn-group">'
 													+ '<button type="button" class="btn btn-secondary m-b-5 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">地址：'
-													+ po.addr
+													+ po.address.detail
 													+ ' <span class="caret"></span></button>'
 													+ '</div>'
 													+ '</div>'
@@ -72,7 +72,7 @@ $(function() {
 													+ po.name
 													+ '</h5>'
 													+ '<div class="card-body">'
-													+ '<img src="images/agsquare.png" />'
+													+ '<img src="'+po.img+'" />'
 													+ '<div class="btn-group">'
 													+ '<button type="button" class="btn btn-primary m-b-5 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">电话：'
 													+ po.phone
@@ -80,7 +80,7 @@ $(function() {
 													+ '</div>'
 													+ '<div class="btn-group">'
 													+ '<button type="button" class="btn btn-secondary m-b-5 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">地址：'
-													+ po.addr
+													+ po.address.detail
 													+ ' <span class="caret"></span></button>'
 													+ '</div>'
 													+ '</div>'

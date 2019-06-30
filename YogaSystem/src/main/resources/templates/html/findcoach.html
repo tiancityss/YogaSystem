@@ -12,7 +12,7 @@
 		<link href="/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="body-main">
-	<header id="iframe-header"> <iframe src="_header.html"
+	<header id="iframe-header"> <iframe src="/_header.html"
 		style="display:none" id="iframe-header"></iframe>
 	<div id="topnav">
 		<div class="top-header-animation">
@@ -33,12 +33,7 @@
 		<div class="zurb-full">
 			<div class="new-row zurb-row">
 				<div class="zurb-div-sm-12">
-					<div class="hide-bread float-right">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#">Tables</a></li>
-							<li class="breadcrumb-item">Basic Tables</li>
-						</ol>
-					</div>
+					
 					<h4 class="page-title">教练查看</h4>
 				</div>
 			</div>
@@ -58,7 +53,7 @@
 									</tr>
 									<tr>
 										<td>地址</td>
-										<td th:text="${coachs.addr}"></td>
+										<td th:text="${coachs.address.town}"></td>
 									</tr>
 									<tr>
 										<td>流派</td>

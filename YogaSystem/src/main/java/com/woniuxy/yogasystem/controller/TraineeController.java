@@ -44,9 +44,7 @@ public class TraineeController {
 	// 查看教练的详细信息
 	@GetMapping("/findCoachDetailMsg")
 	public String findCoachDetailMsg(int uid, ModelMap map) {
-		System.out.println(uid);
 		Coach coach = traineeService.findCoachDetailMsg(uid);
-		System.out.println(coach);
 		map.put("coach", coach);
 		return "/html/coach.html";
 	}
@@ -63,7 +61,6 @@ public class TraineeController {
 	@ResponseBody
 	public Venues findVenuesDetailMsg(int uid) {
 		Venues findVenuesDetailMsg = traineeService.findVenuesDetailMsg(uid);
-		System.out.println(findVenuesDetailMsg);
 		return findVenuesDetailMsg;
 	}
 
@@ -73,7 +70,6 @@ public class TraineeController {
 	public String findCoachMsg(Coach coach, ModelMap map) {
 		List<Coach> coachs = traineeService.findCoachMsg(coach);
 		map.put("coachs", coachs);
-		//System.out.println(coachs);
 		return "/html/findcoach.html";
 	}
 
@@ -90,7 +86,6 @@ public class TraineeController {
 	@ResponseBody
 	public List<Coach> findMyCoachMsg(HttpSession session) {
 		int uid = (int)session.getAttribute("uid");
-		System.out.println(uid);
 		List<Coach> coachs = traineeService.findMyCoachMsg(uid);
 		return coachs;
 	}

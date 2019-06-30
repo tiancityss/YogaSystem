@@ -18,6 +18,16 @@ import com.woniuxy.yogasystem.provider.VenuesProvide;
 
 public interface VenuesDao {
 	@Select("select * from venues inner join coach_venues on coach_venues.vid=venues.id where cid=#{cid}")
+	@Results({
+		@Result(id=true,column="id",property="id"),
+		@Result(column="name",property="name"),
+		@Result(column="phone",property="phone"),
+		@Result(column="salary",property="salary"),
+		@Result(column="descrie",property="descrie"),
+		@Result(column="uid",property="uid"),
+		@Result(column="img",property="img"),
+		@Result(column="uid",property="address",one=@One(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress"))
+	})
 	public List<Venues> findVenuesByCid(int cid);
 	
 	@Select("select * from venues where id=#{id}")
@@ -34,6 +44,16 @@ public interface VenuesDao {
 	public Venues findVenuesById(int id);
 	
 	@Select("select * from venues where uid=#{id}")
+	@Results({
+		@Result(id=true,column="id",property="id"),
+		@Result(column="name",property="name"),
+		@Result(column="phone",property="phone"),
+		@Result(column="salary",property="salary"),
+		@Result(column="descrie",property="descrie"),
+		@Result(column="uid",property="uid"),
+		@Result(column="img",property="img"),
+		@Result(column="uid",property="address",one=@One(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress"))
+	})
 	public Venues findVenuesByUId(int id);
 	
 	@SelectProvider(type=VenuesProvide.class,method="findVenues")
@@ -61,6 +81,13 @@ public interface VenuesDao {
 		//查看我签约的学员
 		@Select("select * from trainee inner join trainee_venues on trainee.id=trainee_venues.tid"
 				+ " where vid=#{uid}")
+		@Results({
+			@Result(id=true,column="id",property="id"),
+			@Result(column="img",property="img"),
+			@Result(column="name",property="name"),
+			@Result(column="phone",property="phone"),
+			@Result(column="uid",property="address",one=@One(select="com.woniuxy.yogasystem.dao.AddressDao.findAddress")),
+		})
 		public List<Trainee> findSignTraineeMsg(int uid);
 		
 		//查看我签约的教练

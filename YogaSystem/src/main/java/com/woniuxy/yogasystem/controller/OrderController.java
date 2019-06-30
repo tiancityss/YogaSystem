@@ -55,7 +55,6 @@ public class OrderController {
 			List<Order_Form> orders = orderService.findOrderMsg(uid);
 			map.put("orders", orders);
 			map.put("role", role);
-			System.out.println(orders.get(0).getCoach());
 		}
 		if (role == 1) {
 			List<Order_Form> orders = orderService.findCoachOrderMsg(uid);
@@ -132,7 +131,6 @@ public class OrderController {
 				double aa = Double.parseDouble(total_amount);
 				int money = (int)aa;
 				// 根据uid改变余额数量
-				System.out.println("11:"+money);
 				//int money = Integer.parseInt(total);
 				orderService.updateMoney(uid, money);
 			}
@@ -152,7 +150,6 @@ public class OrderController {
 	public String pay(int vuid,int cuid,HttpSession session,ModelMap map, int price, String number) {
 		int uid = (int)session.getAttribute("uid");
 		int money = orderService.showMoney(uid);
-		System.out.println(uid);
 		if (money > Math.abs(price)) {
 			// 支付
 			orderService.updateMoney(vuid,uid, price,cuid);
@@ -276,7 +273,6 @@ public class OrderController {
 	    @RequestMapping("addEvaluation")
 	    public ModelAndView addEvaluation(Order_Form order_form){
 	        order_form.setLevel(6-order_form.getLevel());
-	        System.out.println(order_form);
 	        //插入新增评论
 	        Order_Evaluation evaluation=new Order_Evaluation();
 	        evaluation.setId(order_form.getNumber());

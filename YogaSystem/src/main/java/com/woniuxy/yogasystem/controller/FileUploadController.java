@@ -28,7 +28,6 @@ public class FileUploadController {
 		String filename = picture.getOriginalFilename();
 		// 获取保存文件的路径
 		String path = request.getServletContext().getRealPath("upload");
-		System.out.println(path);
 		File file = new File(path);
 		if (!file.exists()) {
 			file.mkdirs();
@@ -37,7 +36,6 @@ public class FileUploadController {
 		filename = UUID.randomUUID().toString() + filename;
 		// 新路径
 		path = path + File.separator + filename;
-		System.out.println(path);
 		file = new File(path);
 		// 保存文件
 		picture.transferTo(file);

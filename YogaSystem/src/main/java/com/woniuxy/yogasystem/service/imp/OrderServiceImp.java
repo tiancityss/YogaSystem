@@ -66,8 +66,6 @@ public class OrderServiceImp implements OrderService{
 		orderDao.updateMoney(uid,money);
 		//增加教练余额
 		int demo = (int) ((int)money*(-0.6));
-		System.out.println(demo);
-		System.out.println(cuid);
 		orderDao.updateMoney(cuid, demo);
 		//增加场馆余额
 		orderDao.updateMoney(vuid, money*(-0.2));

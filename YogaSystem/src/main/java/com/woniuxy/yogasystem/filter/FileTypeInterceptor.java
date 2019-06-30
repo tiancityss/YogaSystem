@@ -14,7 +14,6 @@ public class FileTypeInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("验证文件格式");
 		boolean flag = true;
 		// 判断是否为文件上传请求
 		if (request instanceof MultipartHttpServletRequest) {
@@ -35,7 +34,6 @@ public class FileTypeInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 		}
-		System.out.println("文件格式正确");
 		return flag;
 	}
 

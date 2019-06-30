@@ -167,6 +167,7 @@ public class UserController {
 					}
 				}
 				session.setAttribute("role", user2.getRole());
+				System.out.println(session.getAttribute("role"));
 				session.setAttribute("uid", user2.getId());
 				session.setAttribute("acc", user2.getAcc());
 				System.out.println(user2);

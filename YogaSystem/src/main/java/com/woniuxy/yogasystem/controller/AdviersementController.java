@@ -31,7 +31,6 @@ public class AdviersementController {
 	@RequestMapping("/insertAd")
 	@ResponseBody
 	public String insertAd(Adviersement ad) {
-		/*System.out.println(ad);*/
 		try {
 			adviersementService.insertAd(ad);
 			return "广告新增成功";
@@ -62,9 +61,7 @@ public class AdviersementController {
 	@RequestMapping("/findAllAd")
 	@ResponseBody
 	public List<Adviersement> findThreeAd() {
-		System.out.println(1);
 		List<Adviersement>list= adviersementService.findAllAd();
-		System.out.println(list.size());
 		return list;
 		
 	}

@@ -89,7 +89,6 @@ public class CoachController {
 	@ResponseBody
 	public List<Request_Message> findHintMessage(HttpSession session){
 		int uid = (int)session.getAttribute("uid");
-		System.out.println(uid);
 		return coachService.findHintMessage(uid);
 	}
 	

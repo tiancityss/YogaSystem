@@ -10,17 +10,17 @@ function login() {
 			if (!re) {
 				//0学员 1教练 2场馆 3管理 4超管  5游客
 				if (data.role == 5) {
-					location.href = "http://localhost:8080/html/message1.html";
+					location.href = "/index";
 				} else if(data.role == 4){
-					location.href = "http://localhost:8080/html/addmanager.html";
+					location.href = "/html/addmanager.html";
 				}else if(data.role==0){
-					location.href = "http://localhost:8080/showAdd2.html";
+					location.href = "/index";
 				}else if(data.role==1){
-					location.href = "http://localhost:8080/showAdd2.html";
+					location.href = "/index";
 				}else if(data.role==2||data.role==6){
-					location.href = "http://localhost:8080/showAdd2.html";
+					location.href = "/index";
 				}else if(data.role==3){
-					location.href = "http://localhost:8080/applymessage.html";
+					location.href = "/html/applymessage.html";
 				}
 			} else {
 				alert("账号或密码错误");

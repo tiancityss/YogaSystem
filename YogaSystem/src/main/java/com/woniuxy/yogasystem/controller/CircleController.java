@@ -25,7 +25,6 @@ public class CircleController {
 	@RequestMapping("/insertCircle") // 新增朋友圈
 	@ResponseBody
 	public String insertCircle(Circle_of_Friend circle, HttpSession session) {
-		System.out.println(circle);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd:hh:mm:ss");
 		try {
 			// 用户id

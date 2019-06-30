@@ -24,7 +24,6 @@ public Map<String, Object> findAll(){
 	Map<String, Object> map=new HashMap<String, Object>();
 	map.put("coachs", dtoDaoServiceImpl.findAllCoachDto());
 	map.put("venues", dtoDaoServiceImpl.findAllVenuesDto());
-	System.out.println(dtoDaoServiceImpl.findAllCoachDto());
 	return map;
 	
 }

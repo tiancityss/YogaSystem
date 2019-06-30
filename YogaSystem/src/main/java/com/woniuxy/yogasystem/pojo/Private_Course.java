@@ -11,6 +11,7 @@ public class Private_Course {
 	private String endtime;
 	private int flag;
 	private int tid;
+	private Venues venues;
 	public int getId() {
 		return id;
 	}
@@ -71,6 +72,12 @@ public class Private_Course {
 	}
 	public void setTid(int tid) {
 		this.tid = tid;
+	}
+	public Venues getVenues() {
+		return venues;
+	}
+	public void setVenues(Venues venues) {
+		this.venues = venues;
 	}
 	
 	

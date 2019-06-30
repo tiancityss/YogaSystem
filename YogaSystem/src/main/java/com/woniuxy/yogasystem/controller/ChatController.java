@@ -28,7 +28,6 @@ public class ChatController {
 	@ResponseBody
 	public void saveChatHaveRead(String message, String otherAcc, String mineAcc) {
 		boolean state = WebSocketUtil.checkMessage(otherAcc);
-		System.out.println(state);
 		if (state) {
 			int j = chatService.saveChatHaventRead(message, otherAcc, mineAcc);
 

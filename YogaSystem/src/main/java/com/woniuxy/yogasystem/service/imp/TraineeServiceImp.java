@@ -160,7 +160,6 @@ public class TraineeServiceImp implements TraineeService {
 	@Override
 	public List<Private_Course> findCoachCourse(int uid) {
 		Coach coach = coachDao.findCoachById(uid);
-		System.out.println(coach.getId());
 		return traineeDao.findCoachCourse(coach.getId());
 	}
 

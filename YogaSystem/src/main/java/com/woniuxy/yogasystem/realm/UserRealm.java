@@ -2,6 +2,9 @@ package com.woniuxy.yogasystem.realm;
 
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -9,6 +12,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
@@ -25,7 +29,15 @@ public class UserRealm extends AuthorizingRealm{
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		System.out.println("授权");
-		return null;
+		String account = (String)arg0.getPrimaryPrincipal();
+		User user = new User();
+		user.setAcc(account);
+		User currentUser = userService.login(user);
+		Set<String> set = new HashSet<>();
+		set.add(String.valueOf(currentUser.getRole()));
+		System.out.println(set);
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(set);
+		return info;
 	}
 
 	@Override
@@ -35,7 +47,6 @@ public class UserRealm extends AuthorizingRealm{
 		User user = new User();
 		user.setAcc(account);
 		User currentUser = userService.login(user);
-		System.out.println(currentUser);
 		if(currentUser==null){
 			return null;
 		}

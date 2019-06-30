@@ -1,8 +1,10 @@
 $(function() {
+	
 	$.ajax({
-		url : "http://localhost:8080/coach/findVenues",
+		url : "/coach/findVenues",
 		dataType : "json",
 		success : function(data) {
+			
 			var content = "";
 			for (var i = 0; i < data.length; i++) {
 				var po = data[i];
@@ -38,6 +40,7 @@ $(function() {
 						+ '</div>' + '</div>' + '</div>';
 			}
 			$("#show").html(content)
+			
 		}
 	})
 })
