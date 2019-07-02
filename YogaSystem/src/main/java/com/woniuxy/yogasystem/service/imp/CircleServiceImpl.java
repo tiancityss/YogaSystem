@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.yogasystem.dao.CircleDao;
 import com.woniuxy.yogasystem.pojo.Circle_of_Friend;
 import com.woniuxy.yogasystem.service.CircleService;
-
+@Transactional
 @Service("CircleService")
 public class CircleServiceImpl implements CircleService{
  	@Autowired

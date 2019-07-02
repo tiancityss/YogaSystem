@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.woniuxy.yogasystem.pojo.Circle_of_Friend;
 import com.woniuxy.yogasystem.service.CircleService;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 @Controller
 @RequestMapping("/circle")
 public class CircleController {
@@ -31,10 +33,13 @@ public class CircleController {
 			
 			 int uid= (int) session.getAttribute("uid");
 			 // 用户头像
-			String name=(String) session.getAttribute("name"); 
+			String name=(String) session.getAttribute("name");
+			String img=(String) session.getAttribute("headimg");
+			circle.setHead(img);
 			circle.setUid(uid);
 			circle.setName(name);
 			circle.setTime(simpleDateFormat.format(new Date()));
+			System.out.println(circle);
 			circleService.insertCircle(circle);
 			return "发送成功";
 		} catch (Exception e) {
@@ -58,6 +63,7 @@ public class CircleController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("totalPage", totalPage);
 		map.put("data", circleService.findTenCircle(uid, start));
+		System.out.println(map.get("data"));
 		return map;
 	}
 

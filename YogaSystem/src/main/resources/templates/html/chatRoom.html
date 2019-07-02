@@ -73,11 +73,11 @@
 									<input type="text" class="text" id="message111" />
 									<button class="btn  btn-success waves-effect waves-light"
 										id="send">Send</button>
-									<input type="hidden" id="userOtherAcc" th:value="${otherAcc}">
+									<input type="hidden" id="roomAcc" th:value="${roomAcc}">
 									<!-- th:text="${user.acc}" -->
 									<input type="hidden" id="userMineAcc" th:value="${mineAcc}">
 									<!-- th:text="${user.acc}" -->
-									用户名:<input type="text" id="userName" th:value="${mineAcc}"><br>
+									用户名:<input type="text" id="userName" th:value="${session.name}"><br>
 								</div>
 							</div>
 						</div>
@@ -116,14 +116,14 @@
 	
 	<script type="text/javascript">
 
-	var url = "ws://localhost:8080/OneHandler/";
+	var url = "ws://localhost:8080/RoomHandler/";
 		var ws = null;
 		//连接服务器
 		/* $("#join").click(function() { */
 			var userName = $("#userName").val();
-			var userOtherAcc = $("#userOtherAcc").val();
+			var roomAcc = $("#roomAcc").val();
 			var userMineAcc = $("#userMineAcc").val();
-			url = url + userName + "/" + userOtherAcc + "/" + userMineAcc; //传递用户名，我的id，对方的id
+			url = url + userName + "/" + roomAcc + "/" + userMineAcc; //传递用户名，我的id，对方的id
 			console.info(url);
 			//创建对象，连接服务器
 			ws = new WebSocket(url); //html5中提供了
@@ -142,7 +142,7 @@
 					dataType : "POST",
 					data : {
 						message : result.data,
-						otherAcc : $("#userOtherAcc").val(),
+						otherAcc : $("#roomAcc").val(),
 						mineAcc : $("#userMineAcc").val()
 					},
 
@@ -182,7 +182,7 @@
 			url : "/chat/select",
 
 			data : {
-				otherAcc : $("#userOtherAcc").val(),
+				otherAcc : $("#roomAcc").val(),
 				mineAcc : $("#userMineAcc").val()
 			},
 

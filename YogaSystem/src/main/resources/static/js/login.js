@@ -23,7 +23,10 @@ function login() {
 					location.href = "/html/applymessage.html";
 				}
 			} else {
-				alert("账号或密码错误");
+				//alert("账号或密码错误");
+				var con="";
+				con+=' <a id="mes" style="color: red">账号或密码错误</a>';
+				$("#mes").html(con)
 			}
 
 		}

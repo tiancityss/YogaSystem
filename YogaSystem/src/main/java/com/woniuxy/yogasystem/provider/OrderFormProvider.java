@@ -9,6 +9,7 @@ public class OrderFormProvider {
 
         if(order_form.getCid()>0){
             sql.WHERE("cid="+order_form.getCid());
+            
         }
         if(order_form.getTid()>0){
             sql.WHERE("tid="+order_form.getTid());

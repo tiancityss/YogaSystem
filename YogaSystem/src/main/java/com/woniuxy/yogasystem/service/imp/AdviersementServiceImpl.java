@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.yogasystem.dao.AdviersementDao;
 import com.woniuxy.yogasystem.pojo.Adviersement;
 import com.woniuxy.yogasystem.service.AdviersementService;
 
-
+@Transactional
 @Service("AdviersementService")
 public class AdviersementServiceImpl implements AdviersementService {
 	@Autowired

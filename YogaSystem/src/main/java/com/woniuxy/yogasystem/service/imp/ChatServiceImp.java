@@ -10,12 +10,13 @@ import javax.lang.model.element.Element;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.yogasystem.dao.ChatDao;
 import com.woniuxy.yogasystem.pojo.Chat;
 import com.woniuxy.yogasystem.pojo.UnReadChatMess;
 import com.woniuxy.yogasystem.service.ChatService;
-
+@Transactional
 @Service("chatService")
 public class ChatServiceImp implements ChatService {
 	@Resource

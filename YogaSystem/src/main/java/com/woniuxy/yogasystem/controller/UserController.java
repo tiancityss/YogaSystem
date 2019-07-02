@@ -51,31 +51,39 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Object reCode = session.getAttribute("code");
 		String realCode = (String) reCode;
-		if (code.equals(realCode)) {
-			session.removeAttribute("code");
-			if (userService.register(user)) {
-				result = "成功";
+		 if(code.equals(realCode)){
+			 session.removeAttribute("code");
+			if( userService.register(user)){
+				 result="成功";
 			}
-		}
+		 }else{
+			 result="验证码错误！";
+			 session.removeAttribute("code");
+		 }
 		return result;
 	}
 
-	// 重置密码
+
+	//重置密码
 	@RequestMapping("/reset")
 	@ResponseBody
-	public String reset(HttpServletRequest request, String code, User user) {
-		String result = "失败";
-		HttpSession session = request.getSession();
-		Object reCode = session.getAttribute("code");
-		String realCode = (String) reCode;
-		if (code.equals(realCode)) {
-			session.removeAttribute("code");
-			if (userService.reset(user) > 0) {
-				result = "成功";
+	public String reset(HttpServletRequest request,String code,User user){
+		String result="失败";
+		
+		 HttpSession session= request.getSession();
+		 Object reCode=session.getAttribute("code");
+		 String realCode=(String) reCode;
+		 if(code.equals(realCode)){
+			 session.removeAttribute("code");
+			if( userService.reset(user)>0){
+				 result="成功";
 			}
-		}
+		 }else{
+			 result="验证码错误！";
+			 session.removeAttribute("code");
+		 }
 		return result;
-
+		
 	}
 
 	// 管理员注册
@@ -178,6 +186,81 @@ public class UserController {
 		}
 		return null;
 	}
+	
+	
+	//短信登录
+	@RequestMapping("/meslogin")
+	@ResponseBody
+	public ModelMap mesLogin(HttpServletRequest request,User user,String code){
+		System.out.println("用户账号"+user.getAcc());
+		User user2=null;
+		ModelMap map =new ModelMap();
+		String result="验证码错误！";
+		HttpSession session= request.getSession();
+		 Object reCode=session.getAttribute("code");
+		 String realCode=(String) reCode;
+		 if(code.equals(realCode)){
+			 session.removeAttribute("code");
+			 user2=userService.mesLogin(user);
+			 if(user2==null){
+				 result="用户不存在！";
+				 map.put("result", result);
+				 map.put("user", user2);
+					return map;
+				}else{
+					
+				//0学员 1教练 2场馆 3管理 4超管  5游客
+				if(user2.getRole()==2){//如果登录时会管管理员
+					Venues venues=userService.findVenues(user2.getId());
+					if(venues!=null){
+						System.out.println("场馆信息"+venues);
+						session.setAttribute("venues", venues);
+						session.setAttribute("name", venues.getName());
+						session.setAttribute("headimg", venues.getImg());
+					}
+				}else if(user2.getRole()==1){//登录时教练
+					Coach coach = userService.findCoach(user2.getId());
+					if(coach!=null){
+						System.out.println("教练信息"+coach);
+						session.setAttribute("coach", coach);
+						session.setAttribute("name", coach.getName());
+						session.setAttribute("headimg", coach.getImg());
+
+					}
+				}else if(user2.getRole()==0){//学员登录
+					Trainee trainee = userService.findTrainee(user2.getId());
+					if(trainee!=null){
+						System.out.println("学员信息"+trainee);
+						session.setAttribute("trainee", trainee);
+						session.setAttribute("name", trainee.getName());
+						session.setAttribute("headimg", trainee.getImg());
+					}
+				}
+				Subject currentUser = SecurityUtils.getSubject();
+				UsernamePasswordToken token = new UsernamePasswordToken(user2.getAcc(),user2.getPwd());
+				currentUser.login(token);
+				session.setAttribute("role", user2.getRole());
+			  session.setAttribute("uid", user2.getId());
+			  session.setAttribute("acc", user2.getAcc());
+				System.out.println(user2);
+				result="登陆成功";
+				 map.put("result", result);
+				 map.put("user", user2);
+				return map;
+				
+				}
+		 }else{
+			 session.removeAttribute("code");
+			 map.put("result", result);
+			 map.put("user", user2);
+			 return map;
+		 }
+		
+		
+		
+	}
+	
+	
 
 	// 上传头像图片
 	@RequestMapping("/upload")
@@ -617,10 +700,11 @@ public class UserController {
 	
 	@RequestMapping("/chatroom")
 	@ResponseBody
-	public ModelAndView testRoom(String mineId, String roomId,HttpSession session) {
+	public ModelAndView testRoom(String roomId,HttpSession session) {
 		String name =(String)session.getAttribute("name");
+		int id = (int)session.getAttribute("uid");
 		mv.addObject("myName",name);
-		mv.addObject("mineAcc", mineId);
+		mv.addObject("mineAcc", String.valueOf(id));
 		mv.addObject("roomAcc", roomId);
 		mv.setViewName("/html/chatRoom.html");
 		return mv;
@@ -632,7 +716,7 @@ public class UserController {
 		map.put("img", img);
 		map.put("name", name);
 		System.out.println(map);
-		return "redirect:/html/text.html";
+		return "/html/text.html";
 
 	}
 

@@ -84,8 +84,9 @@ public class ShiroConfig {
 		map.put("/html/register.html", "anon");
 		map.put("/html/_header.html", "anon");
 		map.put("/html/findvenues.html", "anon");
-		
+		map.put("/html/reset.html", "anon");
 		map.put("/html/findcoach.html", "anon");
+		map.put("/html/messagelogin.html", "anon");
 		
 		
 		//controller
@@ -99,6 +100,8 @@ public class ShiroConfig {
 		map.put("/coach/findVenues", "anon");
 		map.put("/venues/find", "authc,or[0,1,3,4]");
 		map.put("/trainee/findCoachDetailMsg", "authc,or[0,2,3,4]");
+		map.put("/user/reset", "anon");
+		map.put("/user/meslogin", "anon");
 		
 		
 		

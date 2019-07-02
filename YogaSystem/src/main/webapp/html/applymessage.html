@@ -12,13 +12,52 @@
 </head>
 
 <body id="body-main">
-	<header id="iframe-header"> <iframe src="_header.html"
-		style="display:none" id="iframe-header"></iframe>
-	<div id="topnav">
-		<div class="top-header-animation">
-			<div id="particles-js" class="zindex1"></div>
+	<header id="topnav">
+	<div class="topbar-main relative">
+		<div class="zurb-full">
+			<div class="logo">
+				<a href="index.html" class="logo"> <img src="images/logo-sm.png"
+					alt="" height="26" class="logo-small"> <img
+						src="images/logo.png" alt="" class="logo-large"></a>
+			</div>
+			<div class="menu-other topbar-custom">
+				<ul class="list-unstyled topbar-right-menu float-right mb-0">
+					<shiro:guest>
+					
+					<!--注销按钮-->
+					<li class="dropdown notification-list notification-box"><a
+						class="nav-link dropdown-toggle waves-effect waves-light notification-box nav-user"
+						href="/logout"> 注销 </a></li>
+					
+					<li class="dropdown notification-list notification-box"><a
+						class="nav-link dropdown-toggle waves-effect waves-light notification-box nav-user"
+						href="/index"> 回到主页 </a></li>
+					
+					
+					<li class="menu-item"><a class="navbar-toggle nav-link">
+							<div class="lines">
+								<span></span> <span></span> <span></span>
+							</div>
+					</a></li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
 		</div>
-		<div class="added-element-header"></div>
+	</div>
+	<div class="navbar-custom navbar-checker">
+		<div class="zurb-full">
+			<div id="navigation">
+				<ul class="navigation-menu">
+				
+					
+				
+					<li class="has-submenu" th:if="${session.role!=2}")><a href="/html/findvenues.html"><i
+							class="ti-home"></i> <span> 场馆查看 </span> </a></li>
+					<li class="has-submenu" th:if="${session.role!=1}"><a href="/trainee/findCoachMsg"><i
+							class="ti-receipt"></i> <span> 教练查看</span> </a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
 	</header>
 	<section>
@@ -37,6 +76,7 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="javascript:void(0)" id="request"> 教练请求</a></li>
 							<li class="breadcrumb-item"><a href="javascript:void(0)" id="hint">场馆请求</a></li>
+							<li class="breadcrumb-item"><a href="addAdver.html" id="hint">设置广告</a></li>
 						</ol>
 					</div>
 					<h4 class="page-title">请求信息</h4>

@@ -56,7 +56,7 @@ public class WebSocketUtil {
 	// 循环发送
 	public static void sendMessageToAll(String message, String roomAcc, String mineAcc) {
 		switch (roomAcc) {
-		case "1":
+		case "6":
 			MESSAGEMAPGROUP1.forEach((sessionId,session)-> sendMessage(session, message, roomAcc, mineAcc));
 			break;
 		case "22":

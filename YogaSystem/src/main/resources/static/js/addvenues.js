@@ -173,7 +173,10 @@ $(function(){
 				name:$("#name").val(),
 			},
 			success:function(data){
-				alert(data)
+				//alert(data)
+				var con="";
+			con+=' <a id="mes" style="color: red">'+data+'</a>';
+			$("#mes").html(con)
 			}
 		})
 	})

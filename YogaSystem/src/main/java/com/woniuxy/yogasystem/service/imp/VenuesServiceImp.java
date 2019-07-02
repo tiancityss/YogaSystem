@@ -117,7 +117,7 @@ public class VenuesServiceImp implements VenuesService {
 		// 向教练发送消息
 		Request_Message rm = answerMsg(vid, cid);
 		venuesDao.insertCoachMsg(rm);
-		return "等待对方付款";
+		return "签约成功";
 	}
 
 	// 接受学员申请消息

@@ -91,14 +91,17 @@
 <td>[[${order.venues.address.detail}]]</td> 
 <td>[[${order.price}]]</td>
 <td>[[${order.startTime}]]</td>
-<td>[[${order.status}]]</td>
+<td th:if="${order.status}==0" th:text="未支付"></td>
+<td th:if="${order.status}==1" th:text="待支付"></td>
+<td th:if="${order.status}==2" th:text="已支付"></td>
 <td th:switch="${order.status}">
-<span th:case="待支付"><a th:href="@{pay(uid=1,vuid=${order.venues.uid},cuid=${order.coach.uid},number=${order.number},price=-${order.price})}" th:if="${role}==0">付款</a><span th:if="${role==1}">教学完成</span></span>
-<span th:case="已支付"><a th:href="@{toaddEvaluation(number=${order.number})}"th:if="${role}==0">评论</a></span>
-<span th:case="未支付"><a th:href="@{updateOrder(number=${order.number})}" th:if="${role}==1">我上完课了</a></span>
+<span th:case=1><a th:href="@{pay(vuid=${order.venues.uid},cuid=${order.coach.uid},number=${order.number},price=-${order.price})}" th:if="${role}==0">付款</a><span th:if="${role}==1">教学完成</span></span>
+<span th:case=2><a th:href="@{toaddEvaluation(number=${order.number})}"th:if="${role}==0">评论</a></span>
+<span th:case=0><a th:href="@{updateOrder(number=${order.number})}" th:if="${role}==1">我上完课了</a></span>
 </td>
 </tr>
 </table>
+
           </div>
         </div>
       </div>

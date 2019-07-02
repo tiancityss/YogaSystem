@@ -80,6 +80,7 @@
                 <input type="hidden" th:value="${po.id}" />
                 <a href="javascript:void(0);" id="coachSign" th:if="${session.role} eq '1'">申请成功该场馆教练</a><br/>
                 <a href="javascript:void(0);" id="teaineeSign" th:if="${session.role} eq '0'">报名</a><br/>
+                <a href="javascript:void(0);" id="demo" >加入聊天室</a><br/>
 				<a href="javascript:void(0);" id="contact" class="btn btn-primary"><i class="ti-shopping-cart"> </i> 留言</a><br/>
              	<a href="javascript:void(0);" id="follows" class="btn btn-primary"><i class="ti-shopping-cart"> </i> 关注</a><br/>
              	
@@ -119,6 +120,10 @@
   <script>
   $(function(){
 	  
+	  $("#demo").click(function(){
+		  var id = [[${po.uid}]]
+		  location.href="/user/chatroom?roomId="+id
+	  })
 	  $("#contact").click(function(){
 		  var id = [[${po.uid}]]
 		  location.href="http://localhost:8080/user/chat1?otherId="+id

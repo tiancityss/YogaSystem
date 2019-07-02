@@ -188,7 +188,7 @@ function showPartCircle() {
 					var content = "";
 					for (var i = 0; i < data.length; i++) {
 						var circle = data[i];
-
+						alert(circle.head)
 						content += '<div class="comment">' + '<img src="'
 								+ circle.head
 								+ '" alt="" class="comment-avatar">'

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ import com.woniuxy.yogasystem.pojo.Request_Message;
 import com.woniuxy.yogasystem.pojo.Trainee;
 import com.woniuxy.yogasystem.pojo.Venues;
 import com.woniuxy.yogasystem.service.TraineeService;
-
+@Transactional
 @Service("traineeService")
 public class TraineeServiceImp implements TraineeService {
 	@Resource

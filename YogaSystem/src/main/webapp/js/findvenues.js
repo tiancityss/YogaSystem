@@ -26,7 +26,7 @@ $(function() {
 						+ '<tr>'
 						+ '<td>地址</td>'
 						+ '<td>'
-						+ po.address.town+""+po.address.descrie
+						+ po.address.town
 						+ '</td>'
 						+ '</tr>'
 						+ '<tr>'

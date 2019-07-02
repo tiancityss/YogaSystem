@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.yogasystem.dao.CoachDao;
 import com.woniuxy.yogasystem.dao.MoneybagDao;
@@ -22,7 +23,7 @@ import com.woniuxy.yogasystem.pojo.Trainee;
 import com.woniuxy.yogasystem.pojo.User;
 import com.woniuxy.yogasystem.pojo.Venues;
 import com.woniuxy.yogasystem.service.UserService;
-
+@Transactional
 @Service("userService")
 public class UserServiceImp implements UserService {
 	@Resource
@@ -88,6 +89,20 @@ public class UserServiceImp implements UserService {
 		re = userdao.regManager(user);
 		return re;
 	}
+	//短信登陆
+		@Override
+		public User mesLogin(User user) {
+			User user2 = null;
+			if (userdao.checkacc(user.getAcc()) == null) {
+				return user2;
+			}  else {
+				user2 = userdao.checkMessageByAcc(user.getAcc());
+				
+					System.out.println("密码正确");
+					return user2;		
+			}
+		}
+
 
 	/*
 	 * 管理员操作
@@ -410,4 +425,7 @@ public class UserServiceImp implements UserService {
 		}
 		return null;
 	}
+    
+    
+    
 }

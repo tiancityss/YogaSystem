@@ -32,7 +32,7 @@ public class RoomHandler {
 
 		// 加入聊天室
 		switch (roomAcc) {
-		case "1":
+		case "6":
 			WebSocketUtil.MESSAGEMAPGROUP1.put(userMineAcc, session);
 			break;
 		case "22":

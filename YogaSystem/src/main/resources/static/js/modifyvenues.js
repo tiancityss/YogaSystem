@@ -47,6 +47,25 @@ function venuesSubmit(){
 		},
 		success:function(data){
 			alert(data)
+			location.href = "/index";
 		}
 	})
 }
+//查询场馆名字是否被注册
+$(function(){
+	$("#name").blur(function(){
+		$.ajax({
+			url:"/user/checkname",
+			data:{
+				name:$("#name").val(),
+			},
+			success:function(data){
+				//alert(data)
+				var con="";
+			con+=' <a id="mes" style="color: red">'+data+'</a>';
+			$("#mes").html(con)
+			}
+		})
+	})
+})
+

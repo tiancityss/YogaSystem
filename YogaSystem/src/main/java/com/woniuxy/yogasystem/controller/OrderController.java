@@ -52,9 +52,12 @@ public class OrderController {
 		int role = (int)session.getAttribute("role");
 		// 根据uid查出我的订单角色
 		if (role == 0) {
+			System.out.println(role);
 			List<Order_Form> orders = orderService.findOrderMsg(uid);
+			System.out.println(orders);
 			map.put("orders", orders);
 			map.put("role", role);
+			
 		}
 		if (role == 1) {
 			List<Order_Form> orders = orderService.findCoachOrderMsg(uid);

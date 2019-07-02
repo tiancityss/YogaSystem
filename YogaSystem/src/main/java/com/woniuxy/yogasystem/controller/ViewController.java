@@ -37,7 +37,7 @@ public class ViewController {
 			view.setName(name);
 			view.setTime(simpleDateFormat.format(new Date()));
 			viewService.insertView(view);
-			return "redirect:html/profile.html";
+			return "redirect:/html/profile.html";
 		
 		
 	}

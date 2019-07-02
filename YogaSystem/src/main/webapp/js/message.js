@@ -169,7 +169,7 @@ $(function() {
 							content += '<div class="zurb-div-xl-6">'
 									+ '<div class="m-b-10">'
 									+ '<div class="callout callout-info shadow">'
-									+ '<img src="images/agsquare.png"/>'
+									+ '<img src="'+po.img+'"/>'
 									+ '<h4 class="text-info">'
 									+ po.name
 									+ '</h4>'

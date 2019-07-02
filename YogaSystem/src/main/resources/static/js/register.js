@@ -10,7 +10,11 @@ function register() {
 		success : function(data) {
 			if (data == "成功") {
 				location.href = "http://localhost:8080/html/login.html";
-			}
+			}else{
+				var con="";
+				con+=' <a id="mes" style="color: red">'+data+'</a>';
+				$("#mes").html(con)
+			}s
 		}
 	})
 }
@@ -56,7 +60,10 @@ $(function() {
 		var pass = $("#pwd").val();
 		var rpass = $("#rpwd").val();
 		if (pass != rpass) {
-			alert("两次密码不一致");
+			//alert("两次密码不一致");
+			var con="";
+			con+=' <a id="mes" style="color: red">两次密码不一致</a>';
+			$("#mes").html(con)
 		}
 	})
 })
@@ -70,7 +77,9 @@ $(function() {
 				acc : $("#acc").val(),
 			},
 			success : function(data) {
-				alert(data)
+				var con="";
+				con+=' <a id="mes" style="color: red">'+data+'</a>';
+				$("#mes").html(con)
 			}
 		})
 	})
